@@ -1,12 +1,34 @@
-# React + Vite
+# InstiReport: Departmental Report and Analytics System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A centralized web-based portal that enables all departments to create, submit, and track annual reports in a standardized format. It integrates smart analytics, multi-year archives, and performance dashboards, reducing manual work and enabling data-driven insights for institutional growth.
 
-Currently, two official plugins are available:
+The platform also integrates an Automated Timetable Generator that dynamically organizes classes, events, and tasks based on user input and constraints.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **📝 Centralized Report Management:** Enables departments to create, submit, and track annual reports in a standardized digital format.
+* **📊 Smart Analytics:** Integrates performance dashboards and analytics to provide data-driven insights.
+* **🗄️ Multi-Year Archiving:** Securely archives reports from previous years for easy access and comparison.
+* **📅 Automated Timetable Generation:** A dynamic tool to organize classes, events, and tasks based on custom constraints.
+* **🔒 User Dashboards:** Provides a personalized dashboard for users to manage their tasks and reports.
+
+---
+
+## 🛠️ Technology Stack
+
+* **Frontend:** React.js
+* **Build Tool:** Vite
+* **Styling:** CSS Modules
+* **Version Control:** Git & GitHub
+
+---
+
+## 🚀 Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+You must have Node.js and npm installed on your machine.
