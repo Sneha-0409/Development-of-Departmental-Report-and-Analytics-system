@@ -1,0 +1,241 @@
+/* Main dashboard container */
+.dashboard {
+  padding: 2rem 3rem;
+  /* Subtle gradient background for depth */
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: calc(100vh - 4.5rem); /* Full height minus navbar */
+  font-family: 'Inter', sans-serif; /* A more modern font */
+  background-image: url('/dashboard-bg.jpg');
+  
+}
+
+/* Header styles */
+.header {
+  margin-bottom: 2.5rem;
+}
+.title {
+  font-size: 2.75rem; /* Slightly larger */
+  font-weight: 800;
+  color: #212529;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Add subtle depth to text */
+}
+.subtitle {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+/* Grid layout for the cards */
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 2rem;
+}
+
+/* General card styling */
+.card {
+  background-color: white;
+  padding: 0;
+  border-radius: 16px;
+  border: 1px solid #e9ecef;
+  /* Softer, more layered shadow */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.02); /* More pronounced hover effect */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.cardHeader {
+  padding: 1.5rem;
+  border-bottom: 1px solid #f1f3f5;
+}
+.card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #343a40;
+  margin: 0;
+}
+
+/* Masonry grid layout */
+.quickActionsCard {
+    grid-row: span 2;
+}
+.activityCard {
+    grid-column: span 1; /* <-- CHANGED FROM 2 to 1 */
+}
+
+/* Quick Actions styles */
+.actionsContainer {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1; /* Allow container to grow */
+  justify-content: center; /* Center buttons vertically */
+}
+.actionButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: left;
+}
+.actionButton:hover {
+  background: #4f46e5;
+  color: white;
+  border-color: #4f46e5;
+  transform: scale(1.03); /* Scale up on hover */
+  box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2);
+}
+.actionIcon {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+.actionCount {
+  margin-left: auto;
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.actionButton:hover .actionCount {
+  background-color: white;
+  color: #4f46e5;
+}
+
+/* Statistics styles */
+.statsCard {
+    background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+    color: white;
+}
+.statsCard h3 {
+    color: rgba(255,255,255,0.9);
+    border-bottom-color: rgba(255,255,255,0.2);
+}
+.statsGrid {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 1.5rem;
+  flex-grow: 1;
+  align-items: center;
+}
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+.statValue {
+  font-size: 3rem; /* Even larger for impact */
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.statLabel {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.8);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Activity & Deadline list styles */
+.activityList, .deadlineList {
+  list-style: none;
+  padding: 1.5rem;
+  margin: 0;
+  flex-grow: 1;
+}
+.activityList li, .deadlineList li {
+  padding: 1.2rem 0; /* Increased padding */
+  border-bottom: 1px solid #f1f3f5;
+  display: flex;
+  align-items: center;
+}
+.activityList li:last-child, .deadlineList li:last-child {
+  border-bottom: none;
+}
+.activityList .activityIcon {
+    margin-right: 1rem;
+    font-size: 1rem;
+    background-color: #f1f3f5;
+    width: 40px; /* Slightly larger */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px; /* Rounded square */
+}
+.activityList p, .deadlineList span {
+  margin: 0;
+  color: #495057;
+  font-weight: 500;
+}
+.activityList span, .deadlineList strong {
+  font-size: 0.875rem;
+  color: #adb5bd;
+}
+.deadlineList li {
+  justify-content: space-between;
+}
+
+/* Logout button container */
+.ReportContainer {
+  margin-top: 3rem;
+  text-align: center;
+}
+.ReportButton {
+  padding: 0.8rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f9f9f9;
+  background-color: rgb(43, 28, 202);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.ReportButton:hover {
+    background-color: #fcfcff;
+    color: rgb(13, 65, 223);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.2);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .dashboardGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .activityCard {
+        grid-column: span 2;
+    }
+}
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 1.5rem;
+    }
+    .dashboardGrid {
+        grid-template-columns: 1fr;
+    }
+    .quickActionsCard, .activityCard {
+        grid-column: span 1;
+        grid-row: auto;
+    }
+}
+

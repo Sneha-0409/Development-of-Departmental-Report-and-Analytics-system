@@ -5,13 +5,14 @@
   align-items: center;
   min-height: 100vh;
   background-color: #f3f4f6; /* light gray */
+  background-image: url('/background.jpg');
   font-family: Arial, sans-serif;
 }
 
 /* Card container */
 .login-container {
   background: white;
-  padding: 2rem;
+  padding: 30px 70px 30px 30px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -22,12 +23,14 @@
 .header {
   text-align: center;
   margin-bottom: 1.5rem;
+
 }
 
 .logo-title {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 29px;
 }
 
 .logo {
@@ -46,11 +49,13 @@
   font-size: 1.2rem;
   color: #444;
   margin-top: 0.5rem;
+  margin-left: 30px;
 }
 
 .description {
   font-size: 0.9rem;
   color: #666;
+  margin-left: 45px;
 }
 
 /* Form */
@@ -59,16 +64,18 @@
   margin-top: 1rem;
   font-weight: 500;
   color: #333;
+  font-size: 18px;
+  
 }
 
 .login-form input,
 .login-form select {
   width: 100%;
-  padding: 0.7rem;
+  padding: 20px;
   margin-top: 0.3rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 16px;
 }
 
 .login-form input:focus,
@@ -82,13 +89,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 0;
+  margin: 20px 1px;
   font-size: 0.85rem;
 }
 
 .form-footer a {
   text-decoration: none;
   color: #4f46e5;
+  font-size: 16px;
+  
 }
 
 .form-footer a:hover {
@@ -111,3 +120,4 @@
 .btn-submit:hover {
   background-color: #3730a3;
 }
+
