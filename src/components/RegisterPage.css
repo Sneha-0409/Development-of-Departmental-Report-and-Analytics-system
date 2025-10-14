@@ -1,0 +1,82 @@
+/* src/components/RegisterPage.css */
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9fafb;
+    font-family: sans-serif;
+}
+
+.register-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
+.register-container .header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.register-container .logo {
+    width: 60px;
+    height: 60px;
+}
+
+.register-container .title {
+    font-size: 1.75rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.register-form label {
+    display: block;
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.register-form input, .register-form select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+}
+
+.message {
+    text-align: center;
+    margin-top: 1rem;
+    color: #4f46e5;
+    font-weight: 500;
+}
+
+.register-container .btn-submit {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #4F46E5;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+}
+
+.footer-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #6b7280;
+}
+
+.footer-text a {
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -1,13 +1,54 @@
 
 
-// import React from "react";
-// import "./LoginPage.css"; // Import CSS file
+// import React, { useState } from "react";
+// import "./LoginPage.css";
 
-// export default function LoginPage() {
+// // The component accepts props from App.jsx to handle a successful login and to show the register page
+// export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
+//     const [role, setRole] = useState("report-maker"); // Default role
+//     const [email, setEmail] = useState("");
+//     const [password, setPassword] = useState("");
+//     const [message, setMessage] = useState("");
+
+//     const handleLogin = async (event) => {
+//         event.preventDefault();
+//         setMessage("");
+
+//         if (!email || !password || !role) {
+//             setMessage("Please fill in all fields.");
+//             return;
+//         }
+
+//         try {
+//             const response = await fetch("http://localhost:3001/api/login", {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                 },
+//                 body: JSON.stringify({ role, email, password }),
+//             });
+
+//             const data = await response.json();
+
+//             if (response.ok) {
+//                 setMessage(data.message || "Login successful!");
+
+//                 // **THE KEY UPDATE**: This line sends the user's data (e.g., their name)
+//                 // back up to the App component so it can be displayed in the navbar.
+//                 onLoginSuccess(data.user);
+
+//             } else {
+//                 setMessage(data.message || "Login failed!");
+//             }
+//         } catch (error) {
+//             console.error("A network error occurred:", error);
+//             setMessage("Could not connect to the server. Please try again later.");
+//         }
+//     };
+
 //     return (
 //         <div className="login-page">
 //             <div className="login-container">
-//                 {/* Header Section */}
 //                 <div className="header">
 //                     <div className="logo-title">
 //                         <img className="logo" src="/logo.png" alt="InstiReport Logo" />
@@ -19,26 +60,21 @@
 //                     </p>
 //                 </div>
 
-//                 {/* Login Form */}
-//                 <form
-//                     className="login-form"
-//                     action="#"
-//                     method="POST"
-//                     onSubmit={(e) => e.preventDefault()}
-//                 >
-//                     {/* Role Selection */}
+//                 <form className="login-form" onSubmit={handleLogin}>
 //                     <label htmlFor="role">Login as</label>
-//                     <select id="role" name="role" required>
-//                         <option value="" disabled defaultValue>
-//                             Select your role
-//                         </option>
+//                     <select
+//                         id="role"
+//                         name="role"
+//                         required
+//                         value={role}
+//                         onChange={(e) => setRole(e.target.value)}
+//                     >
 //                         <option value="hod">HOD</option>
 //                         <option value="admin">Admin</option>
 //                         <option value="nba-naac">NBA/NAAC</option>
 //                         <option value="report-maker">Report Maker</option>
 //                     </select>
 
-//                     {/* Email */}
 //                     <label htmlFor="email">Email Address</label>
 //                     <input
 //                         id="email"
@@ -46,9 +82,10 @@
 //                         type="email"
 //                         placeholder="you@example.com"
 //                         required
+//                         value={email}
+//                         onChange={(e) => setEmail(e.target.value)}
 //                     />
 
-//                     {/* Password */}
 //                     <label htmlFor="password">Password</label>
 //                     <input
 //                         id="password"
@@ -56,9 +93,12 @@
 //                         type="password"
 //                         placeholder="••••••••"
 //                         required
+//                         value={password}
+//                         onChange={(e) => setPassword(e.target.value)}
 //                     />
 
-//                     {/* Remember Me + Forgot Password */}
+//                     {message && <p className="error-message">{message}</p>}
+
 //                     <div className="form-footer">
 //                         <div>
 //                             <input type="checkbox" id="remember-me" />
@@ -67,42 +107,98 @@
 //                         <a href="#">Forgot your password?</a>
 //                     </div>
 
-//                     {/* Button */}
 //                     <button type="submit" className="btn-submit">
 //                         Sign in
 //                     </button>
 //                 </form>
+
+//                 {/* Link to switch to the registration page */}
+//                 <p className="footer-text">
+//                     Don't have an account?{' '}
+//                     <a href="#" onClick={showRegisterPage}>Register Here</a>
+//                 </p>
+//             </div>
+//         </div>
+//     );
+// }
+// import React, { useState } from "react";
+// import "./LoginPage.css";
+
+// // CHANGE 1: Accept 'showRegisterPage' as a prop from App.jsx
+// export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
+//     const [role, setRole] = useState("report-maker");
+//     const [email, setEmail] = useState("");
+//     const [password, setPassword] = useState("");
+//     const [message, setMessage] = useState("");
+
+//     const handleLogin = async (event) => {
+//         event.preventDefault();
+//         setMessage("");
+
+//         if (!email || !password || !role) {
+//             setMessage("Please fill in all fields.");
+//             return;
+//         }
+
+//         try {
+//             const response = await fetch("http://localhost:3001/api/login", {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify({ role, email, password }),
+//             });
+//             const data = await response.json();
+//             if (response.ok) {
+//                 onLoginSuccess(data.user);
+//             } else {
+//                 setMessage(data.message || "Login failed!");
+//             }
+//         } catch (error) {
+//             setMessage("Could not connect to the server.");
+//         }
+//     };
+
+//     return (
+//         <div className="login-page">
+//             <div className="login-container">
+//                 <div className="header">
+//                     {/* ... your header content ... */}
+//                 </div>
+//                 <form className="login-form" onSubmit={handleLogin}>
+//                     {/* ... all your form inputs ... */}
+//                     <button type="submit" className="btn-submit">Sign in</button>
+//                 </form>
+
+//                 {/* CHANGE 2: Added the link to switch to the registration page */}
+//                 <p className="footer-text">
+//                     Don't have an account?{' '}
+//                     <a href="#" onClick={showRegisterPage}>Register Here</a>
+//                 </p>
 //             </div>
 //         </div>
 //     );
 // }
 
-// Import useState to manage form data
 import React, { useState } from "react";
 import "./LoginPage.css";
 
-export default function LoginPage() {
-    // 1. Add state to hold the email, password, and role
-    const [role, setRole] = useState("hod"); // Default to 'hod' or an empty string
+// The component accepts props to handle login success and to show the register page
+export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
+    const [role, setRole] = useState("report-maker");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
-    // 2. Create a function to handle the form submission
     const handleLogin = async (event) => {
-        // This still prevents the page from reloading
         event.preventDefault();
+        setMessage("");
 
-        // A quick check to make sure fields are not empty
         if (!email || !password || !role) {
-            alert("Please fill in all fields.");
+            setMessage("Please fill in all fields.");
             return;
         }
 
-        console.log("Submitting with:", { role, email, password });
-
         try {
-            // This is where you send the data to your backend API
-            const response = await fetch("http://localhost:3000/api/login", { // <-- IMPORTANT: Change this URL to your backend's URL
+            const response = await fetch("http://localhost:3001/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -113,26 +209,22 @@ export default function LoginPage() {
             const data = await response.json();
 
             if (response.ok) {
-                // SUCCESS: Login was successful
-                alert("Login successful!");
-                console.log("Success:", data);
-                // Here you would typically save the token (data.token) and redirect the user
-                // e.g., localStorage.setItem('token', data.token); window.location.href = '/dashboard';
+                setMessage(data.message || "Login successful!");
+                // Pass user data up to the App component to trigger the view change
+                onLoginSuccess(data.user);
             } else {
-                // ERROR: The server responded with an error (e.g., wrong password)
-                alert(data.message || "Login failed!");
-                console.error("Login failed:", data.message);
+                setMessage(data.message || "Login failed!");
             }
         } catch (error) {
-            // NETWORK ERROR: The server could not be reached
             console.error("A network error occurred:", error);
-            alert("Could not connect to the server. Please try again later.");
+            setMessage("Could not connect to the server.");
         }
     };
 
     return (
         <div className="login-page">
             <div className="login-container">
+                {/* --- THIS IS THE MISSING HEADER SECTION --- */}
                 <div className="header">
                     <div className="logo-title">
                         <img className="logo" src="/logo.png" alt="InstiReport Logo" />
@@ -144,10 +236,9 @@ export default function LoginPage() {
                     </p>
                 </div>
 
-                {/* 4. Update the form's onSubmit to call your new handleLogin function */}
                 <form className="login-form" onSubmit={handleLogin}>
+                    {/* --- THESE ARE THE MISSING FORM INPUTS --- */}
                     <label htmlFor="role">Login as</label>
-                    {/* 3. Link state to input values and add onChange handlers to update the state */}
                     <select
                         id="role"
                         name="role"
@@ -183,6 +274,9 @@ export default function LoginPage() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
+                    {/* This will show messages like "Login failed!" */}
+                    {message && <p className="error-message">{message}</p>}
+
                     <div className="form-footer">
                         <div>
                             <input type="checkbox" id="remember-me" />
@@ -195,6 +289,11 @@ export default function LoginPage() {
                         Sign in
                     </button>
                 </form>
+
+                <p className="footer-text">
+                    Don't have an account?{' '}
+                    <a href="#" onClick={showRegisterPage}>Register Here</a>
+                </p>
             </div>
         </div>
     );
