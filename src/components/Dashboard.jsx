@@ -1,10 +1,7 @@
-
-
-
 import React from 'react';
 import styles from './Dashboard.module.css';
 
-// --- Sub-Components (Widgets) for the Dashboard ---
+
 
 // 1. Personalized Header
 const WelcomeHeader = ({ name }) => (
@@ -141,8 +138,6 @@ const Dashboard = ({ handleLogout, currentUser, navigate }) => {
                 <RecentActivity />
                 <UpcomingDeadlines />
             </div>
-
-            {/* ✅ Make Report Button linked to Reports Page */}
             <div className={styles.ReportContainer}>
                 <button
                     className={styles.ReportButton}

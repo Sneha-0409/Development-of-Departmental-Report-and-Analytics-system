@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 
-// The component accepts props to handle login success and to show the register page
 export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
     const [role, setRole] = useState("report-maker");
     const [email, setEmail] = useState("");
@@ -32,7 +31,6 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
 
             if (response.ok) {
                 setMessage(data.message || "Login successful!");
-                // Pass user data up to the App component to trigger the view change
                 onLoginSuccess(data.user);
             } else {
                 setMessage(data.message || "Login failed!");
@@ -46,7 +44,6 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
     return (
         <div className="login-page">
             <div className="login-container">
-                {/* --- THIS IS THE MISSING HEADER SECTION --- */}
                 <div className="header">
                     <div className="logo-title">
                         <img className="logo" src="/logo.png" alt="InstiReport Logo" />
@@ -59,7 +56,6 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
                 </div>
 
                 <form className="login-form" onSubmit={handleLogin}>
-                    {/* --- THESE ARE THE MISSING FORM INPUTS --- */}
                     <label htmlFor="role">Login as</label>
                     <select
                         id="role"
@@ -95,8 +91,6 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-
-                    {/* This will show messages like "Login failed!" */}
                     {message && <p className="error-message">{message}</p>}
 
                     <div className="form-footer">

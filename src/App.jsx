@@ -2,22 +2,21 @@
 
 import React, { useState } from 'react';
 
-// --- Import All Your Components ---
+// --- Import All Your Page Components ---
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
 import DeveloperPage from './components/DeveloperPage';
 import ReportsPage from './components/ReportsPage';
+import ReportStructurePageCSE from './components/ReportStructurePageCSE';
 
 function App() {
-  // --- State Management ---
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [authPage, setAuthPage] = useState('login');
   const [currentPage, setCurrentPage] = useState('Dashboard');
 
-  // --- Core Functions ---
   const handleLoginSuccess = (userData) => {
     setCurrentUser(userData);
     setIsLoggedIn(true);
@@ -29,22 +28,21 @@ function App() {
     setCurrentUser(null);
     setAuthPage('login');
   };
-
-  // This function changes the active page
   const navigate = (page) => {
+    console.log(`App.jsx: Navigating to page: ${page}`);
     setCurrentPage(page);
   };
 
-  // --- Render Logic ---
   const renderPage = () => {
     switch (currentPage) {
       case 'Developer':
         return <DeveloperPage />;
       case 'Reports':
-        return <ReportsPage />;
+        return <ReportsPage navigate={navigate} />;
+      case 'ReportStructureCSE':
+        return <ReportStructurePageCSE />;
       case 'Dashboard':
       default:
-        // **THE FIX IS HERE**: We now pass the 'navigate' function to the Dashboard
         return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
     }
   };

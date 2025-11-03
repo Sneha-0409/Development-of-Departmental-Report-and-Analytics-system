@@ -18,54 +18,54 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.5rem; /* 72px */
+  height: 4.5rem; 
 }
 
 /* Left side: Logo and Brand */
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* 12px */
+  gap: 0.75rem; 
   text-decoration: none;
 }
 
 .brandName {
-  font-size: 1.25rem; /* 20px */
+  font-size: 1.25rem; 
   font-weight: 600;
   color: #1f2937;
 }
 
 /* Center: Navigation Links */
 .navLinks {
-  display: none; /* Hidden on mobile */
+  display: none; 
 }
 
 .navLink {
   font-size: 1rem;
   font-weight: 500;
-  color: #6b7280; /* Gray text */
+  color: #6b7280; 
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   padding: 0.5rem 0.75rem;
-  border-bottom: 2px solid transparent; /* Add transparent border for smooth transition */
+  border-bottom: 2px solid transparent; 
 }
 
 .navLink:hover {
-  color: #1f2937; /* Darker text on hover */
+  color: #1f2937; 
 }
 
 /* UPDATE: Style for the currently active page link */
 .active {
-  color: #4f46e5; /* Indigo color */
+  color: #4f46e5; 
   font-weight: 600;
-  border-bottom: 2px solid #4f46e5; /* Added underline */
+  border-bottom: 2px solid #4f46e5; 
 }
 
 /* Right side: Search and User Profile */
 .userActions {
   display: flex;
   align-items: center;
-  gap: 1rem; /* 16px */
+  gap: 1rem; 
 }
 
 .searchButton {
@@ -90,12 +90,12 @@
 }
 
 .avatar {
-  width: 2.25rem; /* 36px */
+  width: 2.25rem; 
   height: 2.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #22c55e; /* Green background */
+  background-color: #22c55e; 
   border-radius: 9999px;
   color: white;
   font-weight: 600;
@@ -113,7 +113,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    position: absolute; /* Center the links */
+    position: absolute; 
     left: 50%;
     transform: translateX(-50%);
   }
