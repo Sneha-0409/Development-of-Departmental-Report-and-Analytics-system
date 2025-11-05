@@ -1,0 +1,89 @@
+.pageContainer {
+  max-width: 1200px;
+  margin: 2.5rem auto;
+  padding: 1rem;
+}
+
+/* -------- Header -------- */
+.mainHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.mainHeader h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 0.4rem;
+}
+.mainHeader p {
+  font-size: 1.1rem;
+  color: #6b7280;
+}
+
+/* -------- Grid -------- */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.6rem;
+}
+
+/* -------- Cards -------- */
+.departmentCard {
+  position: relative;
+  border-radius: 1rem;
+  padding: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.departmentCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
+  z-index: 1;
+}
+.departmentCard > * { position: relative; z-index: 2; }
+
+.departmentCard:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 16px 28px rgba(0,0,0,0.12);
+}
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255,255,255,0.15);
+  color: #fff;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(6px);
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.35);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.cardArrow {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.85);
+  transition: transform 0.2s;
+}
+.departmentCard:hover .cardArrow {
+  transform: translateX(8px);
+}

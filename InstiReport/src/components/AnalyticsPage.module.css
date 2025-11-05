@@ -1,0 +1,40 @@
+.container {
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.dropdown {
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.section {
+    margin-top: 40px;
+}
+
+.cardGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin-top: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.bigStat {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 8px;
+    color: #333;
+}
