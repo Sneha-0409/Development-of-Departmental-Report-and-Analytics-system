@@ -21,171 +21,472 @@ export const getDepartments = () => [
 // helper to clone simple arrays/objects when returning (avoid accidental mutation)
 const _clone = (x) => JSON.parse(JSON.stringify(x));
 
-// ---------- 1) Departmental Trend (per semester) ----------
-/*
-  Each entry format:
-  { period: "YYYY-S{1|2}", passPct: %, publications: #, enroll: #, grads: #, feedback: 3.0-5.0 }
-*/
+/* ======================================================
+   1) NEW — Student Achievement, Placement, Activities
+   ------------------------------------------------------
+   Periods follow: 2023-S1, 2023-S2, 2024-S1, 2024-S2, 2025-S1
+   Ranges (approx):
+   - scholarships: 5–20
+   - medals: 1–10
+   - papers: 3–15
+   - placed: 100–300
+   - avgPackage (LPA): 4–12
+   - events: 5–20
+   - workshops: 3–12
+   - MoUs: 1–6
+====================================================== */
 
-const trendMock = {
+// --- Student Achievement (stacked bar) ---
+const achievementMock = {
   cse: [
-    { period: "2023-S1", passPct: 82, publications: 18, enroll: 240, grads: 198, feedback: 4.1 },
-    { period: "2023-S2", passPct: 85, publications: 22, enroll: 250, grads: 205, feedback: 4.2 },
-    { period: "2024-S1", passPct: 86, publications: 19, enroll: 255, grads: 210, feedback: 4.25 },
-    { period: "2024-S2", passPct: 89, publications: 24, enroll: 260, grads: 215, feedback: 4.3 },
-    { period: "2025-S1", passPct: 91, publications: 28, enroll: 265, grads: 220, feedback: 4.35 },
+    { period: "2023-S1", scholarships: 12, medals: 6, papers: 10 },
+    { period: "2023-S2", scholarships: 14, medals: 7, papers: 11 },
+    { period: "2024-S1", scholarships: 15, medals: 8, papers: 12 },
+    { period: "2024-S2", scholarships: 17, medals: 9, papers: 14 },
+    { period: "2025-S1", scholarships: 18, medals: 10, papers: 15 },
   ],
   ece: [
-    { period: "2023-S1", passPct: 78, publications: 12, enroll: 190, grads: 160, feedback: 3.9 },
-    { period: "2023-S2", passPct: 80, publications: 15, enroll: 195, grads: 165, feedback: 4.0 },
-    { period: "2024-S1", passPct: 81, publications: 14, enroll: 198, grads: 168, feedback: 4.05 },
-    { period: "2024-S2", passPct: 83, publications: 16, enroll: 200, grads: 172, feedback: 4.1 },
-    { period: "2025-S1", passPct: 84, publications: 18, enroll: 205, grads: 176, feedback: 4.12 },
+    { period: "2023-S1", scholarships: 9, medals: 4, papers: 7 },
+    { period: "2023-S2", scholarships: 10, medals: 5, papers: 8 },
+    { period: "2024-S1", scholarships: 11, medals: 6, papers: 9 },
+    { period: "2024-S2", scholarships: 12, medals: 6, papers: 10 },
+    { period: "2025-S1", scholarships: 13, medals: 7, papers: 11 },
   ],
   me: [
-    { period: "2023-S1", passPct: 75, publications: 8, enroll: 160, grads: 130, feedback: 3.8 },
-    { period: "2023-S2", passPct: 77, publications: 9, enroll: 162, grads: 132, feedback: 3.85 },
-    { period: "2024-S1", passPct: 79, publications: 10, enroll: 165, grads: 135, feedback: 3.9 },
-    { period: "2024-S2", passPct: 80, publications: 12, enroll: 168, grads: 138, feedback: 3.95 },
-    { period: "2025-S1", passPct: 82, publications: 13, enroll: 170, grads: 140, feedback: 4.0 },
+    { period: "2023-S1", scholarships: 7, medals: 3, papers: 5 },
+    { period: "2023-S2", scholarships: 8, medals: 3, papers: 6 },
+    { period: "2024-S1", scholarships: 9, medals: 4, papers: 7 },
+    { period: "2024-S2", scholarships: 10, medals: 5, papers: 8 },
+    { period: "2025-S1", scholarships: 11, medals: 5, papers: 9 },
   ],
   it: [
-    { period: "2023-S1", passPct: 81, publications: 10, enroll: 200, grads: 168, feedback: 4.0 },
-    { period: "2023-S2", passPct: 83, publications: 12, enroll: 205, grads: 172, feedback: 4.05 },
-    { period: "2024-S1", passPct: 85, publications: 14, enroll: 210, grads: 176, feedback: 4.1 },
-    { period: "2024-S2", passPct: 87, publications: 16, enroll: 215, grads: 180, feedback: 4.2 },
-    { period: "2025-S1", passPct: 89, publications: 18, enroll: 220, grads: 185, feedback: 4.25 },
+    { period: "2023-S1", scholarships: 11, medals: 5, papers: 8 },
+    { period: "2023-S2", scholarships: 12, medals: 6, papers: 9 },
+    { period: "2024-S1", scholarships: 13, medals: 6, papers: 10 },
+    { period: "2024-S2", scholarships: 15, medals: 7, papers: 12 },
+    { period: "2025-S1", scholarships: 16, medals: 8, papers: 13 },
   ],
   ai: [
-    { period: "2023-S1", passPct: 79, publications: 15, enroll: 140, grads: 110, feedback: 4.05 },
-    { period: "2023-S2", passPct: 81, publications: 18, enroll: 145, grads: 114, feedback: 4.12 },
-    { period: "2024-S1", passPct: 83, publications: 20, enroll: 150, grads: 118, feedback: 4.2 },
-    { period: "2024-S2", passPct: 85, publications: 24, enroll: 155, grads: 122, feedback: 4.28 },
-    { period: "2025-S1", passPct: 88, publications: 27, enroll: 160, grads: 126, feedback: 4.35 },
+    { period: "2023-S1", scholarships: 10, medals: 5, papers: 9 },
+    { period: "2023-S2", scholarships: 11, medals: 6, papers: 10 },
+    { period: "2024-S1", scholarships: 12, medals: 6, papers: 11 },
+    { period: "2024-S2", scholarships: 14, medals: 7, papers: 13 },
+    { period: "2025-S1", scholarships: 16, medals: 8, papers: 14 },
   ],
   iot: [
-    { period: "2023-S1", passPct: 77, publications: 9, enroll: 120, grads: 96, feedback: 3.95 },
-    { period: "2023-S2", passPct: 79, publications: 11, enroll: 122, grads: 98, feedback: 4.0 },
-    { period: "2024-S1", passPct: 81, publications: 12, enroll: 125, grads: 101, feedback: 4.05 },
-    { period: "2024-S2", passPct: 83, publications: 14, enroll: 128, grads: 104, feedback: 4.12 },
-    { period: "2025-S1", passPct: 85, publications: 16, enroll: 130, grads: 107, feedback: 4.2 },
+    { period: "2023-S1", scholarships: 8, medals: 3, papers: 5 },
+    { period: "2023-S2", scholarships: 9, medals: 4, papers: 6 },
+    { period: "2024-S1", scholarships: 10, medals: 4, papers: 7 },
+    { period: "2024-S2", scholarships: 11, medals: 5, papers: 8 },
+    { period: "2025-S1", scholarships: 12, medals: 5, papers: 9 },
   ],
   ccst: [
-    { period: "2023-S1", passPct: 80, publications: 11, enroll: 115, grads: 92, feedback: 4.0 },
-    { period: "2023-S2", passPct: 82, publications: 13, enroll: 118, grads: 95, feedback: 4.08 },
-    { period: "2024-S1", passPct: 84, publications: 15, enroll: 120, grads: 98, feedback: 4.15 },
-    { period: "2024-S2", passPct: 86, publications: 17, enroll: 123, grads: 102, feedback: 4.22 },
-    { period: "2025-S1", passPct: 88, publications: 19, enroll: 126, grads: 105, feedback: 4.3 },
+    { period: "2023-S1", scholarships: 7, medals: 3, papers: 6 },
+    { period: "2023-S2", scholarships: 8, medals: 3, papers: 7 },
+    { period: "2024-S1", scholarships: 9, medals: 4, papers: 8 },
+    { period: "2024-S2", scholarships: 10, medals: 4, papers: 9 },
+    { period: "2025-S1", scholarships: 11, medals: 5, papers: 10 },
   ],
   ee: [
-    { period: "2023-S1", passPct: 76, publications: 10, enroll: 170, grads: 138, feedback: 3.9 },
-    { period: "2023-S2", passPct: 78, publications: 12, enroll: 172, grads: 140, feedback: 3.95 },
-    { period: "2024-S1", passPct: 80, publications: 13, enroll: 175, grads: 143, feedback: 4.02 },
-    { period: "2024-S2", passPct: 81, publications: 15, enroll: 178, grads: 146, feedback: 4.08 },
-    { period: "2025-S1", passPct: 83, publications: 17, enroll: 180, grads: 149, feedback: 4.15 },
+    { period: "2023-S1", scholarships: 9, medals: 4, papers: 6 },
+    { period: "2023-S2", scholarships: 10, medals: 4, papers: 7 },
+    { period: "2024-S1", scholarships: 11, medals: 5, papers: 8 },
+    { period: "2024-S2", scholarships: 12, medals: 6, papers: 9 },
+    { period: "2025-S1", scholarships: 13, medals: 6, papers: 10 },
   ],
   civil: [
-    { period: "2023-S1", passPct: 74, publications: 6, enroll: 150, grads: 118, feedback: 3.8 },
-    { period: "2023-S2", passPct: 76, publications: 7, enroll: 152, grads: 120, feedback: 3.85 },
-    { period: "2024-S1", passPct: 78, publications: 9, enroll: 155, grads: 124, feedback: 3.92 },
-    { period: "2024-S2", passPct: 79, publications: 10, enroll: 158, grads: 126, feedback: 3.98 },
-    { period: "2025-S1", passPct: 81, publications: 12, enroll: 160, grads: 129, feedback: 4.05 },
+    { period: "2023-S1", scholarships: 6, medals: 2, papers: 4 },
+    { period: "2023-S2", scholarships: 7, medals: 3, papers: 5 },
+    { period: "2024-S1", scholarships: 8, medals: 3, papers: 6 },
+    { period: "2024-S2", scholarships: 9, medals: 4, papers: 7 },
+    { period: "2025-S1", scholarships: 10, medals: 4, papers: 8 },
   ],
   emc: [
-    { period: "2023-S1", passPct: 83, publications: 7, enroll: 90, grads: 75, feedback: 4.2 },
-    { period: "2023-S2", passPct: 84, publications: 8, enroll: 92, grads: 77, feedback: 4.25 },
-    { period: "2024-S1", passPct: 86, publications: 10, enroll: 95, grads: 80, feedback: 4.3 },
-    { period: "2024-S2", passPct: 88, publications: 12, enroll: 97, grads: 82, feedback: 4.35 },
-    { period: "2025-S1", passPct: 90, publications: 13, enroll: 100, grads: 85, feedback: 4.4 },
+    { period: "2023-S1", scholarships: 8, medals: 2, papers: 7 },
+    { period: "2023-S2", scholarships: 9, medals: 3, papers: 8 },
+    { period: "2024-S1", scholarships: 10, medals: 3, papers: 9 },
+    { period: "2024-S2", scholarships: 11, medals: 4, papers: 10 },
+    { period: "2025-S1", scholarships: 12, medals: 4, papers: 11 },
   ],
   che: [
-    { period: "2023-S1", passPct: 79, publications: 9, enroll: 130, grads: 104, feedback: 3.98 },
-    { period: "2023-S2", passPct: 80, publications: 10, enroll: 132, grads: 106, feedback: 4.02 },
-    { period: "2024-S1", passPct: 82, publications: 12, enroll: 135, grads: 109, feedback: 4.08 },
-    { period: "2024-S2", passPct: 83, publications: 13, enroll: 138, grads: 112, feedback: 4.12 },
-    { period: "2025-S1", passPct: 85, publications: 15, enroll: 140, grads: 115, feedback: 4.2 },
+    { period: "2023-S1", scholarships: 8, medals: 3, papers: 6 },
+    { period: "2023-S2", scholarships: 9, medals: 3, papers: 7 },
+    { period: "2024-S1", scholarships: 10, medals: 4, papers: 8 },
+    { period: "2024-S2", scholarships: 12, medals: 5, papers: 9 },
+    { period: "2025-S1", scholarships: 13, medals: 5, papers: 10 },
   ],
 };
 
-// ---------- 2) Faculty Research & Workload ----------
-/*
-  { name, pubs, grants, students, service }
-*/
+// --- Placement (two separate line charts: placed, avgPackage) ---
+const placementMock = {
+  cse: [
+    { period: "2023-S1", placed: 190, avgPackage: 6.5 },
+    { period: "2023-S2", placed: 205, avgPackage: 7.1 },
+    { period: "2024-S1", placed: 215, avgPackage: 7.6 },
+    { period: "2024-S2", placed: 230, avgPackage: 8.2 },
+    { period: "2025-S1", placed: 245, avgPackage: 8.9 },
+  ],
+  ece: [
+    { period: "2023-S1", placed: 150, avgPackage: 5.8 },
+    { period: "2023-S2", placed: 160, avgPackage: 6.1 },
+    { period: "2024-S1", placed: 170, avgPackage: 6.4 },
+    { period: "2024-S2", placed: 178, avgPackage: 6.7 },
+    { period: "2025-S1", placed: 185, avgPackage: 7.0 },
+  ],
+  me: [
+    { period: "2023-S1", placed: 120, avgPackage: 5.2 },
+    { period: "2023-S2", placed: 128, avgPackage: 5.4 },
+    { period: "2024-S1", placed: 135, avgPackage: 5.7 },
+    { period: "2024-S2", placed: 142, avgPackage: 6.0 },
+    { period: "2025-S1", placed: 150, avgPackage: 6.3 },
+  ],
+  it: [
+    { period: "2023-S1", placed: 165, avgPackage: 6.2 },
+    { period: "2023-S2", placed: 175, avgPackage: 6.6 },
+    { period: "2024-S1", placed: 185, avgPackage: 7.1 },
+    { period: "2024-S2", placed: 195, avgPackage: 7.6 },
+    { period: "2025-S1", placed: 205, avgPackage: 8.0 },
+  ],
+  ai: [
+    { period: "2023-S1", placed: 130, avgPackage: 6.8 },
+    { period: "2023-S2", placed: 140, avgPackage: 7.2 },
+    { period: "2024-S1", placed: 150, avgPackage: 7.7 },
+    { period: "2024-S2", placed: 160, avgPackage: 8.1 },
+    { period: "2025-S1", placed: 172, avgPackage: 8.6 },
+  ],
+  iot: [
+    { period: "2023-S1", placed: 100, avgPackage: 5.5 },
+    { period: "2023-S2", placed: 108, avgPackage: 5.8 },
+    { period: "2024-S1", placed: 116, avgPackage: 6.1 },
+    { period: "2024-S2", placed: 123, avgPackage: 6.3 },
+    { period: "2025-S1", placed: 130, avgPackage: 6.6 },
+  ],
+  ccst: [
+    { period: "2023-S1", placed: 95, avgPackage: 5.7 },
+    { period: "2023-S2", placed: 102, avgPackage: 6.0 },
+    { period: "2024-S1", placed: 110, avgPackage: 6.3 },
+    { period: "2024-S2", placed: 118, avgPackage: 6.6 },
+    { period: "2025-S1", placed: 125, avgPackage: 6.9 },
+  ],
+  ee: [
+    { period: "2023-S1", placed: 145, avgPackage: 5.9 },
+    { period: "2023-S2", placed: 152, avgPackage: 6.2 },
+    { period: "2024-S1", placed: 160, avgPackage: 6.5 },
+    { period: "2024-S2", placed: 168, avgPackage: 6.8 },
+    { period: "2025-S1", placed: 176, avgPackage: 7.1 },
+  ],
+  civil: [
+    { period: "2023-S1", placed: 110, avgPackage: 4.8 },
+    { period: "2023-S2", placed: 118, avgPackage: 5.1 },
+    { period: "2024-S1", placed: 124, avgPackage: 5.4 },
+    { period: "2024-S2", placed: 130, avgPackage: 5.7 },
+    { period: "2025-S1", placed: 138, avgPackage: 6.0 },
+  ],
+  emc: [
+    { period: "2023-S1", placed: 85, avgPackage: 5.3 },
+    { period: "2023-S2", placed: 90, avgPackage: 5.5 },
+    { period: "2024-S1", placed: 96, avgPackage: 5.8 },
+    { period: "2024-S2", placed: 102, avgPackage: 6.1 },
+    { period: "2025-S1", placed: 108, avgPackage: 6.4 },
+  ],
+  che: [
+    { period: "2023-S1", placed: 120, avgPackage: 5.6 },
+    { period: "2023-S2", placed: 128, avgPackage: 5.9 },
+    { period: "2024-S1", placed: 136, avgPackage: 6.2 },
+    { period: "2024-S2", placed: 144, avgPackage: 6.5 },
+    { period: "2025-S1", placed: 152, avgPackage: 6.8 },
+  ],
+};
+
+// --- Department Activities (grouped bar) ---
+const activitiesMock = {
+  cse: [
+    { period: "2023-S1", events: 10, workshops: 7, MoUs: 3 },
+    { period: "2023-S2", events: 12, workshops: 8, MoUs: 3 },
+    { period: "2024-S1", events: 14, workshops: 9, MoUs: 4 },
+    { period: "2024-S2", events: 16, workshops: 10, MoUs: 5 },
+    { period: "2025-S1", events: 18, workshops: 11, MoUs: 5 },
+  ],
+  ece: [
+    { period: "2023-S1", events: 9, workshops: 6, MoUs: 2 },
+    { period: "2023-S2", events: 10, workshops: 7, MoUs: 3 },
+    { period: "2024-S1", events: 11, workshops: 7, MoUs: 3 },
+    { period: "2024-S2", events: 12, workshops: 8, MoUs: 4 },
+    { period: "2025-S1", events: 13, workshops: 9, MoUs: 4 },
+  ],
+  me: [
+    { period: "2023-S1", events: 7, workshops: 5, MoUs: 2 },
+    { period: "2023-S2", events: 8, workshops: 5, MoUs: 2 },
+    { period: "2024-S1", events: 9, workshops: 6, MoUs: 3 },
+    { period: "2024-S2", events: 10, workshops: 7, MoUs: 3 },
+    { period: "2025-S1", events: 11, workshops: 7, MoUs: 4 },
+  ],
+  it: [
+    { period: "2023-S1", events: 9, workshops: 6, MoUs: 2 },
+    { period: "2023-S2", events: 10, workshops: 7, MoUs: 3 },
+    { period: "2024-S1", events: 12, workshops: 8, MoUs: 3 },
+    { period: "2024-S2", events: 13, workshops: 9, MoUs: 4 },
+    { period: "2025-S1", events: 14, workshops: 10, MoUs: 5 },
+  ],
+  ai: [
+    { period: "2023-S1", events: 10, workshops: 7, MoUs: 3 },
+    { period: "2023-S2", events: 11, workshops: 7, MoUs: 3 },
+    { period: "2024-S1", events: 12, workshops: 8, MoUs: 4 },
+    { period: "2024-S2", events: 14, workshops: 9, MoUs: 4 },
+    { period: "2025-S1", events: 15, workshops: 10, MoUs: 5 },
+  ],
+  iot: [
+    { period: "2023-S1", events: 6, workshops: 4, MoUs: 2 },
+    { period: "2023-S2", events: 7, workshops: 5, MoUs: 2 },
+    { period: "2024-S1", events: 8, workshops: 5, MoUs: 3 },
+    { period: "2024-S2", events: 9, workshops: 6, MoUs: 3 },
+    { period: "2025-S1", events: 10, workshops: 7, MoUs: 4 },
+  ],
+  ccst: [
+    { period: "2023-S1", events: 6, workshops: 4, MoUs: 2 },
+    { period: "2023-S2", events: 7, workshops: 4, MoUs: 2 },
+    { period: "2024-S1", events: 8, workshops: 5, MoUs: 3 },
+    { period: "2024-S2", events: 9, workshops: 6, MoUs: 3 },
+    { period: "2025-S1", events: 10, workshops: 6, MoUs: 4 },
+  ],
+  ee: [
+    { period: "2023-S1", events: 8, workshops: 5, MoUs: 2 },
+    { period: "2023-S2", events: 9, workshops: 6, MoUs: 3 },
+    { period: "2024-S1", events: 10, workshops: 6, MoUs: 3 },
+    { period: "2024-S2", events: 11, workshops: 7, MoUs: 4 },
+    { period: "2025-S1", events: 12, workshops: 8, MoUs: 4 },
+  ],
+  civil: [
+    { period: "2023-S1", events: 6, workshops: 4, MoUs: 2 },
+    { period: "2023-S2", events: 7, workshops: 4, MoUs: 2 },
+    { period: "2024-S1", events: 8, workshops: 5, MoUs: 2 },
+    { period: "2024-S2", events: 9, workshops: 6, MoUs: 3 },
+    { period: "2025-S1", events: 10, workshops: 6, MoUs: 3 },
+  ],
+  emc: [
+    { period: "2023-S1", events: 5, workshops: 3, MoUs: 1 },
+    { period: "2023-S2", events: 6, workshops: 3, MoUs: 2 },
+    { period: "2024-S1", events: 7, workshops: 4, MoUs: 2 },
+    { period: "2024-S2", events: 8, workshops: 5, MoUs: 3 },
+    { period: "2025-S1", events: 9, workshops: 5, MoUs: 3 },
+  ],
+  che: [
+    { period: "2023-S1", events: 7, workshops: 5, MoUs: 2 },
+    { period: "2023-S2", events: 8, workshops: 5, MoUs: 2 },
+    { period: "2024-S1", events: 9, workshops: 6, MoUs: 3 },
+    { period: "2024-S2", events: 10, workshops: 7, MoUs: 3 },
+    { period: "2025-S1", events: 11, workshops: 8, MoUs: 4 },
+  ],
+};
+
+
+/* ======================================================
+   2) Faculty Research & Workload (unchanged)
+====================================================== */
 const facultyMock = {
   cse: [
-    { name: "Dr. Ahuja", pubs: 12, grants: 2, students: 42, service: 3 },
-    { name: "Dr. Bose",  pubs:  8, grants: 1, students: 38, service: 6 },
-    { name: "Dr. Chen",  pubs: 15, grants: 3, students: 35, service: 2 },
-    { name: "Dr. Dutta", pubs:  6, grants: 1, students: 40, service: 7 },
+    { name: "Dr. Manish Dixit", pubs: 18, grants: 2, students: 42, service: 4 },
+    { name: "Dr. R. S. Jadon", pubs: 15, grants: 3, students: 38, service: 3 },
+    { name: "Dr. R. K. Gupta", pubs: 14, grants: 2, students: 40, service: 4 },
+    { name: "Dr. Anshu Chaturvedi", pubs: 12, grants: 1, students: 36, service: 3 },
+    { name: "Khushboo Agarwal", pubs: 9, grants: 0, students: 30, service: 2 },
+    { name: "Jaimala Jha", pubs: 11, grants: 1, students: 32, service: 3 },
+    { name: "Mahesh Parmar", pubs: 8, grants: 1, students: 28, service: 2 },
+    { name: "Dr. Parul Saxena", pubs: 16, grants: 2, students: 41, service: 4 },
+    { name: "Amit Kumar Manjhvar", pubs: 10, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Ranjeet Kumar Singh", pubs: 17, grants: 3, students: 43, service: 4 },
+    { name: "Dr. Smita Parte", pubs: 14, grants: 2, students: 37, service: 3 },
+    { name: "Dr. Dheeraj Kumar Dixit", pubs: 13, grants: 2, students: 35, service: 5 },
+    { name: "Dr. Praphula Jain", pubs: 15, grants: 1, students: 39, service: 3 },
+    { name: "Dr. Rahul Dubey", pubs: 11, grants: 2, students: 33, service: 3 },
+    { name: "Dr. Devesh Kumar Lal", pubs: 18, grants: 3, students: 44, service: 4 },
+    { name: "Dr. Gagandeep Kaur", pubs: 13, grants: 1, students: 37, service: 3 },
+    { name: "Dr. Rohit Agrawal", pubs: 15, grants: 2, students: 40, service: 4 },
+    { name: "Dr. Kuldeep Narayan Tripathi", pubs: 10, grants: 1, students: 32, service: 2 },
+    { name: "Dr. Nishant Jain", pubs: 12, grants: 2, students: 35, service: 3 },
+    { name: "Vivek Sharma", pubs: 9, grants: 1, students: 31, service: 3 },
+    { name: "Dr. Kirti Raj Bhatele", pubs: 11, grants: 2, students: 34, service: 3 },
+    { name: "Dr. Ashish Tomar", pubs: 14, grants: 1, students: 38, service: 4 },
+    { name: "Dr. Saurabh Agarwal", pubs: 16, grants: 2, students: 41, service: 3 },
+    { name: "Dr. Manojeet Roy", pubs: 12, grants: 1, students: 36, service: 3 },
+    { name: "Jigyasa Mishra", pubs: 8, grants: 1, students: 30, service: 2 },
+    { name: "Manisha Pathak", pubs: 9, grants: 1, students: 29, service: 3 },
+    { name: "Mona Pandey Sharma", pubs: 7, grants: 0, students: 27, service: 2 },
   ],
   ece: [
-    { name: "Dr. Rao",  pubs: 9, grants: 1, students: 45, service: 5 },
-    { name: "Dr. Iyer", pubs: 7, grants: 2, students: 41, service: 4 },
-    { name: "Dr. Patel", pubs: 10, grants: 1, students: 39, service: 3 },
-    { name: "Dr. Singh", pubs: 8, grants: 1, students: 42, service: 6 },
+    { name: "Dr. P. K. Singhal", pubs: 14, grants: 2, students: 48, service: 4 },
+    { name: "Dr. Vandana Vikas Thakare", pubs: 12, grants: 2, students: 45, service: 4 },
+    { name: "Dr. Karuna Markam", pubs: 10, grants: 1, students: 43, service: 3 },
+    { name: "Prof. Pooja Sahoo", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Nidhi Saxena", pubs: 11, grants: 1, students: 44, service: 3 },
+    { name: "Prof. D. K. Parsediya", pubs: 8, grants: 0, students: 40, service: 2 },
+    { name: "Dr. Rahul Dubey", pubs: 12, grants: 1, students: 45, service: 3 },
+    { name: "Dr. Khushboo Punia", pubs: 10, grants: 1, students: 42, service: 3 },
+    { name: "Dr. Deepak Batham", pubs: 11, grants: 1, students: 44, service: 3 },
+    { name: "Dr. Varun Sharma", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Shubhi Kansal", pubs: 8, grants: 0, students: 39, service: 2 },
+    { name: "Dr. Himanshu Singh", pubs: 10, grants: 1, students: 43, service: 3 },
+    { name: "Dr. Yogesh Kumar", pubs: 11, grants: 1, students: 44, service: 3 },
   ],
   me: [
-    { name: "Dr. Khan", pubs: 6, grants: 1, students: 39, service: 5 },
-    { name: "Dr. Gill", pubs: 5, grants: 1, students: 36, service: 6 },
-    { name: "Dr. Rao",  pubs: 7, grants: 1, students: 34, service: 4 },
-    { name: "Dr. Jain", pubs: 6, grants: 2, students: 37, service: 3 },
+    { name: "Dr. Pratesh Jayaswal", pubs: 13, grants: 2, students: 50, service: 5 },
+    { name: "Dr. Chandra Shekhar Malvi", pubs: 11, grants: 1, students: 47, service: 4 },
+    { name: "Dr. Manoj Kumar Gaur", pubs: 12, grants: 2, students: 49, service: 4 },
+    { name: "Dr. Manish Kumar Sagar", pubs: 10, grants: 1, students: 44, service: 3 },
+    { name: "Rajendra Prasad Kori", pubs: 7, grants: 0, students: 40, service: 3 },
+    { name: "Vedansh Chaturvedi", pubs: 9, grants: 1, students: 42, service: 4 },
+    { name: "Dr. Jyoti Vimal", pubs: 12, grants: 2, students: 48, service: 4 },
+    { name: "Sharad Agarwal", pubs: 8, grants: 1, students: 39, service: 3 },
+    { name: "Vaibhav Shivhare", pubs: 7, grants: 0, students: 38, service: 2 },
+    { name: "Dr. Amit Aherwar", pubs: 14, grants: 3, students: 52, service: 5 },
+    { name: "Bhupendra Kumar Pandey", pubs: 9, grants: 1, students: 45, service: 4 },
+    { name: "Dr. Nitin Upadhyay", pubs: 10, grants: 1, students: 47, service: 4 },
+    { name: "Dr. Surendra Kumar Chourasiya", pubs: 11, grants: 2, students: 50, service: 5 },
+    { name: "Dr. Gavendra Norkey", pubs: 8, grants: 1, students: 41, service: 3 },
   ],
   it: [
-    { name: "Dr. Roy",  pubs: 9, grants: 2, students: 40, service: 4 },
-    { name: "Dr. Das",  pubs: 7, grants: 1, students: 38, service: 5 },
-    { name: "Dr. Paul", pubs:10, grants: 2, students: 36, service: 3 },
-    { name: "Dr. Sen",  pubs: 8, grants: 1, students: 39, service: 6 },
+    { name: "Dr. Akhilesh Tiwari", pubs: 13, grants: 2, students: 38, service: 4 },
+    { name: "Dr. Sanjiv Sharma", pubs: 11, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Punit Kumar Johari", pubs: 12, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Abhilash Sonker", pubs: 10, grants: 1, students: 33, service: 3 },
+    { name: "Vikas Sejwar", pubs: 8, grants: 0, students: 30, service: 2 },
+    { name: "Rajeev Kumar Singh", pubs: 10, grants: 1, students: 32, service: 3 },
+    { name: "Neha Bhardwaj", pubs: 9, grants: 1, students: 31, service: 2 },
+    { name: "Dr. Vikram Rajpoot", pubs: 11, grants: 2, students: 34, service: 3 },
+    { name: "Surbhi Gupta", pubs: 8, grants: 1, students: 29, service: 2 },
+    { name: "Shubham Sharma", pubs: 7, grants: 0, students: 28, service: 2 },
+    { name: "Ms. Kumud Dixit", pubs: 9, grants: 1, students: 30, service: 3 },
   ],
   ai: [
-    { name: "Dr. Nair",  pubs: 14, grants: 3, students: 30, service: 2 },
-    { name: "Dr. Verma", pubs: 12, grants: 2, students: 32, service: 3 },
-    { name: "Dr. Garg",  pubs: 10, grants: 2, students: 34, service: 4 },
-    { name: "Dr. Nath",  pubs: 11, grants: 3, students: 31, service: 3 },
+    { name: "Dr. Rajni Ranjan Singh Makwana", pubs: 18, grants: 3, students: 38, service: 4 },
+    { name: "Dr. Mir Shahnawaz Ahmad", pubs: 17, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Arun Kumar", pubs: 15, grants: 2, students: 36, service: 3 },
+    { name: "Dr. Pawan Dubey", pubs: 14, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Tej Singh", pubs: 19, grants: 3, students: 40, service: 5 },
+    { name: "Dr. Bhagat Singh Raghuwanshi", pubs: 13, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Sunil Kumar Shukla", pubs: 16, grants: 2, students: 39, service: 4 },
+    { name: "Dr. Vibha Tiwari", pubs: 12, grants: 1, students: 32, service: 3 },
+    { name: "Dr. Shubha Mishra", pubs: 13, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Abhishek Bhatt", pubs: 10, grants: 1, students: 31, service: 2 },
+    { name: "Dr. Shipra Shukla", pubs: 12, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Hardev Singh Pal", pubs: 14, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Shweta Chauhan", pubs: 9, grants: 0, students: 29, service: 2 },
+    { name: "Dr. Rahul Kumar", pubs: 15, grants: 2, students: 38, service: 3 },
+    { name: "Dr. Sumit Dhariwal", pubs: 11, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Neelam Arya", pubs: 13, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Nandkishor Joshi", pubs: 12, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Neelam Sharma", pubs: 14, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Mausam Chouksey", pubs: 10, grants: 1, students: 31, service: 2 },
+    { name: "Dr. Anurag Singh Tomar", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Satyam Omar", pubs: 9, grants: 0, students: 30, service: 2 },
+    { name: "Dr. Neeraj Mishra", pubs: 13, grants: 2, students: 35, service: 3 },
+    { name: "Dr. Prerna Mishra", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Prof. Ramnaresh Sharma", pubs: 11, grants: 1, students: 33, service: 3 },
+    { name: "Prof. Archana Acharya", pubs: 10, grants: 1, students: 32, service: 3 },
+    { name: "Prof. Geetika Hazra", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Prof. Pooja Tripathi", pubs: 9, grants: 0, students: 30, service: 2 },
   ],
   iot: [
-    { name: "Dr. Rao",  pubs: 8, grants: 2, students: 28, service: 4 },
-    { name: "Dr. Ghosh",pubs: 7, grants: 1, students: 27, service: 5 },
-    { name: "Dr. Shah", pubs: 9, grants: 2, students: 26, service: 3 },
-    { name: "Dr. Ajay", pubs: 8, grants: 1, students: 29, service: 4 },
+    { name: "Dr. Praveen Bansal", pubs: 15, grants: 3, students: 42, service: 4 },
+    { name: "Dr. Saurabh Kumar Rajput", pubs: 13, grants: 2, students: 39, service: 3 },
+    { name: "Dr. Bhavna Rathore", pubs: 12, grants: 2, students: 37, service: 3 },
+    { name: "Dr. Kaushal Pratap Sengar", pubs: 11, grants: 2, students: 36, service: 3 },
+    { name: "Dr. Murli Manohar", pubs: 10, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Soumyajit Ghosh", pubs: 14, grants: 2, students: 41, service: 4 },
+    { name: "Dr. Aftab Ahmed Ansari", pubs: 12, grants: 1, students: 38, service: 3 },
+    { name: "Dr. Dhananjay Bisen", pubs: 11, grants: 1, students: 37, service: 3 },
+    { name: "Dr. Aditya Dubey", pubs: 13, grants: 2, students: 39, service: 3 },
+    { name: "Dr. Nookala Venu", pubs: 9, grants: 1, students: 33, service: 2 },
+    { name: "Dr. Priyanka Garg", pubs: 10, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Namita Arya", pubs: 11, grants: 2, students: 36, service: 3 },
+    { name: "Dr. Abhishek Narwaria", pubs: 12, grants: 2, students: 38, service: 4 },
+    { name: "Dr. Rupam Srivastava", pubs: 10, grants: 1, students: 34, service: 3 },
+    { name: "Prof. Vinay Gupta", pubs: 9, grants: 1, students: 32, service: 3 },
+    { name: "Prof. Anuj Lodhi", pubs: 8, grants: 1, students: 31, service: 2 },
+    { name: "Prof. Rinki Pakshwar", pubs: 9, grants: 1, students: 30, service: 2 },
+    { name: "Prof. Rashmi Shrivastava", pubs: 8, grants: 1, students: 30, service: 2 },
   ],
   ccst: [
-    { name: "Dr. Mishra", pubs: 9, grants: 1, students: 24, service: 4 },
-    { name: "Dr. Kulkarni", pubs: 8, grants: 1, students: 23, service: 5 },
-    { name: "Dr. Sen", pubs: 10, grants: 2, students: 22, service: 3 },
-    { name: "Dr. Bhat", pubs: 11, grants: 2, students: 25, service: 2 },
+    { name: "Dr. Akhilesh Tiwari", pubs: 14, grants: 2, students: 36, service: 4 },
+    { name: "Dr. Saumil Maheshwari", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Abhishek Dixit", pubs: 15, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Devanshu Tiwari", pubs: 13, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Gulshan Soni", pubs: 16, grants: 2, students: 38, service: 4 },
+    { name: "Dr. Tejaswita Mishra", pubs: 11, grants: 1, students: 32, service: 3 },
+    { name: "Dr. Shradha Dubey", pubs: 12, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Suchitra Agrawal", pubs: 10, grants: 1, students: 31, service: 2 },
+    { name: "Mr. Mithun Sahay Shrivastava", pubs: 8, grants: 0, students: 29, service: 2 },
+    { name: "Utkarsh Sharma", pubs: 9, grants: 1, students: 30, service: 2 },
+    { name: "Prof. Aditi Samadhiya", pubs: 10, grants: 1, students: 31, service: 3 },
   ],
   ee: [
-    { name: "Dr. Menon", pubs: 8, grants: 1, students: 38, service: 4 },
-    { name: "Dr. Gupta", pubs: 7, grants: 1, students: 36, service: 5 },
-    { name: "Dr. Ali",   pubs: 9, grants: 2, students: 37, service: 3 },
-    { name: "Dr. Roy",   pubs: 8, grants: 1, students: 35, service: 4 },
+    { name: "Dr. Manjaree Pandit", pubs: 15, grants: 3, students: 52, service: 5 },
+    { name: "Dr. A. K. Wadhwani", pubs: 13, grants: 2, students: 48, service: 4 },
+    { name: "Dr. Sulochana Wadhwani", pubs: 12, grants: 2, students: 45, service: 4 },
+    { name: "Dr. Shishir Dixit", pubs: 11, grants: 1, students: 44, service: 3 },
+    { name: "Ashis Patra", pubs: 8, grants: 0, students: 38, service: 3 },
+    { name: "Dr. Himmat Singh", pubs: 14, grants: 2, students: 50, service: 5 },
+    { name: "Dr. Vijay Bhuria", pubs: 10, grants: 1, students: 46, service: 3 },
+    { name: "Rakesh Narvey", pubs: 7, grants: 0, students: 40, service: 3 },
+    { name: "Kuldeep Kumar Swarnkar", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Vishal Chaudhary", pubs: 12, grants: 2, students: 49, service: 4 },
+    { name: "Dr. Ankit Tiwari", pubs: 10, grants: 1, students: 42, service: 3 },
+    { name: "Dr. Nikhil Paliwal", pubs: 11, grants: 2, students: 44, service: 3 },
+    { name: "Dr. Vikram", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Yashwant Sawle", pubs: 13, grants: 3, students: 51, service: 4 },
+    { name: "Dr. Geetam Shukla", pubs: 11, grants: 2, students: 46, service: 4 },
+    { name: "Prof. Manoj Kumar", pubs: 10, grants: 1, students: 45, service: 4 },
+    { name: "Dr. R. Jenkin Suji", pubs: 9, grants: 1, students: 43, service: 3 },
+    { name: "Prof. Hariom Sharma", pubs: 8, grants: 0, students: 38, service: 2 },
+    { name: "Dr. Rimjhim Agrawal", pubs: 10, grants: 1, students: 44, service: 3 },
+    { name: "Er. Shubham Sharma", pubs: 7, grants: 0, students: 39, service: 2 },
   ],
   civil: [
-    { name: "Dr. Das",  pubs: 6, grants: 1, students: 33, service: 4 },
-    { name: "Dr. Iqbal",pubs: 7, grants: 1, students: 34, service: 5 },
-    { name: "Dr. Jain", pubs: 8, grants: 1, students: 32, service: 3 },
-    { name: "Dr. Bose", pubs: 6, grants: 1, students: 31, service: 4 },
+    { name: "Dr. Sanjay Tiwari", pubs: 12, grants: 1, students: 56, service: 5 },
+    { name: "Dr. Sarvesh Kumar Jain", pubs: 11, grants: 1, students: 54, service: 4 },
+    { name: "Dr. Manoj Kumar Trivedi", pubs: 10, grants: 1, students: 52, service: 4 },
+    { name: "Prof. Anil Kumar Dwivedi", pubs: 9, grants: 0, students: 50, service: 3 },
+    { name: "Prof. Anil Kumar Saxena", pubs: 8, grants: 0, students: 49, service: 3 },
+    { name: "Prof. Gautam Bhadoriya", pubs: 7, grants: 0, students: 47, service: 3 },
+    { name: "Prof. Aditya Kumar Agarwal", pubs: 9, grants: 1, students: 48, service: 4 },
+    { name: "Dr. Hemant Shrivastava", pubs: 10, grants: 1, students: 53, service: 4 },
+    { name: "Dr. Prachi Singh", pubs: 8, grants: 1, students: 45, service: 3 },
+    { name: "Dr. Abhilash Shukla", pubs: 7, grants: 0, students: 44, service: 3 },
+    { name: "Dr. Mohit Kumar", pubs: 9, grants: 1, students: 47, service: 3 },
+    { name: "Dr. Rohit Ralli", pubs: 6, grants: 0, students: 42, service: 2 },
+    { name: "Dr. Raghvendra Sahu", pubs: 11, grants: 1, students: 50, service: 4 },
+    { name: "Dr. Mali Shivashankar", pubs: 10, grants: 1, students: 52, service: 5 },
+    { name: "Dr. Reema Bera Sharma", pubs: 8, grants: 0, students: 45, service: 3 },
   ],
   emc: [
-    { name: "Dr. Iyer", pubs: 7, grants: 1, students: 20, service: 2 },
-    { name: "Dr. Rao",  pubs: 8, grants: 1, students: 22, service: 3 },
-    { name: "Dr. Sen",  pubs: 9, grants: 2, students: 19, service: 2 },
-    { name: "Dr. Paul", pubs:10, grants: 2, students: 21, service: 3 },
+    { name: "Dr. D. K. Jain", pubs: 18, grants: 2, students: 28, service: 3 },
+    { name: "Dr. Vikas Shinde", pubs: 15, grants: 1, students: 26, service: 3 },
+    { name: "Prabhakar Sharma", pubs: 12, grants: 0, students: 25, service: 2 },
+    { name: "Dr. J. K. Muthele", pubs: 16, grants: 2, students: 30, service: 3 },
+    { name: "Dr. Atul Kumar Ray", pubs: 14, grants: 1, students: 27, service: 2 },
+    { name: "Dr. Minakshi Dahiya", pubs: 15, grants: 1, students: 29, service: 3 },
+    { name: "Dr. Divya Chaturvedi", pubs: 13, grants: 1, students: 30, service: 3 },
+    { name: "Dr. Barkha Tiwari", pubs: 12, grants: 0, students: 26, service: 2 },
+    { name: "Dr. Vijay Shankar Sharma", pubs: 17, grants: 2, students: 31, service: 3 },
+    { name: "Dr. Anand Pawar", pubs: 14, grants: 1, students: 28, service: 3 },
+    { name: "Dr. Nidhi Humnekar", pubs: 13, grants: 1, students: 27, service: 3 },
+    { name: "Dr. Kuldeep Kumar Tiwari", pubs: 16, grants: 1, students: 29, service: 3 },
+    { name: "Dr. Dilip Kumar Mishra", pubs: 15, grants: 1, students: 30, service: 4 },
+    { name: "Dr. S. K. Bhardwaj", pubs: 12, grants: 0, students: 25, service: 2 },
   ],
   che: [
-    { name: "Dr. Gill", pubs: 9, grants: 2, students: 29, service: 3 },
-    { name: "Dr. Shah", pubs: 8, grants: 1, students: 28, service: 4 },
-    { name: "Dr. Khan", pubs: 7, grants: 1, students: 27, service: 4 },
-    { name: "Dr. Roy",  pubs:10, grants: 2, students: 30, service: 2 },
+    { name: "Prof. Swati Gupta", pubs: 10, grants: 1, students: 48, service: 4 },
+    { name: "Prof. Anish P. Jacob", pubs: 9, grants: 1, students: 46, service: 3 },
+    { name: "Dr. Shourabh Singh Raghuwanshi", pubs: 11, grants: 1, students: 47, service: 3 },
+    { name: "Shivangi Sharma", pubs: 7, grants: 0, students: 42, service: 2 },
   ],
 };
 
-// ---------- 3) Budget vs Spend ----------
-/*
-  { totalBudget, totalSpend, byCategory: [{ category, budget, spend }] }
-  Budgets: ~16–24 lakhs; categories reflect typical college spends
-*/
+/* ======================================================
+   3) Budget vs Spend (unchanged)
+====================================================== */
 const budgetMock = {
+  // ... (unchanged from your file)
   cse: {
     totalBudget: 2400000, totalSpend: 2050000,
     byCategory: [
@@ -298,11 +599,7 @@ const budgetMock = {
   },
 };
 
-// ---------- 4) Engagement & Activities ----------
-/*
-  { totals: { events, avgAttendance, costPerStudent }, interDept: [{ event, cse, ece, me, ...}] }
-  NOTE: For interDept participation we show CSE/ECE/ME columns for consistency in charts.
-*/
+// ---------- 4) Engagement & Activities (unchanged) ----------
 const engagementMock = {
   cse: {
     totals: { events: 22, avgAttendance: 86, costPerStudent: 1450 },
@@ -391,7 +688,9 @@ const engagementMock = {
 // Exports for AnalyticsPage.jsx
 // ======================================================
 
-export const getTrendData = (dept) => _clone(trendMock[dept] || []);
+export const getAchievementData = (dept) => _clone(achievementMock[dept] || []);
+export const getPlacementData = (dept) => _clone(placementMock[dept] || []);
+export const getActivitiesData = (dept) => _clone(activitiesMock[dept] || []);
 export const getFacultyData = (dept) => _clone(facultyMock[dept] || []);
 export const getBudgetData = (dept) => _clone(budgetMock[dept] || null);
 export const getEngagementData = (dept) => _clone(engagementMock[dept] || null);
