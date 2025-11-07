@@ -1,4 +1,4 @@
-/* Main navbar container */
+
 .navbar {
   background-color: white;
   width: 100%;
@@ -6,14 +6,14 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* Wrapper to control max-width and centering */
+
 .navbarWrapper {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-/* Flexbox container for navbar items */
+
 .navbarContent {
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
   color: #1f2937;
 }
 
-/* Center: Navigation Links */
+
 .navLinks {
   display: none; 
 }
@@ -54,14 +54,14 @@
   color: #1f2937; 
 }
 
-/* UPDATE: Style for the currently active page link */
+
 .active {
   color: #4f46e5; 
   font-weight: 600;
   border-bottom: 2px solid #4f46e5; 
 }
 
-/* Right side: Search and User Profile */
+
 .userActions {
   display: flex;
   align-items: center;
@@ -107,7 +107,24 @@
   color: #374151;
 }
 
-/* Responsive design for medium screens and up */
+
+.logoutBtn {
+  background: transparent;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background: #dc2626;
+  color: white;
+}
+
+
 @media (min-width: 768px) {
   .navLinks {
     display: flex;
@@ -118,4 +135,3 @@
     transform: translateX(-50%);
   }
 }
-

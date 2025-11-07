@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ReportsPage.module.css"; // reuse same tokens for now
+import styles from "./ReportsPage.module.css"; 
 
 export default function DepartmentReports({ dept, navigate }) {
   if (!dept) {
@@ -24,7 +24,7 @@ export default function DepartmentReports({ dept, navigate }) {
         </div>
       </div>
 
-      {/* Quick stats (placeholder) */}
+     
       <div className={styles.cardGrid}>
         <div className={styles.departmentCard} style={{backgroundImage:`url(${dept.bg})`}}>
           <div className={styles.badge}>KPI</div>
@@ -43,7 +43,7 @@ export default function DepartmentReports({ dept, navigate }) {
         </div>
       </div>
 
-      {/* Table placeholder */}
+      
       <div className={styles.listWrap} style={{marginTop:"1rem"}}>
         <div className={styles.row}><div className={styles.rowLeft}><div className={styles.rowThumb} style={{backgroundImage:`url(${dept.bg})`}}/><div><div className={styles.rowName}>Annual Activities Report</div><div className={styles.rowMeta}>Submitted by: HOD · 20 Oct 2025</div></div></div><div className={styles.rowRight}>Approved</div></div>
         <div className={styles.row}><div className={styles.rowLeft}><div className={styles.rowThumb} style={{backgroundImage:`url(${dept.bg})`}}/><div><div className={styles.rowName}>Q3 Events Summary</div><div className={styles.rowMeta}>Submitted by: Faculty · 10 Oct 2025</div></div></div><div className={styles.rowRight}>Pending</div></div>

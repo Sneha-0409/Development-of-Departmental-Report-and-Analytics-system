@@ -1,0 +1,67 @@
+.page {
+  padding: 40px;
+  animation: fadeIn 0.4s ease;
+}
+
+.header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.header p {
+  color: #666;
+  margin-bottom: 35px;
+  font-size: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: #ffffff80;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid #e5e5e5;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  border-color: #b3b3ff;
+}
+
+.iconBox {
+  font-size: 35px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: #222;
+}
+
+.count {
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.linkText {
+  font-size: 14px;
+  color: #635bff;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

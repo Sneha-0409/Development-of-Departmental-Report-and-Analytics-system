@@ -1,85 +1,116 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-// --- Import All Your Page Components ---
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
-import Dashboard from './components/Dashboard';
-import Navbar from './components/Navbar';
-import DeveloperPage from './components/DeveloperPage';
-import ReportsPage from './components/ReportsPage';
-import ReportStructurePageCSE from './components/ReportStructurePageCSE';
-import AnalyticsPage from './components/AnalyticsPage'; // <-- add this import
-import DepartmentReports from './components/DepartmentReports';
-import ReportStructurePage from './components/ReportStructurePage';
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
+import Dashboard from "./components/Dashboard";
+import Navbar from "./components/Navbar";
+import DeveloperPage from "./components/DeveloperPage";
+import ReportsPage from "./components/ReportsPage";
+import ReportStructurePage from "./components/ReportStructurePage";
+import SubmissionPage from "./components/SubmissionPage";
+import AnalyticsPage from "./components/AnalyticsPage";
 
 
+import HODDashboard from "./components/HODDashboard";
+import ApprovalsPage from "./components/ApprovalsPage";
+
+// Back button
+import BackButton from "./components/BackButton";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [authPage, setAuthPage] = useState('login');
-  const [currentPage, setCurrentPage] = useState('Dashboard');
+  const [authPage, setAuthPage] = useState("login");
+  const [currentPage, setCurrentPage] = useState("Dashboard");
   const [selectedDept, setSelectedDept] = useState(null);
+
+  //  Back history
+  const [historyStack, setHistoryStack] = useState([]);
+
+  const handleBack = () => {
+    if (historyStack.length > 0) {
+      const last = historyStack.pop();
+      setHistoryStack([...historyStack]);
+      setCurrentPage(last);
+    }
+  };
+
+  const navigate = (page) => {
+    if (page !== currentPage) {
+      setHistoryStack((prev) => [...prev, currentPage]);
+      setCurrentPage(page);
+    }
+  };
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("insti_user");
+    if (savedUser) {
+      const u = JSON.parse(savedUser);
+      setCurrentUser(u);
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleLoginSuccess = (userData) => {
     setCurrentUser(userData);
+    localStorage.setItem("insti_user", JSON.stringify(userData));
     setIsLoggedIn(true);
-    setCurrentPage('Dashboard');
+    setCurrentPage("Dashboard");
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     setCurrentUser(null);
-    setAuthPage('login');
+    localStorage.removeItem("insti_user");
+    setAuthPage("login");
   };
-  const navigate = (page) => {
-    console.log(`App.jsx: Navigating to page: ${page}`);
-    setCurrentPage(page);
-  };
+
+  // RENDER PAGE BASED ON ROLE
+  const role = currentUser?.roles || "faculty";
 
   const renderPage = () => {
-    switch (currentPage) {
-      case 'Developer':
-        return <DeveloperPage />;
-      case 'Reports':
-        return <ReportsPage navigate={navigate} />;
-       case 'Analytics':                      // ✅ ADD THIS
-      return <AnalyticsPage navigate={navigate} />;
-      // case 'ReportStructureCSE':
-      //   return <ReportStructurePageCSE />;
-      case 'ReportStructure':
-        return <ReportStructurePage dept={selectedDept} navigate={navigate} />;
-
-
-      case 'DepartmentReports':
-        return <DepartmentReports dept={selectedDept} navigate={navigate} />;
-
-      case 'Dashboard':
-      default:
-        return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
+    if (role === "faculty") {
+      switch (currentPage) {
+        case "Reports": return <ReportsPage navigate={navigate} setSelectedDept={setSelectedDept} />;
+        case "ReportStructure": return <ReportStructurePage dept={selectedDept} navigate={navigate} />;
+        case "Submission": return <SubmissionPage currentUser={currentUser} />;
+        case "Analytics": return <AnalyticsPage navigate={navigate} />;
+        case "Developer": return <DeveloperPage />;
+        default: return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
+      }
     }
+
+    if (role === "hod") {
+      switch (currentPage) {
+        case "HOD Dashboard": return <HODDashboard />;
+        case "Approvals": return <ApprovalsPage role="hod" />;
+        case "Analytics": return <AnalyticsPage navigate={navigate} />;
+        default: return <HODDashboard />;
+      }
+    }
+
+    return null;
   };
 
-  const renderAuthPage = () => {
-    if (authPage === 'login') {
-      return <LoginPage onLoginSuccess={handleLoginSuccess} showRegisterPage={() => setAuthPage('register')} />;
-    } else {
-      return <RegisterPage showLoginPage={() => setAuthPage('login')} />;
-    }
-  };
+  const renderAuthPage = () =>
+    authPage === "login"
+      ? <LoginPage onLoginSuccess={handleLoginSuccess} showRegisterPage={() => setAuthPage("register")} />
+      : <RegisterPage showLoginPage={() => setAuthPage("login")} />;
 
-  // --- Main Return ---
+  const hideBackOn = ["Dashboard", "HOD Dashboard", "Admin Dashboard"];
+
   return (
     <div>
       {isLoggedIn ? (
         <>
-          <Navbar
-            navigate={navigate}
-            currentPage={currentPage}
-            currentUser={currentUser}
-          />
+          <Navbar navigate={navigate} currentPage={currentPage} currentUser={currentUser} />
+
+          {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
+            <BackButton onBack={handleBack} />
+          )}
+
           {renderPage()}
         </>
       ) : (
@@ -90,4 +121,3 @@ function App() {
 }
 
 export default App;
-

@@ -107,7 +107,7 @@ const ReviewModal = ({ reportData, departmentName, onClose, onConfirm }) => {
 };
 
 
-// --- Main Page Component (Unchanged) ---
+// --- Main Page Component  ---
 const ReportStructurePageCSE = () => {
     const departmentName = "Computer Science & Engineering";
     const [reportData, setReportData] = useState({

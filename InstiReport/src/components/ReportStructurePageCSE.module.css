@@ -1,4 +1,4 @@
-/* --- src/components/ReportStructurePageCSE.module.css --- */
+
 
 .pageContainer {
     max-width: 900px;
@@ -31,7 +31,7 @@
     margin-top: 0.5rem;
 }
 
-/* Accordion styles */
+
 .accordion {
     border: 1px solid #dee2e6;
     border-radius: 12px;
@@ -101,7 +101,7 @@
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
-/* Main action buttons at the bottom */
+
 .actionButtons {
     display: flex;
     justify-content: flex-end;
@@ -137,7 +137,7 @@
     background-color: #dee2e6;
 }
 
-/* --- Modal Styles --- */
+
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -167,7 +167,7 @@
     flex-grow: 1;
     overflow-y: auto; 
     
-    /* PDF Formatting Styles */
+   
     position: relative; 
     font-family: 'Times New Roman', Georgia, serif; 
 
@@ -240,7 +240,7 @@
     padding-left: 15px;
 }
 
-/* Section Separator */
+
 .sectionSeparator {
     border: 0;
     border-top: 0.5px solid #ddd;
@@ -263,7 +263,7 @@
 }
 
 
-/* PDF Header Styles (Absolute positioning within the capture area) */
+
 .pdfHeader {
     position: absolute; 
     top: 0;
@@ -293,7 +293,7 @@
     display: block; 
 }
 
-/* PDF Footer Styles (at the bottom of the scrollable content) */
+
 .pdfFooter {
     text-align: left;
     padding-left: 20px; 

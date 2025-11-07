@@ -1,7 +1,4 @@
-// ======================================================
-// Analytics Mock Data & Accessors (semester-wise, realistic)
-// Works out of the box with AnalyticsPage.jsx (Recharts)
-// ======================================================
+
 
 // ---------- Departments ----------
 export const getDepartments = () => [
@@ -18,25 +15,12 @@ export const getDepartments = () => [
   { id: "che",   name: "Chemical Engineering" },
 ];
 
-// helper to clone simple arrays/objects when returning (avoid accidental mutation)
+
 const _clone = (x) => JSON.parse(JSON.stringify(x));
 
-/* ======================================================
-   1) NEW — Student Achievement, Placement, Activities
-   ------------------------------------------------------
-   Periods follow: 2023-S1, 2023-S2, 2024-S1, 2024-S2, 2025-S1
-   Ranges (approx):
-   - scholarships: 5–20
-   - medals: 1–10
-   - papers: 3–15
-   - placed: 100–300
-   - avgPackage (LPA): 4–12
-   - events: 5–20
-   - workshops: 3–12
-   - MoUs: 1–6
-====================================================== */
 
-// --- Student Achievement (stacked bar) ---
+
+// --- Student Achievement  ---
 const achievementMock = {
   cse: [
     { period: "2023-S1", scholarships: 12, medals: 6, papers: 10 },
@@ -281,7 +265,7 @@ const activitiesMock = {
 
 
 /* ======================================================
-   2) Faculty Research & Workload (unchanged)
+   2) Faculty Research & Workload 
 ====================================================== */
 const facultyMock = {
   cse: [
@@ -483,10 +467,10 @@ const facultyMock = {
 };
 
 /* ======================================================
-   3) Budget vs Spend (unchanged)
+   3) Budget vs Spend 
 ====================================================== */
 const budgetMock = {
-  // ... (unchanged from your file)
+  
   cse: {
     totalBudget: 2400000, totalSpend: 2050000,
     byCategory: [
@@ -599,7 +583,7 @@ const budgetMock = {
   },
 };
 
-// ---------- 4) Engagement & Activities (unchanged) ----------
+// ---------- 4) Engagement & Activities  ----------
 const engagementMock = {
   cse: {
     totals: { events: 22, avgAttendance: 86, costPerStudent: 1450 },

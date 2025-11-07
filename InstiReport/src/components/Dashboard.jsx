@@ -3,7 +3,7 @@ import styles from './Dashboard.module.css';
 
 
 
-// 1. Personalized Header
+// Personalized Header
 const WelcomeHeader = ({ name }) => (
     <div className={styles.header}>
         <h1 className={styles.title}>Welcome, {name}!</h1>
@@ -11,7 +11,7 @@ const WelcomeHeader = ({ name }) => (
     </div>
 );
 
-// 2. Role-Based Quick Actions
+//  Role-Based Quick Actions
 const QuickActions = ({ role }) => {
     let actions = [];
     if (role === 'hod') {
@@ -51,7 +51,7 @@ const QuickActions = ({ role }) => {
     );
 };
 
-// 3. Key Statistics Card
+//  Key Statistics Card
 const KeyStatistics = () => (
     <div className={`${styles.card} ${styles.statsCard}`}>
         <div className={styles.cardHeader}>
@@ -74,7 +74,7 @@ const KeyStatistics = () => (
     </div>
 );
 
-// 4. Recent Activity Feed
+//  Recent Activity Feed
 const RecentActivity = () => (
     <div className={`${styles.card} ${styles.activityCard}`}>
         <div className={styles.cardHeader}>
@@ -103,7 +103,7 @@ const RecentActivity = () => (
     </div>
 );
 
-// 5. Upcoming Deadlines Card
+//  Upcoming Deadlines Card
 const UpcomingDeadlines = () => (
     <div className={`${styles.card} ${styles.deadlinesCard}`}>
         <div className={styles.cardHeader}>

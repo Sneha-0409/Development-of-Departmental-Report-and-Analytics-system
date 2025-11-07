@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import styles from "./ReportStructurePage.module.css";
+import BackButton from "./BackButton";
 
 const DEFAULT_SECTIONS = [
   "1. Vision and Mission",
@@ -35,7 +36,7 @@ const AccordionItem = ({ title, content, onContentChange }) => {
 };
 
 export default function ReportStructurePage({ dept, navigate }) {
-  const departmentName = dept?.name ?? "Unknown Department";
+  const departmentName = dept?.name ?? "CSE Department";
   const [reportData, setReportData] = useState(
     DEFAULT_SECTIONS.reduce((obj, section) => ({ ...obj, [section]: "" }), {})
   );
@@ -72,7 +73,8 @@ export default function ReportStructurePage({ dept, navigate }) {
 
   return (
     <div className={styles.pageContainer}>
-      {/* ✅ UI stays visible */}
+      
+    
       <header className={styles.header}>
         <div className={styles.breadcrumbs}>
           Reports / <strong>{departmentName}</strong>
@@ -99,7 +101,7 @@ export default function ReportStructurePage({ dept, navigate }) {
         </button>
       </div>
 
-      {/* ✅ HIDDEN PDF EXPORT AREA */}
+     
       {isReviewing && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContainer}>

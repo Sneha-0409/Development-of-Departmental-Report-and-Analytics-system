@@ -1,4 +1,4 @@
-/* PAGE LAYOUT */
+
 .pageContainer {
   max-width: 900px;
   margin: 2rem auto;
@@ -30,7 +30,7 @@
   margin-top: 0.5rem;
 }
 
-/* ACCORDION */
+
 .accordion {
   border: 1px solid #dee2e6;
   border-radius: 12px;
@@ -83,6 +83,7 @@
 
 .editTextarea {
   width: 100%;
+  box-sizing: border-box;
   min-height: 150px;
   padding: 1rem;
   border: 1px solid #ced4da;
@@ -99,7 +100,7 @@
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
-/* ACTION BUTTONS */
+
 .actionButtons {
   display: flex;
   justify-content: flex-end;
@@ -135,7 +136,7 @@
   background-color: #dee2e6;
 }
 
-/* MODAL + PDF PREVIEW */
+
 .modalOverlay {
   position: fixed;
   inset: 0;
@@ -167,7 +168,7 @@
   padding-bottom: 50px;
 }
 
-/* FULL WIDTH HEADER IMAGE */
+
 .pdfHeader {
   position: relative;
   width: 100%;
@@ -181,15 +182,13 @@
   max-height: 110px;
   object-fit: contain;
 }
-
-/* CONTENT BOX (RESPECT 20MM MARGINS) */
 .pdfBody {
   width: 170mm;
   margin: 0 auto;
   padding-top: 20px;
 }
 
-/* TITLE + DATE */
+
 .modalTitle {
   font-size: 22pt;
   font-weight: 700;
@@ -211,7 +210,7 @@
   border-bottom: 1px solid #ccc;
 }
 
-/* SECTIONS */
+
 .reviewSection {
   margin-bottom: 18px;
   page-break-inside: avoid;
@@ -242,7 +241,7 @@
   color: #333;
 }
 
-/* SECTION DIVIDER */
+
 .sectionSeparator {
   border: 0;
   border-top: 0.5px solid #bbb;
@@ -250,7 +249,7 @@
   width: 100%;
 }
 
-/* MODAL FOOTER BUTTONS */
+
 .modalActions {
   padding: 1rem 1.5rem;
   display: flex;
@@ -259,7 +258,7 @@
   border-top: 1px solid #e9ecef;
   background: #f8f9fa;
 }
-/* ✅ PDF EXPORT AREA (HIDDEN IN UI, USED IN PDF ONLY) */
+
 .pdfExportArea {
   display: block;
   width: 170mm;
@@ -267,12 +266,12 @@
   font-family: 'Times New Roman', serif;
 }
 
-/* ✅ Justify paragraph text */
+
 .reportContentText {
   text-align: justify;
 }
 
-/* Prevent sections from splitting across pages */
+
 .reviewSection {
   page-break-inside: avoid;
 }
