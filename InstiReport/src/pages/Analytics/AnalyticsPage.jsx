@@ -10,7 +10,7 @@ import {
   getDepartments,
   getAchievementData, getPlacementData, getActivitiesData,
   getFacultyData, getBudgetData, getEngagementData
-} from "../analytics";
+} from "../../data/analytics";
 
 const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#3b82f6"];
 
@@ -18,12 +18,12 @@ const AnalyticsPage = ({ navigate }) => {
   const [dept, setDept] = useState("cse");
   const [departments, setDepartments] = useState([]);
 
-  
+
   const [achievement, setAchievement] = useState([]);
   const [placement, setPlacement] = useState([]);
   const [activities, setActivities] = useState([]);
 
-  
+
   const [faculty, setFaculty] = useState([]);
   const [budget, setBudget] = useState(null);
   const [engagement, setEngagement] = useState(null);
@@ -53,12 +53,12 @@ const AnalyticsPage = ({ navigate }) => {
         </select>
       </div>
 
-      
+
       <div className={styles.section}>
         <h2> Performance & Outcomes Dashboard</h2>
         <div className={styles.cardGrid}>
 
-          
+
           <div className={styles.card}>
             <h3>Student Achievement</h3>
             <ResponsiveContainer width="100%" height={230}>
@@ -75,7 +75,7 @@ const AnalyticsPage = ({ navigate }) => {
             </ResponsiveContainer>
           </div>
 
-          
+
           <div className={styles.card}>
             <h3>Placement — Students Placed</h3>
             <ResponsiveContainer width="100%" height={230}>
@@ -90,7 +90,7 @@ const AnalyticsPage = ({ navigate }) => {
             </ResponsiveContainer>
           </div>
 
-       
+
           <div className={styles.card}>
             <h3>Placement — Avg Package (LPA)</h3>
             <ResponsiveContainer width="100%" height={230}>
@@ -105,7 +105,7 @@ const AnalyticsPage = ({ navigate }) => {
             </ResponsiveContainer>
           </div>
 
-          
+
           <div className={styles.card}>
             <h3>Department Activities</h3>
             <ResponsiveContainer width="100%" height={230}>
@@ -126,71 +126,71 @@ const AnalyticsPage = ({ navigate }) => {
       </div>
 
 
-<div className={styles.section}>
-  <h2>Faculty Publication & Workload</h2>
-  <div className={styles.cardGrid}>
+      <div className={styles.section}>
+        <h2>Faculty Publication & Workload</h2>
+        <div className={styles.cardGrid}>
 
-    <div className={styles.card}>
-      <h3>Publications by Faculty</h3>
-      <ResponsiveContainer width="100%" height={faculty.length * 30}>
-        <BarChart
-          data={faculty}
-          layout="vertical"
-          margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
-          barCategoryGap="15%"
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type="number" />
-          <YAxis
-            type="category"
-            dataKey="name"
-            tick={{ fontSize: 11 }}
-            tickFormatter={(name) =>
-              name.length > 18 ? name.substring(0, 18) + "…" : name
-            }
-            width={160}
-          />
-          <Tooltip formatter={(val, key, obj) => [val, obj.payload.name]} />
-          <Legend />
-          <Bar dataKey="pubs" fill="#6366f1" barSize={20} name="Publications" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-
-    
-    <div className={styles.card}>
-      <h3>Grants & Students per Faculty</h3>
-      <ResponsiveContainer width="100%" height={faculty.length * 30}>
-        <BarChart
-          data={faculty}
-          layout="vertical"
-          margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
-          barCategoryGap="20%"
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type="number" />
-          <YAxis
-            type="category"
-            dataKey="name"
-            tick={{ fontSize: 11 }}
-            tickFormatter={(name) =>
-              name.length > 18 ? name.substring(0, 18) + "…" : name
-            }
-            width={160}
-          />
-          <Tooltip formatter={(val, key, obj) => [val, obj.payload.name]} />
-          <Legend />
-          <Bar dataKey="grants" fill="#10b981" barSize={18} name="Grants" />
-          <Bar dataKey="students" fill="#ef4444" barSize={18} name="Students" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-
-  </div>
-</div>
+          <div className={styles.card}>
+            <h3>Publications by Faculty</h3>
+            <ResponsiveContainer width="100%" height={faculty.length * 30}>
+              <BarChart
+                data={faculty}
+                layout="vertical"
+                margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
+                barCategoryGap="15%"
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  tick={{ fontSize: 11 }}
+                  tickFormatter={(name) =>
+                    name.length > 18 ? name.substring(0, 18) + "…" : name
+                  }
+                  width={160}
+                />
+                <Tooltip formatter={(val, key, obj) => [val, obj.payload.name]} />
+                <Legend />
+                <Bar dataKey="pubs" fill="#6366f1" barSize={20} name="Publications" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
 
 
-    
+          <div className={styles.card}>
+            <h3>Grants & Students per Faculty</h3>
+            <ResponsiveContainer width="100%" height={faculty.length * 30}>
+              <BarChart
+                data={faculty}
+                layout="vertical"
+                margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
+                barCategoryGap="20%"
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  tick={{ fontSize: 11 }}
+                  tickFormatter={(name) =>
+                    name.length > 18 ? name.substring(0, 18) + "…" : name
+                  }
+                  width={160}
+                />
+                <Tooltip formatter={(val, key, obj) => [val, obj.payload.name]} />
+                <Legend />
+                <Bar dataKey="grants" fill="#10b981" barSize={18} name="Grants" />
+                <Bar dataKey="students" fill="#ef4444" barSize={18} name="Students" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+        </div>
+      </div>
+
+
+
       <div className={styles.section}>
         <h2> Budget vs Spend</h2>
         <div className={styles.cardGrid}>
@@ -238,7 +238,7 @@ const AnalyticsPage = ({ navigate }) => {
         </div>
       </div>
 
- 
+
       <div className={styles.section}>
         <h2> Student Engagement & Activities</h2>
 

@@ -2,19 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 
-import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
-import Dashboard from "./components/Dashboard";
+import LoginPage from "./pages/Auth/LoginPage";
+import RegisterPage from "./pages/Auth/RegisterPage";
+import Dashboard from "./pages/Dashboards/Dashboard";
 import Navbar from "./components/Navbar";
-import DeveloperPage from "./components/DeveloperPage";
-import ReportsPage from "./components/ReportsPage";
-import ReportStructurePage from "./components/ReportStructurePage";
-import SubmissionPage from "./components/SubmissionPage";
-import AnalyticsPage from "./components/AnalyticsPage";
+import DeveloperPage from "./pages/Developer/DeveloperPage";
+import ReportsPage from "./pages/Reports/ReportsPage";
+import ReportStructurePage from "./pages/Reports/ReportStructurePage";
+import SubmissionPage from "./pages/Reports/SubmissionPage";
+import AnalyticsPage from "./pages/Analytics/AnalyticsPage";
 
 
-import HODDashboard from "./components/HODDashboard";
-import ApprovalsPage from "./components/ApprovalsPage";
+import HODDashboard from "./pages/Dashboards/HODDashboard";
+import ApprovalsPage from "./pages/Reports/ApprovalsPage";
 
 // Back button
 import BackButton from "./components/BackButton";

@@ -1,39 +1,52 @@
 
-
 :root {
-  --bg: #f8f9ff;
+  /* Professional SaaS Palette (Light) */
+  --bg: #f3f4f6; /* Slate 100 */
   --bg-alt: #ffffff;
-  --text: #1a1a1a;
-  --text-muted: #555;
+  --text: #111827; /* Gray 900 */
+  --text-muted: #6b7280; /* Gray 500 */
   --panel: #ffffff;
-  --border: #d9d9d9;
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --border: #d1d5db; /* Gray 300 - Slightly darker for better visibility */
+  
+  --accent: #4f46e5; /* Indigo 600 */
+  --accent-hover: #4338ca; /* Indigo 700 */
+  --accent-light: #e0e7ff; /* Indigo 100 - for icon backgrounds */
+  
+  --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
   --input-bg: #fff;
   --button-text: #fff;
-  --danger: #e63946;
-  --success: #16a34a;
+  
+  --danger: #ef4444;
+  --success: #10b981;
   --warning: #f59e0b;
 }
 
 
 
 .dark {
-  --bg: #0f172a;
-  --bg-alt: #1e293b;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
+  /* Professional SaaS Palette (Dark) */
+  --bg: #0f172a; /* Slate 900 */
+  --bg-alt: #1e293b; /* Slate 800 */
+  --text: #f3f4f6; /* Gray 100 */
+  --text-muted: #9ca3af; /* Gray 400 */
   --panel: #1e293b;
-  --border: #334155;
-  --accent: #6366f1;
-  --accent-hover: #818cf8;
-  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --input-bg: #0f172a;
+  --border: #374151; /* Gray 700 */
+  
+  --accent: #6366f1; /* Indigo 500 */
+  --accent-hover: #818cf8; /* Indigo 400 */
+  --accent-light: #312e81; /* Indigo 900 */
+
+  --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.7);
+  
+  --input-bg: #1e293b;
   --button-text: #ffffff;
+  
   --danger: #f87171;
-  --success: #4ade80;
-  --warning: #facc15;
+  --success: #34d399;
+  --warning: #fbbf24;
 }
 
 
@@ -41,9 +54,10 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
-  transition: background 0.25s ease, color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button {
@@ -56,9 +70,9 @@ button {
   width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: transparent;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import styles from "./ReportStructurePage.module.css";
-import BackButton from "./BackButton";
+import BackButton from "../../components/BackButton";
 
 const DEFAULT_SECTIONS = [
   "1. Vision and Mission",
@@ -73,8 +73,8 @@ export default function ReportStructurePage({ dept, navigate }) {
 
   return (
     <div className={styles.pageContainer}>
-      
-    
+
+
       <header className={styles.header}>
         <div className={styles.breadcrumbs}>
           Reports / <strong>{departmentName}</strong>
@@ -101,7 +101,7 @@ export default function ReportStructurePage({ dept, navigate }) {
         </button>
       </div>
 
-     
+
       {isReviewing && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContainer}>

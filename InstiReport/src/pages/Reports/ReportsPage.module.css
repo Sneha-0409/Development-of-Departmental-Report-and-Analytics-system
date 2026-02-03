@@ -1,0 +1,103 @@
+.pageContainer {
+  max-width: 1400px; /* Increased width to accommodate 4 cards comfortably */
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+
+.mainHeader {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.mainHeader h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mainHeader p {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+}
+
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 1200px) {
+  .cardGrid {
+    grid-template-columns: repeat(4, 1fr); /* Force 4 columns on large screens */
+  }
+}
+
+
+.departmentCard {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px; /* Slightly tighter radius like the image */
+  padding: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left align everything */
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  min-height: 180px; 
+}
+
+.departmentCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  border-color: var(--border); /* Keep border subtle */
+}
+
+/* Icon Bubble Container */
+.iconBubble {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.departmentCard:hover .iconBubble {
+  transform: scale(1.05);
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Specific Color Variants (applied via style prop or class in JSX) */
+/* These will be handled dynamically in JSX to keep CSS clean */
+
