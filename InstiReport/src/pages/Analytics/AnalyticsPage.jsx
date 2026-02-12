@@ -9,7 +9,7 @@ import {
 import {
   getDepartments,
   getAchievementData, getPlacementData, getActivitiesData,
-  getFacultyData, getBudgetData, getEngagementData
+  getFacultyData, getEngagementData
 } from "../../data/analytics";
 
 const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#3b82f6"];
@@ -25,7 +25,7 @@ const AnalyticsPage = ({ navigate }) => {
 
 
   const [faculty, setFaculty] = useState([]);
-  const [budget, setBudget] = useState(null);
+
   const [engagement, setEngagement] = useState(null);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const AnalyticsPage = ({ navigate }) => {
     setActivities(getActivitiesData(dept));
 
     setFaculty(getFacultyData(dept));
-    setBudget(getBudgetData(dept));
+
     setEngagement(getEngagementData(dept));
   }, [dept]);
 
@@ -191,52 +191,7 @@ const AnalyticsPage = ({ navigate }) => {
 
 
 
-      <div className={styles.section}>
-        <h2> Budget vs Spend</h2>
-        <div className={styles.cardGrid}>
-          <div className={styles.card}>
-            <h3>Total Summary</h3>
-            <p><b>Total Budget:</b> ₹{budget?.totalBudget}</p>
-            <p><b>Spent:</b> ₹{budget?.totalSpend}</p>
-            <p><b>Utilization:</b> {budget ? Math.round((budget.totalSpend / budget.totalBudget) * 100) : 0}%</p>
-          </div>
 
-          <div className={styles.card}>
-            <h3>Budget vs Spend by Category</h3>
-            <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={budget?.byCategory}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="category" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="budget" fill="#6366f1" name="Budget" />
-                <Bar dataKey="spend" fill="#f59e0b" name="Spend" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className={styles.card}>
-            <h3>Spending Split</h3>
-            <ResponsiveContainer width="100%" height={260}>
-              <PieChart>
-                <Pie
-                  data={budget?.byCategory?.map(c => ({ name: c.category, value: c.spend }))}
-                  dataKey="value"
-                  nameKey="name"
-                  outerRadius={90}
-                  label
-                >
-                  {budget?.byCategory?.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
 
 
       <div className={styles.section}>

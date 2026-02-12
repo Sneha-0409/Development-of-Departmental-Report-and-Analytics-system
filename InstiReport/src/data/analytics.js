@@ -469,119 +469,7 @@ const facultyMock = {
 /* ======================================================
    3) Budget vs Spend 
 ====================================================== */
-const budgetMock = {
-  
-  cse: {
-    totalBudget: 2400000, totalSpend: 2050000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 900000, spend: 820000 },
-      { category: "Software",        budget: 500000, spend: 460000 },
-      { category: "Travel Grants",   budget: 300000, spend: 260000 },
-      { category: "Events",          budget: 300000, spend: 240000 },
-      { category: "Maintenance",     budget: 400000, spend: 270000 },
-    ],
-  },
-  ece: {
-    totalBudget: 1800000, totalSpend: 1400000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 700000, spend: 580000 },
-      { category: "Software",        budget: 300000, spend: 240000 },
-      { category: "Travel Grants",   budget: 250000, spend: 180000 },
-      { category: "Events",          budget: 250000, spend: 200000 },
-      { category: "Maintenance",     budget: 300000, spend: 200000 },
-    ],
-  },
-  me: {
-    totalBudget: 1600000, totalSpend: 1200000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 600000, spend: 480000 },
-      { category: "Software",        budget: 200000, spend: 160000 },
-      { category: "Travel Grants",   budget: 200000, spend: 150000 },
-      { category: "Events",          budget: 300000, spend: 200000 },
-      { category: "Maintenance",     budget: 300000, spend: 210000 },
-    ],
-  },
-  it: {
-    totalBudget: 2000000, totalSpend: 1650000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 700000, spend: 620000 },
-      { category: "Software",        budget: 450000, spend: 380000 },
-      { category: "Travel Grants",   budget: 250000, spend: 210000 },
-      { category: "Events",          budget: 250000, spend: 210000 },
-      { category: "Maintenance",     budget: 350000, spend: 230000 },
-    ],
-  },
-  ai: {
-    totalBudget: 2200000, totalSpend: 1820000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 800000, spend: 700000 },
-      { category: "Software",        budget: 600000, spend: 520000 },
-      { category: "Travel Grants",   budget: 250000, spend: 200000 },
-      { category: "Events",          budget: 250000, spend: 210000 },
-      { category: "Maintenance",     budget: 300000, spend: 190000 },
-    ],
-  },
-  iot: {
-    totalBudget: 1700000, totalSpend: 1350000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 600000, spend: 520000 },
-      { category: "Software",        budget: 350000, spend: 300000 },
-      { category: "Travel Grants",   budget: 200000, spend: 160000 },
-      { category: "Events",          budget: 250000, spend: 200000 },
-      { category: "Maintenance",     budget: 300000, spend: 170000 },
-    ],
-  },
-  ccst: {
-    totalBudget: 1650000, totalSpend: 1320000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 550000, spend: 480000 },
-      { category: "Software",        budget: 350000, spend: 300000 },
-      { category: "Travel Grants",   budget: 200000, spend: 160000 },
-      { category: "Events",          budget: 250000, spend: 200000 },
-      { category: "Maintenance",     budget: 300000, spend: 180000 },
-    ],
-  },
-  ee: {
-    totalBudget: 1750000, totalSpend: 1400000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 600000, spend: 500000 },
-      { category: "Software",        budget: 300000, spend: 240000 },
-      { category: "Travel Grants",   budget: 250000, spend: 200000 },
-      { category: "Events",          budget: 300000, spend: 250000 },
-      { category: "Maintenance",     budget: 300000, spend: 210000 },
-    ],
-  },
-  civil: {
-    totalBudget: 1600000, totalSpend: 1240000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 500000, spend: 420000 },
-      { category: "Software",        budget: 250000, spend: 200000 },
-      { category: "Travel Grants",   budget: 200000, spend: 150000 },
-      { category: "Events",          budget: 300000, spend: 230000 },
-      { category: "Maintenance",     budget: 350000, spend: 240000 },
-    ],
-  },
-  emc: {
-    totalBudget: 1400000, totalSpend: 1100000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 400000, spend: 350000 },
-      { category: "Software",        budget: 300000, spend: 260000 },
-      { category: "Travel Grants",   budget: 200000, spend: 160000 },
-      { category: "Events",          budget: 250000, spend: 190000 },
-      { category: "Maintenance",     budget: 250000, spend: 200000 },
-    ],
-  },
-  che: {
-    totalBudget: 1650000, totalSpend: 1300000,
-    byCategory: [
-      { category: "Lab Equipment",   budget: 550000, spend: 470000 },
-      { category: "Software",        budget: 250000, spend: 210000 },
-      { category: "Travel Grants",   budget: 200000, spend: 160000 },
-      { category: "Events",          budget: 300000, spend: 230000 },
-      { category: "Maintenance",     budget: 350000, spend: 260000 },
-    ],
-  },
-};
+
 
 // ---------- 4) Engagement & Activities  ----------
 const engagementMock = {
@@ -676,5 +564,5 @@ export const getAchievementData = (dept) => _clone(achievementMock[dept] || []);
 export const getPlacementData = (dept) => _clone(placementMock[dept] || []);
 export const getActivitiesData = (dept) => _clone(activitiesMock[dept] || []);
 export const getFacultyData = (dept) => _clone(facultyMock[dept] || []);
-export const getBudgetData = (dept) => _clone(budgetMock[dept] || null);
+
 export const getEngagementData = (dept) => _clone(engagementMock[dept] || null);

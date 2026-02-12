@@ -73,7 +73,7 @@ function App() {
   const renderPage = () => {
     if (role === "faculty") {
       switch (currentPage) {
-        case "Reports": return <ReportsPage navigate={navigate} setSelectedDept={setSelectedDept} />;
+        case "Reports": return <ReportsPage navigate={navigate} onOpenDepartment={setSelectedDept} />;
         case "ReportStructure": return <ReportStructurePage dept={selectedDept} navigate={navigate} />;
         case "Submission": return <SubmissionPage currentUser={currentUser} />;
         case "Analytics": return <AnalyticsPage navigate={navigate} />;
