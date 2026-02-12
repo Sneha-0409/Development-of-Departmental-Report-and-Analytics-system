@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 
 export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
-    const [role, setRole] = useState("report-maker");
+    const [role, setRole] = useState("student");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -63,9 +63,10 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
                     >
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="project-coordinator">Project Coordinator</option>
                         <option value="hod">HOD</option>
-                        <option value="admin">Admin</option>
-                        <option value="nba-naac">NBA/NAAC</option>
                         <option value="report-maker">Report Maker</option>
                     </select>
 
