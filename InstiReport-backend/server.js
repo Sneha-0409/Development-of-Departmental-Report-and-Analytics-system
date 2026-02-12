@@ -53,7 +53,7 @@ app.post('/api/login', (req, res) => {
     if (foundUser) {
         res.status(200).json({
             message: 'Login successful!',
-            user: { name: foundUser.name, email: foundUser.email }
+            user: { name: foundUser.name, email: foundUser.email, role: role }
         });
     } else {
         res.status(401).json({ message: 'Invalid email, password, or role.' });

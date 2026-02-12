@@ -1,17 +1,17 @@
 
 
 import React, { useState } from 'react';
-import './RegisterPage.css'; 
+import './RegisterPage.css';
 
 const RegisterPage = ({ showLoginPage }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('report-maker'); 
-    const [message, setMessage] = useState(''); 
+    const [role, setRole] = useState('report-maker');
+    const [message, setMessage] = useState('');
 
     const handleRegister = async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         setMessage('');
 
         if (!name || !email || !password || !role) {
@@ -27,7 +27,7 @@ const RegisterPage = ({ showLoginPage }) => {
             });
 
             const data = await response.json();
-            setMessage(data.message); 
+            setMessage(data.message);
 
             if (response.ok) {
                 setTimeout(() => {
@@ -60,10 +60,11 @@ const RegisterPage = ({ showLoginPage }) => {
 
                     <label htmlFor="role">Register as</label>
                     <select id="role" value={role} onChange={(e) => setRole(e.target.value)} required>
-                        <option value="report-maker">Report Maker</option>
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="project-coordinator">Project Coordinator</option>
                         <option value="hod">HOD</option>
-                        <option value="nba-naac">NBA/NAAC</option>
-                        <option value="admin">Admin</option>
+                        <option value="report-maker">Report Maker</option>
                     </select>
                     {message && <p className="message">{message}</p>}
 

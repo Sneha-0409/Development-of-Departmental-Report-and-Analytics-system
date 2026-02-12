@@ -11,29 +11,35 @@ const LogoIcon = () => (
     />
 );
 
-export default function Navbar({ navigate, currentPage, currentUser }) {
-    const role = currentUser?.roles || "faculty"; 
+export default function Navbar({ navigate, currentPage, currentUser, isDarkMode, toggleTheme }) {
+    const role = currentUser?.role || "faculty";
 
-    
+
     const NAV_ITEMS = {
-        faculty: ["Dashboard", "Reports", "Submission", "Analytics", "Developer"],
+        student: ["Dashboard", "My Projects", "Analytics", "Developer"],
+        faculty: ["Dashboard", "Analytics", "Developer"],
+        "project-coordinator": ["Dashboard", "Analytics", "Developer"],
         hod: ["HOD Dashboard", "Approvals", "Analytics", "Developer"],
         admin: ["Admin Dashboard", "Approvals", "Departments", "Analytics", "Developer"],
+        "report-maker": ["Dashboard", "Reports", "Analytics", "Developer"],
         naac: ["Reports", "Analytics", "Developer"],
     };
 
     const navLinks = NAV_ITEMS[role] || NAV_ITEMS.faculty;
 
     const homePage = {
+        student: "Dashboard",
         faculty: "Dashboard",
+        "project-coordinator": "Dashboard",
         hod: "HOD Dashboard",
         admin: "Admin Dashboard",
+        "report-maker": "Dashboard",
         naac: "Reports",
     }[role];
 
     const handleLogout = () => {
-        localStorage.clear();         
-        sessionStorage.clear();       
+        localStorage.clear();
+        sessionStorage.clear();
         window.location.href = "/login";
 
     };
@@ -43,13 +49,13 @@ export default function Navbar({ navigate, currentPage, currentUser }) {
             <div className={styles.navbarWrapper}>
                 <div className={styles.navbarContent}>
 
-                  
+
                     <a href="#" onClick={() => navigate(homePage)} className={styles.logoContainer}>
                         <LogoIcon />
                         <span className={styles.brandName}>InstiReport</span>
                     </a>
 
-                    
+
                     <div className={styles.navLinks}>
                         {navLinks.map((link) => (
                             <a
@@ -63,7 +69,7 @@ export default function Navbar({ navigate, currentPage, currentUser }) {
                         ))}
                     </div>
 
-                   
+
                     <div className={styles.userActions}>
                         <div className={styles.profileContainer}>
                             <div className={styles.avatar}>
@@ -74,7 +80,12 @@ export default function Navbar({ navigate, currentPage, currentUser }) {
                             </span>
                         </div>
 
-                        
+
+                        {/* Theme Toggle */}
+                        <button className={styles.themeToggle} onClick={toggleTheme}>
+                            {isDarkMode ? "☀️" : "🌙"}
+                        </button>
+
                         <button className={styles.logoutBtn} onClick={handleLogout}>
                             Logout
                         </button>
