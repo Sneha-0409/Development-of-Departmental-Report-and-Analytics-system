@@ -1,21 +1,24 @@
 .page {
   padding: 40px;
   animation: fadeIn 0.4s ease;
+  background: var(--bg);
+  min-height: 100vh;
 }
 
 .header h1 {
   font-size: 26px;
   margin-bottom: 6px;
+  color: var(--text);
 }
 
 .header p {
-  color: #666;
+  color: var(--text-muted);
   margin-bottom: 28px;
 }
 
 .empty {
   text-align: center;
-  color: #666;
+  color: var(--text-muted);
   margin-top: 30px;
 }
 
@@ -26,18 +29,18 @@
 }
 
 .card {
-  background: #ffffff90;
-  backdrop-filter: blur(10px);
-  border: 1px solid #e2e2e2;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 18px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  box-shadow: var(--card-shadow);
   transition: 0.2s ease;
+  color: var(--text);
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .top {
@@ -48,7 +51,7 @@
 
 .viewBtn {
   border: none;
-  background: #6b5bff;
+  background: var(--accent);
   color: white;
   padding: 7px 14px;
   border-radius: 6px;
@@ -62,7 +65,7 @@
 }
 
 .approveBtn {
-  background: #16a34a;
+  background: var(--success);
   color: white;
   border: none;
   padding: 8px 15px;
@@ -71,7 +74,7 @@
 }
 
 .rejectBtn {
-  background: #dc2626;
+  background: var(--danger);
   color: white;
   border: none;
   padding: 8px 15px;
@@ -83,18 +86,22 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: #00000050;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(4px);
+  z-index: 2000;
 }
 
 .modal {
-  background: white;
+  background: var(--card-bg);
   padding: 25px;
   width: 380px;
   border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow-hover);
+  color: var(--text);
 }
 
 .textarea {
@@ -102,8 +109,11 @@
   height: 110px;
   margin: 14px 0;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--input-text);
+  font-family: inherit;
 }
 
 .modalActions {
@@ -112,16 +122,16 @@
 }
 
 .closeBtn {
-  background: #999;
-  color: white;
-  border: none;
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .sendBackBtn {
-  background: #d946ef;
+  background: #d946ef; /* Distinct color for send back */
   color: white;
   border: none;
   padding: 8px 12px;

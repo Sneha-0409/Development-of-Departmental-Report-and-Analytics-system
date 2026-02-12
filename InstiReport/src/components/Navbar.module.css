@@ -1,17 +1,16 @@
 .navbar {
-  background-color: white;
+  background-color: var(--nav-bg);
   width: 100%;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-  border-bottom: 1px solid #e5e7eb;
+  box-shadow: var(--card-shadow);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background-color 0.3s, border-color 0.3s;
 }
-
 
 .navbarWrapper {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
-
 
 .navbarContent {
   display: flex;
@@ -31,9 +30,8 @@
 .brandName {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1f2937;
+  color: var(--nav-text);
 }
-
 
 .navLinks {
   display: none;
@@ -42,7 +40,7 @@
 .navLink {
   font-size: 1rem;
   font-weight: 500;
-  color: #6b7280;
+  color: var(--nav-text-muted);
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   padding: 0.5rem 0.75rem;
@@ -50,16 +48,14 @@
 }
 
 .navLink:hover {
-  color: #1f2937;
+  color: var(--nav-text);
 }
-
 
 .active {
-  color: #4f46e5;
+  color: var(--accent);
   font-weight: 600;
-  border-bottom: 2px solid #4f46e5;
+  border-bottom: 2px solid var(--accent);
 }
-
 
 .userActions {
   display: flex;
@@ -73,13 +69,13 @@
   padding: 0.5rem;
   border-radius: 9999px;
   cursor: pointer;
-  color: #6b7280;
+  color: var(--nav-text-muted);
   display: flex;
   align-items: center;
 }
 
 .searchButton:hover {
-  background-color: #f3f4f6;
+  background-color: var(--bg);
 }
 
 .profileContainer {
@@ -94,7 +90,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #22c55e;
+  background-color: var(--success);
   border-radius: 9999px;
   color: white;
   font-weight: 600;
@@ -103,14 +99,13 @@
 
 .userName {
   font-weight: 500;
-  color: var(--text);
+  color: var(--nav-text);
 }
-
 
 .logoutBtn {
   background: transparent;
-  border: 1px solid #dc2626;
-  color: #dc2626;
+  border: 1px solid var(--danger);
+  color: var(--danger);
   padding: 6px 12px;
   font-size: 0.9rem;
   border-radius: 6px;
@@ -119,13 +114,13 @@
 }
 
 .logoutBtn:hover {
-  background: #dc2626;
+  background: var(--danger);
   color: white;
 }
 
 .themeToggle {
   background: transparent;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--nav-border);
   padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -133,23 +128,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--nav-text);
   transition: all 0.2s;
 }
 
 .themeToggle:hover {
-  background-color: #f3f4f6;
-  border-color: #d1d5db;
+  background-color: var(--bg);
+  border-color: var(--border);
 }
-
-.dark .themeToggle {
-  border-color: #374151;
-  color: #f3f4f6;
-}
-
-.dark .themeToggle:hover {
-  background-color: #1e293b;
-}
-
 
 @media (min-width: 768px) {
   .navLinks {

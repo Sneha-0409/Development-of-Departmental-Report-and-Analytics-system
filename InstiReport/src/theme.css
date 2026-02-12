@@ -1,49 +1,65 @@
 
 :root {
   /* Professional SaaS Palette (Light) */
-  --bg: #f3f4f6; /* Slate 100 */
+  --bg: #f3f4f6;
   --bg-alt: #ffffff;
-  --text: #111827; /* Gray 900 */
-  --text-muted: #6b7280; /* Gray 500 */
+  --text: #111827; 
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
   --panel: #ffffff;
-  --border: #d1d5db; /* Gray 300 - Slightly darker for better visibility */
+  --border: #e5e7eb;
   
-  --accent: #4f46e5; /* Indigo 600 */
-  --accent-hover: #4338ca; /* Indigo 700 */
-  --accent-light: #e0e7ff; /* Indigo 100 - for icon backgrounds */
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-light: #e0e7ff;
   
+  --card-bg: #ffffff;
   --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   
-  --input-bg: #fff;
-  --button-text: #fff;
+  --nav-bg: #ffffff;
+  --nav-border: #e5e7eb;
+  --nav-text: #111827;
+  --nav-text-muted: #6b7280;
   
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-text: #111827;
+  
+  --button-text: #ffffff;
   --danger: #ef4444;
   --success: #10b981;
   --warning: #f59e0b;
 }
 
-
-
 .dark {
   /* Professional SaaS Palette (Dark) */
-  --bg: #0f172a; /* Slate 900 */
-  --bg-alt: #1e293b; /* Slate 800 */
-  --text: #f3f4f6; /* Gray 100 */
-  --text-muted: #9ca3af; /* Gray 400 */
-  --panel: #1e293b;
-  --border: #374151; /* Gray 700 */
+  --bg: #0b0f1a;
+  --bg-alt: #161e2e;
+  --text: #f9fafb;
+  --text-muted: #9ca3af;
+  --text-light: #6b7280;
+  --panel: #161e2e;
+  --border: #1f2937;
   
-  --accent: #6366f1; /* Indigo 500 */
-  --accent-hover: #818cf8; /* Indigo 400 */
-  --accent-light: #312e81; /* Indigo 900 */
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-light: #1e1b4b;
 
+  --card-bg: #161e2e;
   --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
   --card-shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.7);
   
-  --input-bg: #1e293b;
-  --button-text: #ffffff;
+  --nav-bg: #111827;
+  --nav-border: #1f2937;
+  --nav-text: #f9fafb;
+  --nav-text-muted: #9ca3af;
   
+  --input-bg: #1f2937;
+  --input-border: #374151;
+  --input-text: #f9fafb;
+  
+  --button-text: #ffffff;
   --danger: #f87171;
   --success: #34d399;
   --warning: #fbbf24;
@@ -58,6 +74,12 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s, color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  margin-top: 0;
 }
 
 button {

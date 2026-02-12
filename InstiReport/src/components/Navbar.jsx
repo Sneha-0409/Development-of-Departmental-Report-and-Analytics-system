@@ -16,12 +16,12 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
 
 
     const NAV_ITEMS = {
-        student: ["Dashboard", "My Projects", "Analytics", "Developer"],
-        faculty: ["Dashboard", "Analytics", "Developer"],
+        student: ["Dashboard", "Achievements", "My Projects", "Analytics", "Developer"],
+        faculty: ["Dashboard", "Achievements", "Analytics", "Developer"],
         "project-coordinator": ["Dashboard", "Analytics", "Developer"],
         hod: ["HOD Dashboard", "Approvals", "Analytics", "Developer"],
         admin: ["Admin Dashboard", "Approvals", "Departments", "Analytics", "Developer"],
-        "report-maker": ["Dashboard", "Reports", "Analytics", "Developer"],
+        "report-maker": ["Dashboard", "Achievements", "Reports", "Analytics", "Developer"],
         naac: ["Reports", "Analytics", "Developer"],
     };
 

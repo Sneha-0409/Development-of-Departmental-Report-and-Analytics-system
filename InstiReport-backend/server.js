@@ -10,9 +10,6 @@ let users = {
     hod: [
         { name: 'Dr. Smith', email: 'smith@example.com', password: 'password123' }
     ],
-    admin: [
-        { name: 'Samarth Khare', email: 'samarthkhare29@gmail.com', password: 'Sam1234' }
-    ],
     'report-maker': [
         { name: 'Sneha', email: 'sneha044l2005@gmail.com', password: 'Sneha1234' }
     ]

@@ -12,7 +12,7 @@ export default function HODDashboard({ navigate, currentUser }) {
             </header>
 
             <div className={styles.grid}>
-             
+
                 <div className={styles.card} onClick={() => navigate("Approvals")}>
                     <div className={styles.iconBox}>📄</div>
                     <h3>Pending Approvals</h3>
@@ -20,7 +20,20 @@ export default function HODDashboard({ navigate, currentUser }) {
                     <span className={styles.linkText}>Review Now →</span>
                 </div>
 
-                
+                <div className={styles.card} onClick={() => navigate("Achievements")}>
+                    <div className={styles.iconBox}>🏆</div>
+                    <h3>Approved Achievements</h3>
+                    <p className={styles.count}>12 Total</p>
+                    <span className={styles.linkText}>View List →</span>
+                </div>
+
+                <div className={styles.card}>
+                    <div className={styles.iconBox}>👨‍🏫</div>
+                    <h3>Total Faculty Count</h3>
+                    <p className={styles.count}>24 Active</p>
+                    <span className={styles.linkText}>Manage Faculty →</span>
+                </div>
+
                 <div className={styles.card} onClick={() => navigate("Analytics")}>
                     <div className={styles.iconBox}>📊</div>
                     <h3>Department Analytics</h3>
@@ -28,7 +41,7 @@ export default function HODDashboard({ navigate, currentUser }) {
                     <span className={styles.linkText}>Open Analytics →</span>
                 </div>
 
-        
+
                 <div className={styles.card}>
                     <div className={styles.iconBox}>🏫</div>
                     <h3>Department</h3>

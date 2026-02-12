@@ -16,6 +16,7 @@ import AnalyticsPage from "./pages/Analytics/AnalyticsPage";
 import HODDashboard from "./pages/Dashboards/HODDashboard";
 import FacultyDashboard from "./pages/Dashboards/FacultyDashboard";
 import ApprovalsPage from "./pages/Reports/ApprovalsPage";
+import AchievementsPage from "./pages/Dashboards/AchievementsPage";
 
 // Back button
 import BackButton from "./components/BackButton";
@@ -60,6 +61,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
@@ -82,27 +84,35 @@ function App() {
   const role = currentUser?.role || "faculty";
 
   const renderPage = () => {
-    if (role === "faculty") {
-      switch (currentPage) {
-        case "Reports": return <ReportsPage navigate={navigate} setSelectedDept={setSelectedDept} />;
-        case "ReportStructure": return <ReportStructurePage dept={selectedDept} navigate={navigate} />;
-        case "Submission": return <SubmissionPage currentUser={currentUser} />;
-        case "Analytics": return <AnalyticsPage navigate={navigate} />;
-        case "Developer": return <DeveloperPage />;
-        default: return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
-      }
+    switch (role) {
+      case "faculty":
+      case "student":
+      case "project-coordinator":
+        switch (currentPage) {
+          case "Submission": return <SubmissionPage currentUser={currentUser} />;
+          case "Analytics": return <AnalyticsPage navigate={navigate} />;
+          case "Achievements": return <AchievementsPage currentUser={currentUser} />;
+          case "Developer": return <DeveloperPage />;
+          default: return <FacultyDashboard currentUser={currentUser} navigate={navigate} />;
+        }
+      case "hod":
+        switch (currentPage) {
+          case "HOD Dashboard": return <HODDashboard navigate={navigate} currentUser={currentUser} />;
+          case "Approvals": return <ApprovalsPage role="hod" />;
+          case "Analytics": return <AnalyticsPage navigate={navigate} />;
+          case "Developer": return <DeveloperPage />;
+          default: return <HODDashboard navigate={navigate} currentUser={currentUser} />;
+        }
+      case "report-maker":
+        switch (currentPage) {
+          case "Reports": return <ReportsPage navigate={navigate} setSelectedDept={setSelectedDept} />;
+          case "Analytics": return <AnalyticsPage navigate={navigate} />;
+          case "Achievements": return <AchievementsPage currentUser={currentUser} />;
+          default: return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
+        }
+      default:
+        return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
     }
-
-    if (role === "hod") {
-      switch (currentPage) {
-        case "HOD Dashboard": return <HODDashboard />;
-        case "Approvals": return <ApprovalsPage role="hod" />;
-        case "Analytics": return <AnalyticsPage navigate={navigate} />;
-        default: return <HODDashboard />;
-      }
-    }
-
-    return null;
   };
 
   const renderAuthPage = () =>
@@ -113,7 +123,7 @@ function App() {
   const hideBackOn = ["Dashboard", "HOD Dashboard", "Admin Dashboard"];
 
   return (
-    <div className={isDarkMode ? "dark" : ""}>
+    <div className="app-container">
       {isLoggedIn ? (
         <>
           <Navbar

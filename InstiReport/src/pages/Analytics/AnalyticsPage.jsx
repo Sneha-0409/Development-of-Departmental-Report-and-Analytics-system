@@ -63,11 +63,11 @@ const AnalyticsPage = ({ navigate }) => {
             <h3>Student Achievement</h3>
             <ResponsiveContainer width="100%" height={230}>
               <BarChart data={achievement}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="period" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="period" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} />
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                 <Bar dataKey="scholarships" stackId="a" fill="#6366f1" name="Scholarships" />
                 <Bar dataKey="medals" stackId="a" fill="#10b981" name="Medals" />
                 <Bar dataKey="papers" stackId="a" fill="#f59e0b" name="Papers" />
@@ -80,11 +80,11 @@ const AnalyticsPage = ({ navigate }) => {
             <h3>Placement — Students Placed</h3>
             <ResponsiveContainer width="100%" height={230}>
               <LineChart data={placement}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="period" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="period" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} />
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                 <Line type="monotone" dataKey="placed" stroke="#3b82f6" strokeWidth={2} name="Placed" />
               </LineChart>
             </ResponsiveContainer>
@@ -95,11 +95,11 @@ const AnalyticsPage = ({ navigate }) => {
             <h3>Placement — Avg Package (LPA)</h3>
             <ResponsiveContainer width="100%" height={230}>
               <LineChart data={placement}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="period" />
-                <YAxis />
-                <Tooltip formatter={(val, name) => [val, "LPA"]} />
-                <Legend />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="period" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} formatter={(val, name) => [val, "LPA"]} />
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                 <Line type="monotone" dataKey="avgPackage" stroke="#ef4444" strokeWidth={2} name="Avg Package" />
               </LineChart>
             </ResponsiveContainer>
@@ -110,11 +110,11 @@ const AnalyticsPage = ({ navigate }) => {
             <h3>Department Activities</h3>
             <ResponsiveContainer width="100%" height={230}>
               <BarChart data={activities}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="period" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis dataKey="period" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} />
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                 <Bar dataKey="events" fill="#6366f1" name="Events" />
                 <Bar dataKey="workshops" fill="#10b981" name="Workshops" />
                 <Bar dataKey="MoUs" fill="#f59e0b" name="MoUs" />
@@ -139,19 +139,20 @@ const AnalyticsPage = ({ navigate }) => {
                 margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
                 barCategoryGap="15%"
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis type="number" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
                 <YAxis
                   type="category"
                   dataKey="name"
-                  tick={{ fontSize: 11 }}
+                  stroke="var(--text-muted)"
+                  tick={{ fontSize: 11, fill: 'var(--text-muted)' }}
                   tickFormatter={(name) =>
                     name.length > 18 ? name.substring(0, 18) + "…" : name
                   }
                   width={160}
                 />
-                <Tooltip formatter={(val, key, obj) => [val, obj.payload.name]} />
-                <Legend />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} formatter={(val, key, obj) => [val, obj.payload.name]} />
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                 <Bar dataKey="pubs" fill="#6366f1" barSize={20} name="Publications" />
               </BarChart>
             </ResponsiveContainer>
@@ -167,19 +168,20 @@ const AnalyticsPage = ({ navigate }) => {
                 margin={{ left: 100, right: 30, top: 10, bottom: 10 }}
                 barCategoryGap="20%"
               >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis type="number" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
                 <YAxis
                   type="category"
                   dataKey="name"
-                  tick={{ fontSize: 11 }}
+                  stroke="var(--text-muted)"
+                  tick={{ fontSize: 11, fill: 'var(--text-muted)' }}
                   tickFormatter={(name) =>
                     name.length > 18 ? name.substring(0, 18) + "…" : name
                   }
                   width={160}
                 />
-                <Tooltip formatter={(val, key, obj) => [val, obj.payload.name]} />
-                <Legend />
+                <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} formatter={(val, key, obj) => [val, obj.payload.name]} />
+                <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
                 <Bar dataKey="grants" fill="#10b981" barSize={18} name="Grants" />
                 <Bar dataKey="students" fill="#ef4444" barSize={18} name="Students" />
               </BarChart>
@@ -216,11 +218,11 @@ const AnalyticsPage = ({ navigate }) => {
           <h3>Inter-Department Participation</h3>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={engagement?.interDept}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="event" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="event" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+              <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+              <Tooltip contentStyle={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', color: 'var(--text)' }} />
+              <Legend iconType="circle" wrapperStyle={{ paddingTop: '10px' }} />
               <Bar dataKey="cse" fill="#6366f1" />
               <Bar dataKey="ece" fill="#10b981" />
               <Bar dataKey="me" fill="#ef4444" />
