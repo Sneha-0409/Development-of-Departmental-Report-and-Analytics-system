@@ -16,9 +16,12 @@ export const getDepartments = () => [
 ];
 
 
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { db } from "../firebase.js";
+
 const _clone = (x) => JSON.parse(JSON.stringify(x));
 
-
+// ---------- Departments ----------
 
 // --- Student Achievement  ---
 const achievementMock = {
@@ -560,9 +563,67 @@ const engagementMock = {
 // Exports for AnalyticsPage.jsx
 // ======================================================
 
-export const getAchievementData = (dept) => _clone(achievementMock[dept] || []);
-export const getPlacementData = (dept) => _clone(placementMock[dept] || []);
-export const getActivitiesData = (dept) => _clone(activitiesMock[dept] || []);
-export const getFacultyData = (dept) => _clone(facultyMock[dept] || []);
+export const getAchievementData = async (dept) => {
+  try {
+    if (db) {
+      const q = query(collection(db, "achievements"), where("departmentId", "==", dept));
+      const snaps = await getDocs(q);
+      if (!snaps.empty) {
+        return snaps.docs.map(d => d.data()).sort((a,b) => a.period.localeCompare(b.period));
+      }
+    }
+  } catch(e) { console.warn("Firebase fetch failed, falling back to mock", e); }
+  return _clone(achievementMock[dept] || []);
+};
 
-export const getEngagementData = (dept) => _clone(engagementMock[dept] || null);
+export const getPlacementData = async (dept) => {
+  try {
+    if (db) {
+      const q = query(collection(db, "placements"), where("departmentId", "==", dept));
+      const snaps = await getDocs(q);
+      if (!snaps.empty) {
+        return snaps.docs.map(d => d.data()).sort((a,b) => a.period.localeCompare(b.period));
+      }
+    }
+  } catch(e) { console.warn("Firebase fetch failed, falling back to mock", e); }
+  return _clone(placementMock[dept] || []);
+};
+
+export const getActivitiesData = async (dept) => {
+  try {
+    if (db) {
+      const q = query(collection(db, "activities"), where("departmentId", "==", dept));
+      const snaps = await getDocs(q);
+      if (!snaps.empty) {
+        return snaps.docs.map(d => d.data()).sort((a,b) => a.period.localeCompare(b.period));
+      }
+    }
+  } catch(e) { console.warn("Firebase fetch failed, falling back to mock", e); }
+  return _clone(activitiesMock[dept] || []);
+};
+
+export const getFacultyData = async (dept) => {
+  try {
+    if (db) {
+      const q = query(collection(db, "faculty"), where("departmentId", "==", dept));
+      const snaps = await getDocs(q);
+      if (!snaps.empty) {
+        return snaps.docs.map(d => d.data()).sort((a, b) => b.pubs - a.pubs); // sorting by pubs desc
+      }
+    }
+  } catch(e) { console.warn("Firebase fetch failed, falling back to mock", e); }
+  return _clone(facultyMock[dept] || []);
+};
+
+export const getEngagementData = async (dept) => {
+  try {
+    if (db) {
+      const q = query(collection(db, "engagement"), where("departmentId", "==", dept), limit(1));
+      const snaps = await getDocs(q);
+      if (!snaps.empty) {
+        return snaps.docs[0].data();
+      }
+    }
+  } catch(e) { console.warn("Firebase fetch failed, falling back to mock", e); }
+  return _clone(engagementMock[dept] || null);
+};

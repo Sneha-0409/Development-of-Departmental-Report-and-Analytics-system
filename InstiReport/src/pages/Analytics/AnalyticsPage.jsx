@@ -33,13 +33,23 @@ const AnalyticsPage = ({ navigate }) => {
   }, []);
 
   useEffect(() => {
-    setAchievement(getAchievementData(dept));
-    setPlacement(getPlacementData(dept));
-    setActivities(getActivitiesData(dept));
+    async function loadData() {
+      const ach = await getAchievementData(dept);
+      setAchievement(ach);
 
-    setFaculty(getFacultyData(dept));
+      const plmnt = await getPlacementData(dept);
+      setPlacement(plmnt);
 
-    setEngagement(getEngagementData(dept));
+      const actvs = await getActivitiesData(dept);
+      setActivities(actvs);
+
+      const fac = await getFacultyData(dept);
+      setFaculty(fac);
+
+      const eng = await getEngagementData(dept);
+      setEngagement(eng);
+    }
+    loadData();
   }, [dept]);
 
   return (
@@ -228,6 +238,33 @@ const AnalyticsPage = ({ navigate }) => {
               <Bar dataKey="me" fill="#ef4444" />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div className={styles.section} style={{ marginTop: "40px" }}>
+        <h2>Subscribe to Analytics Newsletter</h2>
+        <div className={styles.card} style={{ textAlign: "center", padding: "30px" }}>
+          <p style={{ color: "var(--text-muted)", marginBottom: "15px" }}>Get monthly department performance reports directly to your inbox.</p>
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const input = e.target.elements.email;
+              const val = input.value;
+              if (!val) return;
+              input.value = "";
+              const { saveEmailToDatabase } = await import("../../firebase");
+              const res = await saveEmailToDatabase(val);
+              if (res) {
+                alert("Subscribed successfully!");
+              } else {
+                alert("Failed to subscribe. Please check your config.");
+              }
+            }}
+            style={{ display: "flex", gap: "10px", justifyContent: "center" }}
+          >
+            <input type="email" name="email" placeholder="Enter your email address" required style={{ padding: "10px 15px", borderRadius: "8px", border: "1px solid var(--border)", background: "var(--bg)", color: "var(--text)", width: "300px" }} />
+            <button type="submit" style={{ padding: "10px 20px", borderRadius: "8px", background: "#6366f1", color: "white", border: "none", cursor: "pointer", fontWeight: "bold" }}>Subscribe</button>
+          </form>
         </div>
       </div>
     </div>
