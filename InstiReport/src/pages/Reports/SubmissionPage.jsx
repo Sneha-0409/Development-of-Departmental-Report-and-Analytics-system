@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
 import styles from "./SubmissionPage.module.css";
+import {
+    collection, addDoc, getDocs, doc, updateDoc, deleteDoc,
+    query, where, serverTimestamp, orderBy
+} from "firebase/firestore";
+import { db } from "../../firebase";
 
-const STORAGE_KEY = "insti_reports";
 const DRAFT_KEY = "insti_latest_report_draft";
 
 
@@ -26,47 +30,66 @@ const StatusBadge = ({ status }) => {
 
 export default function SubmissionPage({ currentUser }) {
     const userName = currentUser?.name || "Unknown User";
+    const userEmail = currentUser?.email || "";
     const [items, setItems] = useState([]);
     const [tab, setTab] = useState("draft");
     const [newDept, setNewDept] = useState("");
     const [newYear, setNewYear] = useState(new Date().getFullYear());
     const [newFile, setNewFile] = useState(null);
     const [showModal, setShowModal] = useState(false);
-
-    
-    const load = () => JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    const save = (arr) => localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    const [loading, setLoading] = useState(true);
 
   
+    // Load reports from Firestore on mount
     useEffect(() => {
-        const existing = load();
-        const draft = localStorage.getItem(DRAFT_KEY);
+        if (!userEmail) { setLoading(false); return; }
 
-        if (draft) {
-            const data = JSON.parse(draft);
-            const id = `${data.department}-${data.year}-${userName}`.toLowerCase().replace(/\s+/g, "-");
+        const fetchReports = async () => {
+            setLoading(true);
+            try {
+                const q = query(
+                    collection(db, "reports"),
+                    where("userEmail", "==", userEmail)
+                );
+                const snapshot = await getDocs(q);
+                const fetched = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+                setItems(fetched);
 
-            if (!existing.some((x) => x.id === id)) {
-                existing.push({
-                    id,
-                    department: data.department,
-                    year: data.year,
-                    fileName: data.fileName,
-                    fileDataUrl: data.fileDataUrl,
-                    status: "draft",
-                    submittedBy: userName,
-                    submittedOn: null,
-                    remarks: null,
-                    createdAt: Date.now(),
-                    updatedAt: Date.now(),
-                });
-                save(existing);
+                // Handle pending draft from localStorage
+                const draft = localStorage.getItem(DRAFT_KEY);
+                if (draft) {
+                    const data = JSON.parse(draft);
+                    const localId = `${data.department}-${data.year}-${userName}`.toLowerCase().replace(/\s+/g, "-");
+                    const alreadyExists = fetched.some(x => x.id === localId);
+                    if (!alreadyExists) {
+                        const newEntry = {
+                            id: localId,
+                            department: data.department,
+                            year: data.year,
+                            fileName: data.fileName,
+                            fileDataUrl: data.fileDataUrl,
+                            status: "draft",
+                            submittedBy: userName,
+                            userEmail,
+                            submittedOn: null,
+                            remarks: null,
+                            createdAt: serverTimestamp(),
+                            updatedAt: serverTimestamp(),
+                        };
+                        const ref = await addDoc(collection(db, "reports"), newEntry);
+                        setItems(prev => [...prev, { firestoreId: ref.id, ...newEntry }]);
+                    }
+                    localStorage.removeItem(DRAFT_KEY);
+                }
+            } catch (err) {
+                console.error("Error loading reports from Firestore:", err);
+            } finally {
+                setLoading(false);
             }
-            localStorage.removeItem(DRAFT_KEY);
-        }
+        };
 
-        setItems(existing);
-    }, [userName]);
+        fetchReports();
+    }, [userEmail, userName]);
 
     
     const myItems = useMemo(
@@ -90,30 +113,33 @@ export default function SubmissionPage({ currentUser }) {
     const list = myItems.filter((x) => x.status === tab);
 
    
-    const submitReport = (r) => {
-        const updated = items.map((x) =>
-            x.id === r.id
-                ? { ...x, status: "pending", submittedOn: Date.now(), updatedAt: Date.now() }
-                : x
-        );
-        save(updated);
-        setItems(updated);
-
-        
-        fetch("/api/reports/submit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(r),
-        }).catch(() => console.log("Backend not connected yet"));
-
-        setTab("pending");
+    const submitReport = async (r) => {
+        try {
+            await updateDoc(doc(db, "reports", r.firestoreId), {
+                status: "pending",
+                submittedOn: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+            });
+            setItems(prev =>
+                prev.map(x =>
+                    x.firestoreId === r.firestoreId
+                        ? { ...x, status: "pending", submittedOn: Date.now() }
+                        : x
+                )
+            );
+            setTab("pending");
+        } catch (err) {
+            console.error("Error submitting report:", err);
+        }
     };
 
-   
-    const deleteDraft = (r) => {
-        const filtered = items.filter((x) => x.id !== r.id);
-        save(filtered);
-        setItems(filtered);
+    const deleteDraft = async (r) => {
+        try {
+            await deleteDoc(doc(db, "reports", r.firestoreId));
+            setItems(prev => prev.filter(x => x.firestoreId !== r.firestoreId));
+        } catch (err) {
+            console.error("Error deleting draft:", err);
+        }
     };
 
    
@@ -141,15 +167,27 @@ export default function SubmissionPage({ currentUser }) {
             fileDataUrl: dataUrl,
             status: "draft",
             submittedBy: userName,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
+            userEmail,
+            submittedOn: null,
+            remarks: null,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
         };
 
-        const updated = [...items, newEntry];
-        save(updated);
-        setItems(updated);
-        setShowModal(false);
+        try {
+            const ref = await addDoc(collection(db, "reports"), newEntry);
+            setItems(prev => [...prev, { firestoreId: ref.id, ...newEntry }]);
+            setShowModal(false);
+            // reset form
+            setNewDept("");
+            setNewFile(null);
+        } catch (err) {
+            console.error("Error saving draft:", err);
+            alert("Failed to save draft. Please try again.");
+        }
     };
+
+    if (loading) return <div className={styles.page} style={{display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.2rem',color:'var(--text-muted)'}}>⏳ Loading your submissions...</div>;
 
     return (
         <div className={styles.page}>

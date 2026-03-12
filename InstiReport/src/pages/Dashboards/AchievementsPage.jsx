@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './AchievementsPage.module.css';
+import { collection, addDoc, getDocs, query, where, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const CATEGORIES = [
     "Academic",
@@ -11,8 +13,10 @@ const CATEGORIES = [
 ];
 
 const AchievementsPage = ({ currentUser }) => {
+    const userEmail = currentUser?.email || "";
     const [achievements, setAchievements] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [fetchLoading, setFetchLoading] = useState(true);
     const [formData, setFormData] = useState({
         title: '',
         category: 'Academic',
@@ -23,61 +27,55 @@ const AchievementsPage = ({ currentUser }) => {
         visibility: 'Public'
     });
 
-    // Mock initial achievements for demonstration
+    // Load achievements from Firestore
     useEffect(() => {
-        const savedAchievements = localStorage.getItem(`achievements_${currentUser?.email}`);
-        if (savedAchievements) {
-            setAchievements(JSON.parse(savedAchievements));
-        } else {
-            const initialData = [
-                {
-                    id: 1,
-                    title: 'Best Research Paper Award 2023',
-                    category: 'Technical',
-                    description: 'Received for the paper "AI in Healthcare" at the International Tech Summit.',
-                    date: '2023-11-15',
-                    mentorName: 'Dr. Rajesh Kumar',
-                    teamMembers: '',
-                    visibility: 'Public',
-                    submissionDate: 'Nov 18, 2023'
-                },
-                {
-                    id: 2,
-                    title: 'Patent on Smart Irrigation Systems',
-                    category: 'Technical',
-                    description: 'Patent filed for IoT-based automated irrigation system for arid regions.',
-                    date: '2023-12-05',
-                    mentorName: 'Prof. Anita Sharma',
-                    teamMembers: 'Rahul, Sneha',
-                    visibility: 'Department Only',
-                    submissionDate: 'Dec 10, 2023'
-                }
-            ];
-            setAchievements(initialData);
-            localStorage.setItem(`achievements_${currentUser?.email}`, JSON.stringify(initialData));
-        }
-    }, [currentUser]);
+        if (!userEmail) { setFetchLoading(false); return; }
+
+        const fetchAchievements = async () => {
+            setFetchLoading(true);
+            try {
+                const q = query(
+                    collection(db, "achievements"),
+                    where("userEmail", "==", userEmail)
+                );
+                const snapshot = await getDocs(q);
+                const fetched = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+                // Sort by createdAt descending (newest first)
+                fetched.sort((a, b) => {
+                    const aTime = a.createdAt?.seconds || 0;
+                    const bTime = b.createdAt?.seconds || 0;
+                    return bTime - aTime;
+                });
+                setAchievements(fetched);
+            } catch (err) {
+                console.error("Error fetching achievements:", err);
+            } finally {
+                setFetchLoading(false);
+            }
+        };
+
+        fetchAchievements();
+    }, [userEmail]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
 
-        // Simulate API call
-        setTimeout(() => {
+        try {
             const newAchievement = {
                 ...formData,
-                id: Date.now(),
-                submissionDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+                userEmail,
+                submissionDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                createdAt: serverTimestamp()
             };
 
-            const updatedList = [newAchievement, ...achievements];
-            setAchievements(updatedList);
-            localStorage.setItem(`achievements_${currentUser?.email}`, JSON.stringify(updatedList));
+            const ref = await addDoc(collection(db, "achievements"), newAchievement);
+            setAchievements(prev => [{ firestoreId: ref.id, ...newAchievement }, ...prev]);
 
             // Reset form
             setFormData({
@@ -89,10 +87,20 @@ const AchievementsPage = ({ currentUser }) => {
                 teamMembers: '',
                 visibility: 'Public'
             });
-            setIsLoading(false);
             alert('Achievement uploaded successfully!');
-        }, 1500);
+        } catch (err) {
+            console.error("Error saving achievement:", err);
+            alert('Failed to save achievement. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
+
+    if (fetchLoading) return (
+        <div className={styles.achievementsPage} style={{display:'flex', alignItems:'center', justifyContent:'center', fontSize:'1.2rem', color:'var(--text-muted)'}}>
+            ⏳ Loading your achievements...
+        </div>
+    );
 
     return (
         <div className={styles.achievementsPage}>

@@ -1,6 +1,8 @@
 
 
 import React, { useState } from 'react';
+import { collection, addDoc, getDocs, query, where, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase';
 import './RegisterPage.css';
 
 const RegisterPage = ({ showLoginPage }) => {
@@ -20,22 +22,34 @@ const RegisterPage = ({ showLoginPage }) => {
         }
 
         try {
-            const response = await fetch("http://localhost:3001/api/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password, role }),
+            const usersRef = collection(db, "users");
+            // Check if user already exists
+            const q = query(usersRef, where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                setMessage("A user with this email already exists.");
+                return;
+            }
+
+            // Create new user
+            await addDoc(usersRef, {
+                name,
+                email,
+                password,
+                role,
+                createdAt: serverTimestamp()
             });
 
-            const data = await response.json();
-            setMessage(data.message);
-
-            if (response.ok) {
-                setTimeout(() => {
-                    showLoginPage();
-                }, 2000);
-            }
+            setMessage("User registered successfully! Please log in.");
+            
+            setTimeout(() => {
+                showLoginPage();
+            }, 2000);
+            
         } catch (error) {
-            setMessage("Could not connect to the server. Please try again later.");
+            console.error("Error registering user:", error);
+            setMessage("Could not connect to the database. Please try again later.");
         }
     };
 

@@ -1,5 +1,7 @@
 
 import React, { useState } from "react";
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../firebase';
 import "./LoginPage.css";
 
 export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
@@ -18,25 +20,30 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
         }
 
         try {
-            const response = await fetch("http://localhost:3001/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ role, email, password }),
-            });
+            const usersRef = collection(db, "users");
+            const q = query(
+                usersRef, 
+                where("email", "==", email), 
+                where("password", "==", password), 
+                where("role", "==", role)
+            );
+            
+            const querySnapshot = await getDocs(q);
 
-            const data = await response.json();
-
-            if (response.ok) {
-                setMessage(data.message || "Login successful!");
-                onLoginSuccess(data.user);
+            if (!querySnapshot.empty) {
+                const userDoc = querySnapshot.docs[0].data();
+                setMessage("Login successful!");
+                onLoginSuccess({
+                    name: userDoc.name || email.split('@')[0], // fallback if name missing
+                    email: userDoc.email,
+                    role: userDoc.role
+                });
             } else {
-                setMessage(data.message || "Login failed!");
+                setMessage("Invalid email, password, or role.");
             }
         } catch (error) {
             console.error("A network error occurred:", error);
-            setMessage("Could not connect to the server.");
+            setMessage("Could not connect to the database.");
         }
     };
 
