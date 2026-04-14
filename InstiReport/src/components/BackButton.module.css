@@ -1,7 +1,4 @@
 .backButton {
-  position: fixed;
-  top: 85px;       
-  left: 25px;
   padding: 8px 15px;
   font-size: 15px;
   font-weight: 500;
@@ -12,7 +9,7 @@
   cursor: pointer;
   box-shadow: var(--card-shadow);
   transition: all .2s ease;
-  z-index: 900;
+  display: inline-block;
 }
 
 .backButton:hover {

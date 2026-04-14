@@ -87,7 +87,7 @@ const RegisterPage = ({ showLoginPage }) => {
 
                 <p className="footer-text">
                     Already have an account?{' '}
-                    <a href="#" onClick={showLoginPage}>Sign In</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); showLoginPage(); }}>Sign In</a>
                 </p>
             </div>
         </div>

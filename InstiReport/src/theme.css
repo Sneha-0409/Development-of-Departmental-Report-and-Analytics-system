@@ -98,3 +98,19 @@ button {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Global 3-Column Layout Base */
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: var(--bg);
+}

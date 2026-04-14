@@ -115,7 +115,7 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
 
                 <p className="footer-text">
                     Don't have an account?{' '}
-                    <a href="#" onClick={showRegisterPage}>Register Here</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); showRegisterPage(); }}>Register Here</a>
                 </p>
             </div>
         </div>

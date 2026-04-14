@@ -22,6 +22,9 @@ import AchievementsPage from "./pages/Dashboards/AchievementsPage";
 import BackButton from "./components/BackButton";
 import "./theme.css";
 
+import TopNav from "./components/TopNav";
+import ProfilePage from "./pages/Profile/ProfilePage";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
@@ -93,6 +96,7 @@ function App() {
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
           case "Developer": return <DeveloperPage />;
+          case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
           default: return <FacultyDashboard currentUser={currentUser} navigate={navigate} />;
         }
       case "hod":
@@ -101,6 +105,7 @@ function App() {
           case "Approvals": return <ApprovalsPage role="hod" />;
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "Developer": return <DeveloperPage />;
+          case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
           default: return <HODDashboard navigate={navigate} currentUser={currentUser} />;
         }
       case "report-maker":
@@ -108,9 +113,11 @@ function App() {
           case "Reports": return <ReportsPage navigate={navigate} setSelectedDept={setSelectedDept} />;
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
+          case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
           default: return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
         }
       default:
+        if (currentPage === "Profile") return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
         return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
     }
   };
@@ -134,11 +141,19 @@ function App() {
             toggleTheme={toggleTheme}
           />
 
-          {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
-            <BackButton onBack={handleBack} />
-          )}
+          <div className="main-content">
+            {currentPage !== "Profile" && (
+              <TopNav currentUser={currentUser} navigate={navigate} />
+            )}
 
-          {renderPage()}
+            {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
+              <div style={{ padding: "1rem 3rem 0rem 3rem" }}>
+                <BackButton onBack={handleBack} />
+              </div>
+            )}
+
+            {renderPage()}
+          </div>
         </>
       ) : (
         renderAuthPage()

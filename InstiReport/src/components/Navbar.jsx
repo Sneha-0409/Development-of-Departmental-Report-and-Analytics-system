@@ -57,7 +57,7 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
 
 
                     <div className={styles.navLinks}>
-                        {navLinks.map((link) => (
+                        {navLinks.filter(l => l !== "Developer").map((link) => (
                             <a
                                 key={link}
                                 href="#"
@@ -71,24 +71,34 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
 
 
                     <div className={styles.userActions}>
-                        <div className={styles.profileContainer}>
-                            <div className={styles.avatar}>
-                                {currentUser ? currentUser.name.charAt(0).toUpperCase() : "?"}
-                            </div>
-                            <span className={styles.userName}>
-                                {currentUser ? currentUser.name : "Guest"}
-                            </span>
-                        </div>
+                        {navLinks.includes("Developer") && (
+                            <a
+                                href="#"
+                                onClick={() => navigate("Developer")}
+                                className={`${styles.navLink} ${currentPage === "Developer" ? styles.active : ""}`}
+                            >
+                                Developer
+                            </a>
+                        )}
+                        <a 
+                            href="#profile" 
+                            onClick={(e) => { e.preventDefault(); navigate("Profile"); }}
+                            className={`${styles.navLink} ${currentPage === "Profile" ? styles.active : ""}`}
+                        >
+                            My Profile
+                        </a>
 
 
                         {/* Theme Toggle */}
-                        <button className={styles.themeToggle} onClick={toggleTheme}>
-                            {isDarkMode ? "☀️" : "🌙"}
-                        </button>
+                        <div className={styles.bottomActions}>
+                            <button className={styles.themeToggle} onClick={toggleTheme} title="Toggle Theme">
+                                {isDarkMode ? "☀️" : "🌙"}
+                            </button>
 
-                        <button className={styles.logoutBtn} onClick={handleLogout}>
-                            Logout
-                        </button>
+                            <button className={styles.logoutBtn} onClick={handleLogout} title="Logout">
+                                Logout
+                            </button>
+                        </div>
                     </div>
 
                 </div>

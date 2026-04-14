@@ -1,0 +1,63 @@
+.topNav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem 3rem 0;
+  gap: 1.75rem;
+}
+
+.iconButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280; /* muted grey, or whatever matches theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.iconButton:hover {
+  color: var(--accent);
+}
+
+.avatarContainer {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.profilePic {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: border-color 0.2s;
+}
+
+.profilePic:hover {
+  border-color: var(--accent);
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: #ef4444; 
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg);
+  padding: 0 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}

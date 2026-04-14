@@ -13,9 +13,6 @@ const FacultyDashboard = ({ currentUser, navigate }) => {
                     <h1>{isStudent ? 'Student' : 'Faculty'} Overview</h1>
                     <p className={styles.subtitle}>Welcome back, here's what's happening today.</p>
                 </div>
-                <div className={styles.headerActions}>
-                    <button className={styles.notificationBtn}>🔔</button>
-                </div>
             </header>
 
             <section className={styles.welcomeCard}>

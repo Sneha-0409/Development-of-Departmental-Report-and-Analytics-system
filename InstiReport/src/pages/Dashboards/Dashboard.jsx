@@ -129,22 +129,29 @@ const Dashboard = ({ handleLogout, currentUser, navigate }) => {
 
     return (
         <div className={styles.dashboard}>
-            <WelcomeHeader name={userName} />
-            <div className={styles.dashboardGrid}>
-                {(userRole === 'hod' || userRole === 'admin' || userRole === 'report-maker') && (
-                    <QuickActions role={userRole} />
-                )}
-                <KeyStatistics />
+            <div className={styles.mainColumn}>
+                <WelcomeHeader name={userName} />
+                
+                <div className={styles.dashboardGrid}>
+                    {(userRole === 'hod' || userRole === 'admin' || userRole === 'report-maker') && (
+                        <QuickActions role={userRole} />
+                    )}
+                    <KeyStatistics />
+                </div>
+
+                <div className={styles.ReportContainer}>
+                    <button
+                        className={styles.ReportButton}
+                        onClick={() => navigate('Reports')}
+                    >
+                        Make Report
+                    </button>
+                </div>
+            </div>
+
+            <div className={styles.rightColumn}>
                 <RecentActivity />
                 <UpcomingDeadlines />
-            </div>
-            <div className={styles.ReportContainer}>
-                <button
-                    className={styles.ReportButton}
-                    onClick={() => navigate('Reports')}
-                >
-                    Make Report
-                </button>
             </div>
         </div>
     );
