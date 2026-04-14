@@ -2,7 +2,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 2rem 3rem 0;
   gap: 1.75rem;
 }
 
@@ -45,19 +44,88 @@
 
 .badge {
   position: absolute;
-  top: -4px;
-  right: -6px;
+  top: -2px;
+  right: -2px;
   background-color: #ef4444; 
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  height: 22px;
-  min-width: 22px;
-  border-radius: 11px;
+  height: 16px;
+  min-width: 16px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--bg);
-  padding: 0 5px;
+  border: 1.5px solid var(--bg);
+  padding: 0 4px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.notificationsDropdown {
+  position: absolute;
+  top: calc(100% + 15px);
+  right: -10px;
+  width: 320px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownHeader {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdownList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background-color: var(--bg);
+}
+
+.notifTime {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  display: block;
+}
+
+.dropdownFooter {
+  padding: 0.75rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 0.85rem;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.dropdownFooter:hover {
+  text-decoration: underline;
 }

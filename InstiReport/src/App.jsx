@@ -24,6 +24,7 @@ import "./theme.css";
 
 import TopNav from "./components/TopNav";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import PortfolioPage from "./pages/Portfolio/PortfolioPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,8 +89,16 @@ function App() {
 
   const renderPage = () => {
     switch (role) {
-      case "faculty":
       case "student":
+        switch (currentPage) {
+          case "Analytics": return <AnalyticsPage navigate={navigate} />;
+          case "My Portfolio": return <PortfolioPage currentUser={currentUser} />;
+          case "Achievements": return <AchievementsPage currentUser={currentUser} />;
+          case "Developer": return <DeveloperPage />;
+          case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
+          default: return <FacultyDashboard currentUser={currentUser} navigate={navigate} />;
+        }
+      case "faculty":
       case "project-coordinator":
         switch (currentPage) {
           case "Submission": return <SubmissionPage currentUser={currentUser} />;
@@ -142,15 +151,19 @@ function App() {
           />
 
           <div className="main-content">
-            {currentPage !== "Profile" && (
-              <TopNav currentUser={currentUser} navigate={navigate} />
-            )}
-
-            {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
-              <div style={{ padding: "1rem 3rem 0rem 3rem" }}>
-                <BackButton onBack={handleBack} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 3rem 0 3rem', minHeight: '60px' }}>
+              <div style={{ flex: 1 }}>
+                {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
+                  <BackButton onBack={handleBack} />
+                )}
               </div>
-            )}
+              
+              <div>
+                {currentPage !== "Profile" && (
+                  <TopNav currentUser={currentUser} navigate={navigate} />
+                )}
+              </div>
+            </div>
 
             {renderPage()}
           </div>
