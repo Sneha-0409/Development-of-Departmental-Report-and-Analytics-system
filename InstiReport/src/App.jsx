@@ -13,6 +13,7 @@ import AnalyticsPage from "./pages/Analytics/AnalyticsPage";
 
 import HODDashboard from "./pages/Dashboards/HODDashboard";
 import FacultyDashboard from "./pages/Dashboards/FacultyDashboard";
+import StudentDashboard from "./pages/Dashboards/StudentDashboard";
 import ApprovalsPage from "./pages/Reports/ApprovalsPage";
 import AchievementsPage from "./pages/Dashboards/AchievementsPage";
 
@@ -93,7 +94,7 @@ function App() {
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
           case "Developer": return <DeveloperPage />;
           case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
-          default: return <FacultyDashboard currentUser={currentUser} navigate={navigate} />;
+          default: return <StudentDashboard currentUser={currentUser} navigate={navigate} />;
         }
       case "faculty":
       case "project-coordinator":
