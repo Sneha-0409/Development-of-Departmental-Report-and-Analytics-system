@@ -191,10 +191,6 @@ export default function SubmissionPage({ currentUser }) {
 
     return (
         <div className={styles.page}>
-            <h1 className={styles.pageTitle}>📤 Report Submissions</h1>
-            <p className={styles.pageSubtitle}>Submit completed reports for HOD approval</p>
-
-          
             <div className={styles.tabs}>
                 {["draft", "pending", "approved", "rejected", "needs_correction"].map((key) => (
                     <button

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 
 import LoginPage from "./pages/Auth/LoginPage";
@@ -84,7 +82,6 @@ function App() {
     setAuthPage("login");
   };
 
-  // RENDER PAGE BASED ON ROLE
   const role = currentUser?.role || "faculty";
 
   const renderPage = () => {
@@ -151,13 +148,33 @@ function App() {
           />
 
           <div className="main-content">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 3rem 0 3rem', minHeight: '60px' }}>
-              <div style={{ flex: 1 }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              padding: currentPage === "Dashboard" ? '1rem 3rem 0 3rem' : '2.3rem 3rem 1.5rem 3rem',
+              borderBottom: currentPage === "Dashboard" ? 'none' : '1px solid var(--border)',
+              marginBottom: currentPage === "Dashboard" ? '0' : '2rem'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                 {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
                   <BackButton onBack={handleBack} />
                 )}
+                {currentPage !== "Dashboard" && (
+                  <h1 style={{
+                    fontSize: '1.8rem',
+                    fontWeight: '800',
+                    margin: 0,
+                    background: 'linear-gradient(90deg, #6366f1, #a855f7, #ec4899)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    textTransform: 'capitalize'
+                  }}>
+                    {currentPage}
+                  </h1>
+                )}
               </div>
-              
+
               <div>
                 {currentPage !== "Profile" && (
                   <TopNav currentUser={currentUser} navigate={navigate} />

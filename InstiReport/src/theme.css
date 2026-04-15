@@ -1,6 +1,5 @@
 
 :root {
-  /* Professional SaaS Palette (Light) */
   --bg: #f3f4f6;
   --bg-alt: #ffffff;
   --text: #111827; 
@@ -33,7 +32,6 @@
 }
 
 .dark {
-  /* Professional SaaS Palette (Dark) */
   --bg: #0b0f1a;
   --bg-alt: #161e2e;
   --text: #f9fafb;
@@ -64,8 +62,6 @@
   --success: #34d399;
   --warning: #fbbf24;
 }
-
-
 
 body {
   background: var(--bg);
@@ -99,7 +95,6 @@ button {
   background: transparent;
 }
 
-/* Global 3-Column Layout Base */
 .app-container {
   display: flex;
   height: 100vh;

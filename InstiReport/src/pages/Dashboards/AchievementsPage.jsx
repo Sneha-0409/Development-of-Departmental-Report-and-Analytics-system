@@ -104,11 +104,6 @@ const AchievementsPage = ({ currentUser }) => {
 
     return (
         <div className={styles.achievementsPage}>
-            <header className={styles.header}>
-                <h1>Professional Achievements</h1>
-                <p>Manage and showcase your career milestones and accomplishments.</p>
-            </header>
-
             <div className={styles.grid}>
                 {/* Upload Form */}
                 <div className={styles.card}>

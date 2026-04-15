@@ -1,10 +1,24 @@
 .facultyDashboard {
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
     background-color: var(--bg);
     color: var(--text);
     min-height: 100vh;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
+
+/* Two-column layout for student view */
+.studentLayout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 0 2rem 2rem 2rem;
+}
+
+.dashboardMain {
+    flex: 1;
+    min-width: 0;
+}
+
 
 .header {
     display: flex;
@@ -138,9 +152,24 @@
 }
 
 .actionCard:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-4px);
+    background: #facc15;
+    border-color: #facc15;
+    box-shadow: 0 8px 32px rgba(250, 204, 21, 0.45);
+}
+
+.actionCard:hover h3 {
+    color: #fff;
+    font-weight: 700;
+}
+
+.actionCard:hover p {
+    color: #fff;
+}
+
+.actionCard:hover .iconWrapper {
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
 }
 
 .iconWrapper {
@@ -266,18 +295,70 @@
 }
 
 .portfolioCard {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 16px;
+    background: linear-gradient(145deg, var(--card-light-start) 0%, var(--card-light-end) 50%, #ffffff 100%);
+    border: 1.5px solid #000;
+    border-radius: 20px;
     padding: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .portfolioCard:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-4px);
+    background: var(--card-color);
+    border-color: #000;
+    border-width: 3px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.portfolioCard:hover .titleArea h4 {
+    color: #fff;
+    font-weight: 700;
+}
+
+.portfolioCard:hover .category {
+    color: #fff;
+}
+
+.portfolioCard:hover .progressLabel {
+    color: #fff;
+}
+
+.portfolioCard:hover .progressLabel .percentage {
+    color: #fff;
+}
+
+.portfolioCard:hover .progressBarWrapper {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.portfolioCard:hover .progressBar {
+    background-color: #fff !important;
+    background-image: none;
+}
+
+.portfolioCard:hover .iconBox {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    color: #000 !important;
+}
+
+.portfolioCard:hover .metaItem {
+    color: #fff;
+}
+
+.portfolioCard:hover .arrowIcon {
+    color: #fff;
+}
+
+.portfolioCard:hover .moreBtn {
+    color: #fff;
+}
+
+.portfolioCard:hover .cardFooter {
+    border-top-color: rgba(255, 255, 255, 0.5);
 }
 
 .cardHeader {
@@ -389,4 +470,380 @@
     .recentReports {
         padding: 1rem;
     }
+}
+
+/* Know Your Contribution Section */
+.contributionSection {
+    margin-top: 0.5rem;
+}
+
+.contributionIntro {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(168, 85, 247, 0.06));
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contributionIntro p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.contributionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.contributionCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.25s ease;
+}
+
+.contributionCard:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+}
+
+.contributionIcon {
+    font-size: 1.75rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 0.1rem;
+}
+
+.contributionText h4 {
+    margin: 0 0 0.4rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.contributionText p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ─── Student Sidebar ─── */
+.studentSidebar {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: 1rem;
+}
+
+/* Profile Card */
+.sideProfileCard {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.sideAvatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c4b5fd, #818cf8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 3px #a5b4fc;
+}
+
+.sideAvatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sideAvatarInitials {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.sideProfileName {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
+}
+
+.sideProfileRole {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.sideProfileBtn {
+    margin-top: 0.75rem;
+    background: linear-gradient(135deg, #818cf8, #a855f7);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.sideProfileBtn:hover {
+    opacity: 0.88;
+}
+
+/* Calendar */
+.calendarWidget {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.calendarNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.calMonthLabel {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.calNavBtn {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+}
+
+.calNavBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.calGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
+}
+
+.calDayName {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 0.25rem 0 0.5rem;
+}
+
+.calCell {
+    font-size: 0.8rem;
+    padding: 0.35rem 0;
+    border-radius: 8px;
+    color: var(--text);
+    cursor: default;
+}
+
+.calCell:not(.calEmpty):hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.calEmpty {
+    color: transparent;
+}
+
+.calToday {
+    background: linear-gradient(135deg, #818cf8, #a855f7);
+    color: #fff !important;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+/* Reminders */
+.remindersSection {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.remindersTitle {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text);
+}
+
+.remindersList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.reminderItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.reminderBell {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, rgba(129,140,248,0.15), rgba(168,85,247,0.15));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.reminderText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.reminderName {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.reminderDate {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+    .studentLayout {
+        flex-direction: column;
+    }
+    .studentSidebar {
+        width: 100%;
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .sideProfileCard,
+    .calendarWidget,
+    .remindersSection {
+        flex: 1;
+        min-width: 260px;
+    }
+}
+
+/* Latest Activity Timeline */
+.activitySection {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.activityList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.activityItem {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+}
+
+.activityDotWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 0.2rem;
+}
+
+.activityDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot_green  { background-color: #22c55e; }
+.dot_yellow { background-color: #eab308; }
+.dot_red    { background-color: #ef4444; }
+
+.activityLine {
+    width: 2px;
+    flex: 1;
+    min-height: 24px;
+    background: var(--border);
+    margin: 3px 0;
+    border-radius: 2px;
+}
+
+.activityContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-bottom: 1rem;
+}
+
+.activityText {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.activityTime {
+    font-size: 0.73rem;
+    color: var(--text-muted);
 }

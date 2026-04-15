@@ -95,14 +95,14 @@ export default function PortfolioPage({ currentUser }) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <h1 className={styles.title}>My Portfolio</h1>
-                <p className={styles.subtitle}>Click on any project or achievement to explore deep-dive details.</p>
-            </div>
-            
             <div className={styles.cardGrid}>
                 {portfolioSummary.map(item => (
-                    <div key={item.id} className={styles.card} onClick={() => item.type && setActiveTab(item.type)}>
+                    <div 
+                        key={item.id} 
+                        className={styles.card} 
+                        onClick={() => item.type && setActiveTab(item.type)}
+                        style={{ '--hover-color': item.color }}
+                    >
                         <div className={styles.cardHeader}>
                             <div className={styles.iconBox} style={{ backgroundColor: item.color }}>
                                 {item.icon}
