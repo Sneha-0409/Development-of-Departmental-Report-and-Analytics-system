@@ -7,7 +7,7 @@ const LogoIcon = () => (
     <img
         src="/logo.png"
         alt="InstiReport Logo"
-        style={{ width: "63px", height: "63px" }}
+        style={{ width: "50px", height: "50px" }}
     />
 );
 
@@ -51,7 +51,9 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
 
 
                     <a href="#" onClick={() => navigate(homePage)} className={styles.logoContainer}>
-                        <LogoIcon />
+                        <div className={styles.logoIconCircle}>
+                            <LogoIcon />
+                        </div>
                         <span className={styles.brandName}>InstiReport</span>
                     </a>
 

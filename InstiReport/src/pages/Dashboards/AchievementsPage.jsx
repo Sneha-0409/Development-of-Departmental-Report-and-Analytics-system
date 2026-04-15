@@ -107,7 +107,7 @@ const AchievementsPage = ({ currentUser }) => {
             <div className={styles.grid}>
                 {/* Upload Form */}
                 <div className={styles.card}>
-                    <h2><span style={{ fontSize: '1.2em' }}>🚀</span> Upload Achievement</h2>
+                    <h2>Upload Achievement</h2>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.formGroup}>
                             <label>Achievement Title</label>
@@ -241,7 +241,7 @@ const AchievementsPage = ({ currentUser }) => {
 
                 {/* My Achievements List */}
                 <div className={styles.card}>
-                    <h2><span style={{ fontSize: '1.2em' }}>🏆</span> My Achievements</h2>
+                    <h2>My Achievements</h2>
                     <div className={styles.listContainer}>
                         {achievements.length > 0 ? (
                             achievements.map(item => (

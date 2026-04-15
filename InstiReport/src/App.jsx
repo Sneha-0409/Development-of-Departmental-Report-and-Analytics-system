@@ -166,7 +166,7 @@ function App() {
                     fontSize: '1.8rem',
                     fontWeight: '800',
                     margin: 0,
-                    background: 'linear-gradient(90deg, #6366f1, #a855f7, #ec4899)',
+                    background: 'linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     textTransform: 'capitalize'

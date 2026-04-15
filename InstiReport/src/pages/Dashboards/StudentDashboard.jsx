@@ -1,54 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styles from './StudentDashboard.module.css';
 
-/* ─── Mini Calendar ─── */
-const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-function MiniCalendar() {
-    const today = new Date();
-    const [viewDate, setViewDate] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
-
-    const year  = viewDate.getFullYear();
-    const month = viewDate.getMonth();
-
-    const firstDay = new Date(year, month, 1).getDay();
-    const offset   = (firstDay === 0) ? 6 : firstDay - 1;
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    const cells = [];
-    for (let i = 0; i < offset; i++) cells.push(null);
-    for (let d = 1; d <= daysInMonth; d++) cells.push(d);
-
-    const isToday = (d) =>
-        d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-
-    const prev = () => setViewDate(new Date(year, month - 1, 1));
-    const next = () => setViewDate(new Date(year, month + 1, 1));
-
-    return (
-        <div className={styles.calendarWidget}>
-            <div className={styles.calendarNav}>
-                <button className={styles.calNavBtn} onClick={prev}>‹</button>
-                <span className={styles.calMonthLabel}>{MONTHS[month]} {year}</span>
-                <button className={styles.calNavBtn} onClick={next}>›</button>
-            </div>
-            <div className={styles.calGrid}>
-                {DAYS.map(d => (
-                    <div key={d} className={styles.calDayName}>{d}</div>
-                ))}
-                {cells.map((d, i) => (
-                    <div
-                        key={i}
-                        className={`${styles.calCell} ${d === null ? styles.calEmpty : ''} ${isToday(d) ? styles.calToday : ''}`}
-                    >
-                        {d}
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-}
 
 /* ─── Sidebar Data ─── */
 const reminders = [
@@ -66,7 +18,18 @@ const latestActivity = [
     { color: 'green',  text: 'Portfolio synced with faculty records successfully', time: '14 Apr 2026, 4:00 pm' },
 ];
 
+const faqs = [
+    { q: "How to add achievements?", a: "Go to Achievements page and click 'Add New' to log your certifications or awards." },
+    { q: "Who reviews my portfolio?", a: "Your department advisor reviews all submitted items for verification." },
+    { q: "Can I edit my profile?", a: "Yes, click the 'Profile' button at the top of the sidebar to update your details." }
+];
+
+
+
+
 function StudentSidebar({ currentUser, navigate }) {
+
+
     const name = currentUser?.name || 'Student';
     const initials = name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
     const photo = currentUser?.photoURL;
@@ -86,7 +49,7 @@ function StudentSidebar({ currentUser, navigate }) {
                     Profile
                 </button>
             </div>
-            <MiniCalendar />
+
             <div className={styles.remindersSection}>
                 <h4 className={styles.remindersTitle}>Reminders</h4>
                 <ul className={styles.remindersList}>
@@ -118,13 +81,24 @@ function StudentSidebar({ currentUser, navigate }) {
                     ))}
                 </ul>
             </div>
+
+
+
+
+
+
+
         </aside>
     );
 }
 
 /* ─── Main Component ─── */
 const StudentDashboard = ({ currentUser, navigate }) => {
+    const [showFAQ, setShowFAQ] = useState(false);
+    const [expandedFaq, setExpandedFaq] = useState(null);
     const userName = currentUser?.name || 'Student';
+
+
     const contributionScrollRef = useRef(null);
 
     const scrollContributions = (direction) => {
@@ -213,7 +187,54 @@ const StudentDashboard = ({ currentUser, navigate }) => {
             </div>
 
             <StudentSidebar currentUser={currentUser} navigate={navigate} />
+
+            {/* Chat Agent FAQ */}
+            <div className={styles.chatAgentWrapper}>
+                <button 
+                    className={`${styles.chatFab} ${showFAQ ? styles.chatFabActive : ''}`}
+                    onClick={() => setShowFAQ(!showFAQ)}
+                    aria-label="Toggle Support Chat"
+                >
+                    {showFAQ ? '✕' : '💬'}
+                </button>
+
+                {showFAQ && (
+                    <div className={styles.chatWindow}>
+                        <div className={styles.chatHeader}>
+                            <div className={styles.chatStatus}>
+                                <div className={styles.statusDot} />
+                                <span>Support Agent</span>
+                            </div>
+                            <h5>Need help?</h5>
+                        </div>
+                        <div className={styles.chatBody}>
+                            <p className={styles.chatIntro}>Hi there! 👋 How can I help you today?</p>
+                            <div className={styles.chatFaqs}>
+                                {faqs.map((faq, i) => (
+                                    <div 
+                                        key={i} 
+                                        className={`${styles.chatFaqItem} ${expandedFaq === i ? styles.chatFaqActive : ''}`}
+                                        onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
+                                    >
+                                        <div className={styles.chatQuestionRow}>
+                                            <h6 className={styles.chatQuestion}>{faq.q}</h6>
+                                            <span className={styles.faqArrow}>{expandedFaq === i ? '−' : '+'}</span>
+                                        </div>
+                                        {expandedFaq === i && (
+                                            <div className={styles.faqAnswerWrapper}>
+                                                <p className={styles.chatAnswer}>{faq.a}</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
+
     );
 };
 

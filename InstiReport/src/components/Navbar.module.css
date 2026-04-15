@@ -1,6 +1,6 @@
 .navbar {
   /* Blue background aesthetic from reference */
-  background-color: #0d47a1; 
+  background-color: #0d47a1;
   width: 260px;
   min-width: 260px;
   height: 100vh;
@@ -32,8 +32,20 @@
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   justify-content: center;
+}
+
+.logoIconCircle {
+  background-color: #ffffff;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
 }
 
 .brandName {
@@ -46,7 +58,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex-grow: 1; /* Pushes userActions to the bottom */
+  flex-grow: 1;
+  /* Pushes userActions to the bottom */
   width: 100%;
 }
 
@@ -100,7 +113,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffb300; 
+  background-color: #ffb300;
   border-radius: 50%;
   color: #fff;
   font-weight: bold;
@@ -120,7 +133,7 @@
 
 .themeToggle {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
@@ -134,7 +147,7 @@
 }
 
 .themeToggle:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .logoutBtn {
@@ -160,12 +173,17 @@
     width: 80px;
     min-width: 80px;
   }
-  .brandName, .userName, .navLink span {
+
+  .brandName,
+  .userName,
+  .navLink span {
     display: none;
   }
+
   .active {
     border-left: none;
   }
+
   .bottomActions {
     flex-direction: column;
   }
