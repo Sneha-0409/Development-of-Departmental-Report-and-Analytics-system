@@ -1,33 +1,34 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './StudentDashboard.module.css';
+import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 
 /* ─── Sidebar Data ─── */
-const reminders = [
-    { title: 'Submit Mini Project Report', date: 'Due: 20 Apr 2026, Monday' },
-    { title: 'Upload Certification (NPTEL)', date: 'Due: 22 Apr 2026, Wednesday' },
-    { title: 'Portfolio Review by Faculty', date: 'Due: 25 Apr 2026, Saturday' },
-    { title: 'Semester Activity Submission', date: 'Due: 30 Apr 2026, Thursday' },
-];
-
-const latestActivity = [
-    { color: 'green',  text: 'Your achievement submission was approved',         time: 'Today, 10:30 am' },
-    { color: 'yellow', text: 'Department tech fest registrations are now open',   time: 'Today, 9:00 am' },
-    { color: 'red',    text: 'Mini Project Report deadline is in 3 days',        time: '17 Apr 2026, 9:00 am' },
-    { color: 'red',    text: 'NPTEL Certification upload is pending',             time: '15 Apr 2026, 9:00 am' },
-    { color: 'green',  text: 'Portfolio synced with faculty records successfully', time: '14 Apr 2026, 4:00 pm' },
-];
-
 const faqs = [
     { q: "How to add achievements?", a: "Go to Achievements page and click 'Add New' to log your certifications or awards." },
     { q: "Who reviews my portfolio?", a: "Your department advisor reviews all submitted items for verification." },
     { q: "Can I edit my profile?", a: "Yes, click the 'Profile' button at the top of the sidebar to update your details." }
 ];
 
+// Helper to format timestamps
+const formatActivityTime = (timestamp) => {
+    if (!timestamp) return 'Just now';
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    const now = new Date();
+    const isToday = date.toDateString() === now.toDateString();
+    
+    if (isToday) {
+        return `Today, ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    }
+    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+};
 
 
 
-function StudentSidebar({ currentUser, navigate }) {
+
+
+function StudentSidebar({ currentUser, navigate, reminders = [], latestActivity = [] }) {
 
 
     const name = currentUser?.name || 'Student';
@@ -53,7 +54,7 @@ function StudentSidebar({ currentUser, navigate }) {
             <div className={styles.remindersSection}>
                 <h4 className={styles.remindersTitle}>Reminders</h4>
                 <ul className={styles.remindersList}>
-                    {reminders.map((r, i) => (
+                    {reminders.length > 0 ? reminders.map((r, i) => (
                         <li key={i} className={styles.reminderItem}>
                             <div className={styles.reminderBell}>🔔</div>
                             <div className={styles.reminderText}>
@@ -61,13 +62,15 @@ function StudentSidebar({ currentUser, navigate }) {
                                 <span className={styles.reminderDate}>{r.date}</span>
                             </div>
                         </li>
-                    ))}
+                    )) : (
+                        <li className={styles.emptyItem}>No pending reminders</li>
+                    )}
                 </ul>
             </div>
             <div className={styles.activitySection}>
                 <h4 className={styles.remindersTitle}>Latest Activity</h4>
                 <ul className={styles.activityList}>
-                    {latestActivity.map((item, i) => (
+                    {latestActivity.length > 0 ? latestActivity.map((item, i) => (
                         <li key={i} className={styles.activityItem}>
                             <div className={styles.activityDotWrapper}>
                                 <div className={`${styles.activityDot} ${styles[`dot_${item.color}`]}`} />
@@ -78,9 +81,12 @@ function StudentSidebar({ currentUser, navigate }) {
                                 <span className={styles.activityTime}>{item.time}</span>
                             </div>
                         </li>
-                    ))}
+                    )) : (
+                        <li className={styles.emptyItem}>No recent activity</li>
+                    )}
                 </ul>
             </div>
+
 
 
 
@@ -96,7 +102,97 @@ function StudentSidebar({ currentUser, navigate }) {
 const StudentDashboard = ({ currentUser, navigate }) => {
     const [showFAQ, setShowFAQ] = useState(false);
     const [expandedFaq, setExpandedFaq] = useState(null);
+    const [dynamicReminders, setDynamicReminders] = useState([]);
+    const [activities, setActivities] = useState([]);
     const userName = currentUser?.name || 'Student';
+    const userEmail = currentUser?.email || '';
+
+    useEffect(() => {
+        if (!userEmail) return;
+
+        const fetchDashboardData = async () => {
+            try {
+                // 1. Fetch Achievements
+                const qAch = query(
+                    collection(db, "achievements"),
+                    where("userEmail", "==", userEmail),
+                    orderBy("createdAt", "desc"),
+                    limit(5)
+                );
+                const snapAch = await getDocs(qAch);
+                const fetchedAch = snapAch.docs.map(d => ({ ...d.data(), id: d.id, source: 'achievement' }));
+
+                // 2. Fetch Reports
+                const qRep = query(
+                    collection(db, "reports"),
+                    where("userEmail", "==", userEmail),
+                    orderBy("createdAt", "desc"),
+                    limit(5)
+                );
+                const snapRep = await getDocs(qRep);
+                const fetchedRep = snapRep.docs.map(d => ({ ...d.data(), id: d.id, source: 'report' }));
+
+                // --- Build Activity Feed ---
+                const allData = [...fetchedAch, ...fetchedRep].sort((a, b) => {
+                    const timeA = a.createdAt?.seconds || 0;
+                    const timeB = b.createdAt?.seconds || 0;
+                    return timeB - timeA;
+                }).slice(0, 5);
+
+                const activityFeed = allData.map(item => {
+                    if (item.source === 'achievement') {
+                        return {
+                            color: 'green',
+                            text: `Logged achievement: ${item.title}`,
+                            time: formatActivityTime(item.createdAt)
+                        };
+                    } else {
+                        return {
+                            color: item.status === 'approved' ? 'green' : (item.status === 'rejected' ? 'red' : 'yellow'),
+                            text: `Report submission: ${item.fileName} (${item.status})`,
+                            time: formatActivityTime(item.createdAt)
+                        };
+                    }
+                });
+                setActivities(activityFeed);
+
+                // --- Build Reminders Feed ---
+                const remindersList = [];
+                
+                // Add drafts as reminders
+                const drafts = fetchedRep.filter(r => r.status === 'draft');
+                drafts.forEach(d => {
+                    remindersList.push({
+                        title: `Finish draft: ${d.fileName}`,
+                        date: 'Action Required'
+                    });
+                });
+
+                // Add rejected/needs correction as reminders
+                const needsAction = fetchedRep.filter(r => r.status === 'rejected' || r.status === 'needs_correction');
+                needsAction.forEach(r => {
+                    remindersList.push({
+                        title: `Correction needed: ${r.fileName}`,
+                        date: 'High Priority'
+                    });
+                });
+
+                // Default informative reminders if empty
+                if (remindersList.length === 0) {
+                    remindersList.push({ title: 'Keep your portfolio updated', date: 'Ongoing' });
+                    remindersList.push({ title: 'Check upcoming deadlines', date: 'Weekly' });
+                }
+
+                setDynamicReminders(remindersList.slice(0, 4));
+
+            } catch (err) {
+                console.error("Error fetching dashboard dynamic data:", err);
+            }
+        };
+
+        fetchDashboardData();
+    }, [userEmail]);
+
 
 
     const contributionScrollRef = useRef(null);
@@ -186,7 +282,12 @@ const StudentDashboard = ({ currentUser, navigate }) => {
                 </div>
             </div>
 
-            <StudentSidebar currentUser={currentUser} navigate={navigate} />
+            <StudentSidebar 
+                currentUser={currentUser} 
+                navigate={navigate} 
+                activities={activities}
+                reminders={dynamicReminders}
+            />
 
             {/* Chat Agent FAQ */}
             <div className={styles.chatAgentWrapper}>

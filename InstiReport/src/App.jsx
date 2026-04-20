@@ -92,6 +92,7 @@ function App() {
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "My Portfolio": return <PortfolioPage currentUser={currentUser} />;
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
+          case "Project": return <SubmissionPage currentUser={currentUser} />;
           case "Developer": return <DeveloperPage />;
           case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
           default: return <StudentDashboard currentUser={currentUser} navigate={navigate} />;
@@ -99,7 +100,7 @@ function App() {
       case "faculty":
       case "project-coordinator":
         switch (currentPage) {
-          case "Submission": return <SubmissionPage currentUser={currentUser} />;
+          case "Project": return <SubmissionPage currentUser={currentUser} />;
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
           case "Developer": return <DeveloperPage />;
@@ -137,9 +138,9 @@ function App() {
   const hideBackOn = ["Dashboard", "HOD Dashboard", "Admin Dashboard"];
 
   return (
-    <div className="app-container">
+    <>
       {isLoggedIn ? (
-        <>
+        <div className="app-container">
           <Navbar
             navigate={navigate}
             currentPage={currentPage}
@@ -185,11 +186,11 @@ function App() {
 
             {renderPage()}
           </div>
-        </>
+        </div>
       ) : (
         renderAuthPage()
       )}
-    </div>
+    </>
   );
 }
 

@@ -16,6 +16,37 @@ const fileToDataURL = (file) =>
         reader.readAsDataURL(file);
     });
 
+const compressImage = (file) =>
+    new Promise((resolve, reject) => {
+        if (!file.type.startsWith('image/')) {
+            reject(new Error("Selected file is not an image."));
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 1000;
+                let width = img.width;
+                let height = img.height;
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', 0.6));
+            };
+            img.onerror = () => reject(new Error("Failed to load image."));
+            img.src = event.target.result;
+        };
+        reader.onerror = () => reject(new Error("Failed to read file."));
+        reader.readAsDataURL(file);
+    });
+
 
 const StatusBadge = ({ status }) => {
     const map = {
@@ -33,11 +64,19 @@ export default function SubmissionPage({ currentUser }) {
     const userEmail = currentUser?.email || "";
     const [items, setItems] = useState([]);
     const [tab, setTab] = useState("draft");
-    const [newDept, setNewDept] = useState("");
-    const [newYear, setNewYear] = useState(new Date().getFullYear());
-    const [newFile, setNewFile] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [statusMsg, setStatusMsg] = useState("");
+
+    // Form States
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [githubLink, setGithubLink] = useState("");
+    const [liveLink, setLiveLink] = useState("");
+    const [isDeployed, setIsDeployed] = useState(false);
+    const [projectImage, setProjectImage] = useState(null);
+    const [dept, setDept] = useState("");
 
   
     // Load reports from Firestore on mount
@@ -155,35 +194,53 @@ export default function SubmissionPage({ currentUser }) {
    
     const createDraft = async (e) => {
         e.preventDefault();
-        if (!newDept || !newFile) return alert("Please complete the form.");
-        const dataUrl = await fileToDataURL(newFile);
-        const id = `${newDept}-${newYear}-${userName}`.toLowerCase().replace(/\s+/g, "-");
-
-        const newEntry = {
-            id,
-            department: newDept,
-            year: newYear,
-            fileName: newFile.name,
-            fileDataUrl: dataUrl,
-            status: "draft",
-            submittedBy: userName,
-            userEmail,
-            submittedOn: null,
-            remarks: null,
-            createdAt: serverTimestamp(),
-            updatedAt: serverTimestamp(),
-        };
-
+        if (!title || !description || !githubLink || !liveLink || !projectImage || !isDeployed) {
+            return alert("Please fulfill all conditions and complete the form.");
+        }
+        
+        setIsSubmitting(true);
+        setStatusMsg("Optimizing...");
         try {
-            const ref = await addDoc(collection(db, "reports"), newEntry);
+            const imageDataUrl = await compressImage(projectImage);
+            setStatusMsg("Uploading...");
+            
+            const newEntry = {
+                title,
+                description,
+                githubLink,
+                liveLink,
+                projectImage: imageDataUrl,
+                department: dept,
+                status: "draft",
+                submittedBy: userName,
+                userEmail,
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+            };
+
+            const timeoutPromise = new Promise((_, rej) => 
+                setTimeout(() => rej(new Error("Upload timed out. Please check your connection.")), 15000)
+            );
+
+            const uploadPromise = addDoc(collection(db, "reports"), newEntry);
+            const ref = await Promise.race([uploadPromise, timeoutPromise]);
+
             setItems(prev => [...prev, { firestoreId: ref.id, ...newEntry }]);
             setShowModal(false);
-            // reset form
-            setNewDept("");
-            setNewFile(null);
+            
+            // Reset
+            setTitle("");
+            setDescription("");
+            setGithubLink("");
+            setLiveLink("");
+            setProjectImage(null);
+            setIsDeployed(false);
         } catch (err) {
-            console.error("Error saving draft:", err);
-            alert("Failed to save draft. Please try again.");
+            console.error("Error saving project:", err);
+            alert("Failed to save project. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+            setStatusMsg("");
         }
     };
 
@@ -205,77 +262,119 @@ export default function SubmissionPage({ currentUser }) {
 
            
             {list.length === 0 ? (
-                <div className={styles.emptyState}>No reports in this section</div>
-            ) : (
-                <div className={styles.cardGrid}>
-                    {list.map((r) => (
-                        <div key={r.id} className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <h3>{r.fileName}</h3>
-                                <StatusBadge status={r.status} />
-                            </div>
-
-                            <p className={styles.meta}>{r.department} • {r.year}</p>
-
-                            {r.remarks && (
-                                <div className={styles.remarksBox}>
-                                    <strong>HOD Remark:</strong>
-                                    <p>{r.remarks}</p>
-                                </div>
-                            )}
-
-                            <div className={styles.actions}>
-                                <button onClick={() => viewPDF(r)} className={styles.btnOutline}>View PDF</button>
-
-                                {r.status === "draft" && (
-                                    <>
-                                        <button onClick={() => submitReport(r)} className={styles.btnPrimary}>Submit</button>
-                                        <button onClick={() => deleteDraft(r)} className={styles.btnDanger}>Delete</button>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    ))}
+                <div className={styles.emptyState}>
+                    <p>No projects in this section</p>
+                    <button className={styles.centerBtn} onClick={() => setShowModal(true)}>
+                        + Add New Project
+                    </button>
                 </div>
+            ) : (
+                <>
+                    <div className={styles.cardGrid}>
+                        {list.map((r) => (
+                            <div key={r.firestoreId} className={styles.card}>
+                                {/* ... existing card content ... */}
+                                {r.projectImage && (
+                                    <div className={styles.thumbnailWrapper}>
+                                        <img src={r.projectImage} alt={r.title} className={styles.thumbnail} />
+                                    </div>
+                                )}
+                                <div className={styles.cardContent}>
+                                    <div className={styles.cardHeader}>
+                                        <h3>{r.title}</h3>
+                                        <StatusBadge status={r.status} />
+                                    </div>
+
+                                    <p className={styles.projectDesc}>{r.description}</p>
+                                    
+                                    <div className={styles.linkGroup}>
+                                        <a href={r.githubLink} target="_blank" rel="noreferrer" className={styles.linkBtn}>
+                                            GitHub ↗
+                                        </a>
+                                        <a href={r.liveLink} target="_blank" rel="noreferrer" className={styles.linkBtn}>
+                                            Live Demo ↗
+                                        </a>
+                                    </div>
+
+                                    {r.remarks && (
+                                        <div className={styles.remarksBox}>
+                                            <strong>Feedback:</strong>
+                                            <p>{r.remarks}</p>
+                                        </div>
+                                    )}
+
+                                    <div className={styles.actions}>
+                                        {r.status === "draft" && (
+                                            <>
+                                                <button onClick={() => submitReport(r)} className={styles.btnPrimary}>Submit for Review</button>
+                                                <button onClick={() => deleteDraft(r)} className={styles.btnDanger}>Delete</button>
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className={styles.actionsFooter}>
+                        <button className={styles.centerBtn} onClick={() => setShowModal(true)}>
+                            + Add New Project
+                        </button>
+                    </div>
+                </>
             )}
 
             
-            <button className={styles.fab} onClick={() => setShowModal(true)}>+ Add Submission</button>
 
-         
+
             {showModal && (
                 <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
                     <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                        <h3>Add Report Submission</h3>
+                        <h3>Share Your Project</h3>
+                        <p className={styles.modalSubtitle}>Document your completed and deployed work.</p>
 
                         <form onSubmit={createDraft} className={styles.form}>
                             <label>
-                                <span>Department</span>
-                                <select value={newDept} onChange={(e) => setNewDept(e.target.value)} required>
-                                    <option value="">Select department</option>
-                                    <option>Computer Science & Engineering</option>
-                                    <option>Information Technology</option>
-                                    <option>Electrical Engineering</option>
-                                    <option>Electronics Engineering</option>
-                                    <option>Mechanical Engineering</option>
-                                    <option>Civil Engineering</option>
-                                    <option>Chemical Engineering</option>
-                                </select>
+                                <span>Project Title</span>
+                                <input type="text" placeholder="e.g. AI Content Generator" value={title} onChange={(e) => setTitle(e.target.value)} required />
                             </label>
 
                             <label>
-                                <span>Year</span>
-                                <input type="number" min="2000" max="2100" value={newYear} onChange={(e) => setNewYear(e.target.value)} required />
+                                <span>Description</span>
+                                <textarea 
+                                    placeholder="Briefly describe what your project does..." 
+                                    value={description} 
+                                    onChange={(e) => setDescription(e.target.value)} 
+                                    className={styles.textarea}
+                                    required 
+                                />
                             </label>
 
+                            <div className={styles.row}>
+                                <label>
+                                    <span>GitHub Repository</span>
+                                    <input type="url" placeholder="https://github.com/..." value={githubLink} onChange={(e) => setGithubLink(e.target.value)} required />
+                                </label>
+                                <label>
+                                    <span>Live Deployment</span>
+                                    <input type="url" placeholder="https://..." value={liveLink} onChange={(e) => setLiveLink(e.target.value)} required />
+                                </label>
+                            </div>
+
                             <label>
-                                <span>Upload PDF</span>
-                                <input type="file" accept="application/pdf" onChange={(e) => setNewFile(e.target.files[0])} required />
+                                <span>Project Screenshot/Image</span>
+                                <input type="file" accept="image/*" onChange={(e) => setProjectImage(e.target.files[0])} required />
+                            </label>
+
+                            <label className={styles.checkboxLabel}>
+                                <input type="checkbox" checked={isDeployed} onChange={(e) => setIsDeployed(e.target.checked)} required />
+                                <span>I confirm that this project is completed and deployed.</span>
                             </label>
 
                             <div className={styles.modalActions}>
-                                <button type="button" onClick={() => setShowModal(false)} className={styles.btnOutline}>Cancel</button>
-                                <button type="submit" className={styles.btnPrimary}>Save Draft</button>
+                                <button type="button" onClick={() => setShowModal(false)} className={styles.btnOutline} disabled={isSubmitting}>Cancel</button>
+                                <button type="submit" className={styles.btnPrimary} disabled={isSubmitting}>
+                                    {isSubmitting ? (statusMsg || "Saving...") : "Save Showcase Item"}
+                                </button>
                             </div>
                         </form>
                     </div>

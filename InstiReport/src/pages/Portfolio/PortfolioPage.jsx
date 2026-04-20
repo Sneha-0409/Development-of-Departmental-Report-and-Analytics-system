@@ -72,7 +72,7 @@ export default function PortfolioPage({ currentUser }) {
         },
         {
             id: 2,
-            title: "Submissions",
+            title: "Projects",
             category: "Projects",
             value: reports.length,
             target: 15,
@@ -142,7 +142,7 @@ export default function PortfolioPage({ currentUser }) {
                                 className={`${styles.filterLink} ${activeTab === tab ? styles.activeFilter : ''}`}
                                 onClick={() => setActiveTab(tab)}
                             >
-                                {tab.toUpperCase()}
+                                {tab === 'submission' ? 'PROJECTS' : tab.toUpperCase()}
                             </button>
                         ))}
                     </div>
@@ -159,7 +159,7 @@ export default function PortfolioPage({ currentUser }) {
                                     </div>
                                 </div>
                                 <div className={styles.showcaseContent}>
-                                    <span className={styles.itemTag}>{item.type === 'achievement' ? 'Achievement' : 'Project Submission'}</span>
+                                    <span className={styles.itemTag}>{item.type === 'achievement' ? 'Achievement' : 'Project'}</span>
                                     <h4>{item.title || item.fileName}</h4>
                                     <p className={styles.itemDesc}>{item.description || `Submitted for ${item.department}`}</p>
                                     <div className={styles.itemInfo}>
