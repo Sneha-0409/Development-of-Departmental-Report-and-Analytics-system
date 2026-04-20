@@ -1,13 +1,42 @@
+import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { collection, query, where, getDocs, doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc, serverTimestamp, orderBy, onSnapshot } from "firebase/firestore";
+import styles from "./ApprovalsPage.module.css";
+
+const DEPARTMENTS = [
+    { id: "cse", name: "Computer Science & Engg", short: "CSE", color: "#eff6ff", text: "#3b82f6", faculty: "Dr. Ramesh Kumar" },
+    { id: "it", name: "Information Technology", short: "IT", color: "#f0fdf4", text: "#22c55e", faculty: "Dr. Priya Mehta" },
+    { id: "ds", name: "Data Science", short: "DS", color: "#faf5ff", text: "#a855f7", faculty: "Prof. Aniket Vaidya" },
+    { id: "mech", name: "Mechanical Engineering", short: "MECH", color: "#fff7ed", text: "#f97316", faculty: "Dr. Sunita Kulkarni" },
+    { id: "civil", name: "Civil Engineering", short: "CIVIL", color: "#f1f5f9", text: "#64748b", faculty: "Prof. Neha Joshi" }
+];
+
+const SECTIONS = [
+    "Faculty profile & qualifications",
+    "Research publications",
+    "Student achievements",
+    "Industry collaborations",
+    "Events & workshops conducted",
+    "Lab infrastructure",
+    "Financial summary"
+];
 
 export default function ApprovalsPage({ currentUser }) {
-    const [items, setItems] = useState([]);
+    const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selected, setSelected] = useState(null);
-    const [remarks, setRemarks] = useState("");
-
+    const [search, setSearch] = useState("");
     const deptName = currentUser?.department || "";
+
+    // Filter departments to only show HOD's own department
+    const filteredDepts = DEPARTMENTS.filter(d => 
+        deptName.toLowerCase().includes(d.id.toLowerCase()) || 
+        deptName.toLowerCase().includes(d.name.toLowerCase()) ||
+        d.id === "cse" // Fallback for the demo "Computer Science" -> "CSE" mapping
+    );
+
+    const [selectedId, setSelectedId] = useState(filteredDepts[0]?.id || "cse");
+    const [remarks, setRemarks] = useState("");
+    const [isReviewMode, setIsReviewMode] = useState(false);
 
     useEffect(() => {
         if (!deptName) {
@@ -15,120 +44,260 @@ export default function ApprovalsPage({ currentUser }) {
             return;
         }
 
-        const fetchApprovedItems = async () => {
-            setLoading(true);
-            try {
-                const q = query(
-                    collection(db, "reports"),
-                    where("department", "==", deptName),
-                    where("status", "==", "pending")
-                );
-                const snapshot = await getDocs(q);
-                const fetched = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
-                setItems(fetched);
-            } catch (err) {
-                console.error("Error fetching approvals:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
+        const reportsRef = collection(db, "reports");
+        const q = query(reportsRef, where("department", "==", deptName));
 
-        fetchApprovedItems();
+        const unsub = onSnapshot(q, (snap) => {
+            const fetched = snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+            setReports(fetched);
+            setLoading(false);
+        });
+
+        return () => unsub();
     }, [deptName]);
 
-    const updateStatus = async (item, newStatus, remarksText = null) => {
+    const handleViewPDF = (item) => {
+        if (!item?.fileDataUrl) {
+            // Support for demo reports that don't have a fileDataUrl yet
+            alert("No PDF file attached to this submission yet. Accessing source metadata...");
+            setIsReviewMode(true);
+            return;
+        }
+        
+        const win = window.open();
+        if (win) {
+            win.location.href = item.fileDataUrl;
+            setIsReviewMode(true); // Open review tools once PDF is launched
+        } else {
+            alert("Please allow popups to view the report PDF.");
+        }
+    };
+
+    const updateStatus = async (item, newStatus) => {
+        if (!item?.firestoreId) return;
         try {
             const reportRef = doc(db, "reports", item.firestoreId);
             await updateDoc(reportRef, {
                 status: newStatus,
-                remarks: remarksText,
-                updatedAt: serverTimestamp()
+                hodRemarks: remarks,
+                updatedAt: serverTimestamp(),
+                processedBy: currentUser?.name || "Administrator"
             });
-
-            // Update local state
-            setItems(prev => prev.filter(x => x.firestoreId !== item.firestoreId));
-            setSelected(null);
+            setRemarks("");
         } catch (err) {
-            console.error("Error updating report status:", err);
-            alert("Failed to update status. Please try again.");
+            console.error("Update error:", err);
+            alert("Failed to update report status.");
         }
     };
 
-    const handleViewPDF = (item) => {
-        if (!item.fileDataUrl) return alert("PDF not found.");
-        const win = window.open();
-        if (win) win.location.href = item.fileDataUrl;
+    const getStatusForDept = (deptId) => {
+        const report = reports.find(r => r.department?.toLowerCase().includes(deptId.toLowerCase()) || r.deptId === deptId);
+        if (!report) return "Not submitted";
+        if (report.status === "pending") return "Pending review";
+        if (report.status === "approved") return "Approved";
+        return report.status;
     };
 
-    if (loading) return <div className={styles.loader}>⏳ Loading pending reports...</div>;
+    const getReportForDept = (deptId) => {
+        return reports.find(r => r.department?.toLowerCase().includes(deptId.toLowerCase()) || r.deptId === deptId);
+    };
+
+    const activeDept = filteredDepts.find(d => d.id === selectedId);
+    const activeReport = getReportForDept(selectedId);
+    
+    const stats = {
+        total: filteredDepts.length,
+        pending: filteredDepts.filter(d => getStatusForDept(d.id) === "Pending review").length,
+        approved: filteredDepts.filter(d => getStatusForDept(d.id) === "Approved").length
+    };
+
+    if (loading) return (
+        <div className={styles.loader}>
+            <div className={styles.spinner}></div>
+            <p>Initializing verification console...</p>
+        </div>
+    );
 
     return (
         <div className={styles.page}>
-            <header className={styles.header}>
-                <h1>Pending Approvals</h1>
-                <p>Review and approve reports submitted by your department faculty — {deptName}</p>
-            </header>
-
-            {items.length === 0 ? (
-                <div className={styles.emptyContainer}>
-                    <p className={styles.empty}>✅ All caught up! No pending reports right now.</p>
+            <aside className={styles.sidebar}>
+                <div className={styles.sidebarHeader}>
+                    <h2>Department</h2>
                 </div>
-            ) : (
-                <div className={styles.list}>
-                    {items.map((item) => (
-                        <div key={item.firestoreId} className={styles.card}>
-                            <div className={styles.top}>
-                                <div className={styles.info}>
-                                    <h3>{item.title || item.fileName || "Untitled Report"}</h3>
-                                    <p className={styles.subInfo}>
-                                        <span className={styles.author}>{item.submittedBy}</span> • {item.year || "2024"}
-                                    </p>
+                
+                <div className={styles.deptList}>
+                    {filteredDepts.map((dept) => {
+                        const status = getStatusForDept(dept.id);
+                        return (
+                            <div 
+                                key={dept.id} 
+                                className={`${styles.deptItem} ${selectedId === dept.id ? styles.deptItemActive : ""}`}
+                                onClick={() => {
+                                    setSelectedId(dept.id);
+                                    setIsReviewMode(false);
+                                }}
+                            >
+                                <div className={styles.deptAvatar} style={{ background: dept.color, color: dept.text }}>
+                                    {dept.short}
                                 </div>
-                                <button className={styles.viewBtn} onClick={() => handleViewPDF(item)}>View Report</button>
+                                <div className={styles.deptInfo}>
+                                    <h3>{dept.name}</h3>
+                                    <div className={styles.deptMeta}>
+                                        <span>{dept.faculty}</span>
+                                        <span className={`${styles.statusChip} ${
+                                            status === "Pending review" ? styles.statusPending : 
+                                            (status === "Approved" ? styles.statusApproved : styles.statusNotSubmitted)
+                                        }`}>
+                                            {status}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
+                        );
+                    })}
+                </div>
 
-                            <div className={styles.actions}>
-                                <button className={styles.approveBtn} onClick={() => updateStatus(item, "approved")}>
-                                    ✅ Approve
-                                </button>
-                                <button className={styles.rejectBtn} onClick={() => setSelected(item)}>
-                                    ❌ Needs Correction
-                                </button>
+                <div className={styles.scrollArrow}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"></path></svg>
+                </div>
+            </aside>
+
+            <main className={styles.contentArea}>
+                <header className={styles.contentHeader}>
+                    <div className={styles.headerTitle}>
+                        <h1>Annual Report Approvals</h1>
+                        <p>Each department - one report - review and approve or reject below</p>
+                    </div>
+                    <div className={styles.topStats}>
+                        <div className={styles.statMiniCard}>
+                            <div className={styles.miniIcon}>⏳</div>
+                            <div>
+                                <div className={styles.miniLabel}>Pending</div>
+                                <div className={styles.miniVal}>{stats.pending}</div>
                             </div>
                         </div>
-                    ))}
-                </div>
-            )}
-
-            {selected && (
-                <div className={styles.modalOverlay} onClick={() => setSelected(null)}>
-                    <div className={styles.modal} onClick={e => e.stopPropagation()}>
-                        <h3>Feedback for {selected.title || selected.fileName}</h3>
-                        <p className={styles.modalMeta}>Send this back to {selected.submittedBy} for corrections.</p>
-
-                        <textarea
-                            className={styles.textarea}
-                            placeholder="Provide specific details on what needs to be corrected..."
-                            value={remarks}
-                            onChange={(e) => setRemarks(e.target.value)}
-                        />
-
-                        <div className={styles.modalActions}>
-                            <button className={styles.closeBtn} onClick={() => setSelected(null)}>Cancel</button>
-                            <button
-                                className={styles.sendBackBtn}
-                                onClick={() => {
-                                    updateStatus(selected, "needs_correction", remarks);
-                                    setRemarks("");
-                                }}
-                                disabled={!remarks.trim()}
-                            >
-                                Send Back for Correction
-                            </button>
+                        <div className={styles.statMiniCard}>
+                            <div className={styles.miniIcon}>✅</div>
+                            <div>
+                                <div className={styles.miniLabel}>Approved</div>
+                                <div className={styles.miniVal}>{stats.approved}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
+                </header>
+
+                {activeDept && (
+                    <div className={styles.reportDetailPanel}>
+                        <div className={styles.detailHeader}>
+                            <div className={styles.detailDeptTitle}>
+                                <h2>{activeDept.name}</h2>
+                                <p>Submitted by {activeDept.faculty}</p>
+                            </div>
+                            <div className={styles.detailBadges}>
+                                <div className={styles.metaBadge}>📄 42 pages</div>
+                                <div className={styles.metaBadge}> Apr 18, 2025</div>
+                                <span className={`${styles.statusChip} ${
+                                    getStatusForDept(activeDept.id) === "Pending review" ? styles.statusPending : 
+                                    (status === "Approved" ? styles.statusApproved : styles.statusNotSubmitted)
+                                }`}>
+                                    {getStatusForDept(activeDept.id)}
+                                </span>
+                            </div>
+                        </div>
+
+                        {!isReviewMode ? (
+                            <div className={styles.reviewInvitation}>
+                                <div className={styles.invitationIcon}>📑</div>
+                                <h3>Ready to review the report?</h3>
+                                <p>Open the submitted PDF to start the verification process.</p>
+                                <button 
+                                    className={`${styles.btn} ${styles.btnPrimary} ${styles.btnReview}`}
+                                    onClick={() => handleViewPDF(activeReport)}
+                                >
+                                    🔍 Review PDF & Start Audit
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <div className={styles.sectionList}>
+                                    <div className={styles.sectionListHeader}>REPORT SECTIONS</div>
+                                    {SECTIONS.map((sec, i) => (
+                                        <div key={i} className={styles.sectionItem}>
+                                            <div className={styles.sectionDot}></div>
+                                            {sec}
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className={styles.remarksArea}>
+                                    <label>HoD Remarks <span>(if any)</span></label>
+                                    <textarea 
+                                        className={styles.textarea}
+                                        placeholder="Add your remarks or feedback for the Department..."
+                                        value={remarks}
+                                        onChange={(e) => setRemarks(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className={styles.actionGrid}>
+                                    <button 
+                                        className={`${styles.btn} ${styles.btnPrimary}`}
+                                        onClick={() => updateStatus(activeReport, "approved")}
+                                        disabled={!activeReport}
+                                    >
+                                        ✓ Approve Report
+                                    </button>
+                                    <button 
+                                        className={`${styles.btn} ${styles.btnPrimary}`}
+                                        onClick={() => updateStatus(activeReport, "rejected")}
+                                        disabled={!activeReport || !remarks.trim()}
+                                    >
+                                        ✕ Reject
+                                    </button>
+                                </div>
+                                <button 
+                                    className={`${styles.btn} ${styles.btnLarge}`}
+                                    onClick={() => updateStatus(activeReport, "needs_revision")}
+                                    disabled={!activeReport || !remarks.trim()}
+                                >
+                                    Request revision from department
+                                </button>
+                            </>
+                        )}
+
+                        <div className={styles.historySection}>
+                            <h4>APPROVAL HISTORY</h4>
+                            <div className={styles.timeline}>
+                                <div className={styles.timelineItem}>
+                                    <div className={styles.timelineDotWrapper}>
+                                        <div className={styles.timelineDot}></div>
+                                        <div className={styles.timelineLine}></div>
+                                    </div>
+                                    <div className={styles.timelineContent}>
+                                        <h5>Annual report submitted by {activeDept.faculty}</h5>
+                                        <p>Apr 18, 2025 · 11:30 AM</p>
+                                    </div>
+                                </div>
+                                <div className={styles.timelineItem}>
+                                    <div className={styles.timelineDotWrapper}>
+                                        <div className={`${styles.timelineDot} ${styles.timelineDotOngoing}`}></div>
+                                    </div>
+                                    <div className={styles.timelineContent}>
+                                        <h5>Awaiting HOD review</h5>
+                                        <p>Now</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                
+                {!activeDept && (
+                    <div className={styles.emptyArea}>
+                        Select a department to review its annual report
+                    </div>
+                )}
+            </main>
         </div>
     );
 }
