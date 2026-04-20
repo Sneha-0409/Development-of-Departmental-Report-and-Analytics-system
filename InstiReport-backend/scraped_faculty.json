@@ -1,0 +1,1784 @@
+{
+  "cse": [
+    {
+      "name": "Dr Anshu Chaturvedi",
+      "designation": "Professor",
+      "pubs": 28,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161657",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Rakesh Singh Jadon",
+      "designation": "Professor",
+      "pubs": 75,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/447236",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Abhilash Sonker",
+      "designation": "Associate Professor",
+      "pubs": 31,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161625",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mrs Poonam Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/121410",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Smita Parte",
+      "designation": "Assistant Professor",
+      "pubs": 25,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/128097",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Manojeet Roy",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/128650",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mr Lav Upadhyay",
+      "designation": "Assistant Professor",
+      "pubs": 9,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129882",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mrs Ruchi Jayaswal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/148333",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mr Amit Kumar Manjhvar",
+      "designation": "Assistant Professor",
+      "pubs": 36,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161613",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mr Sheo Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161617",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Rajni Ranjan Singh Makwana",
+      "designation": "Assistant Professor",
+      "pubs": 64,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161621",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mr Mahesh Parmar",
+      "designation": "Assistant Professor",
+      "pubs": 72,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161624",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Ms Jaimala Jha",
+      "designation": "Assistant Professor",
+      "pubs": 12,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161628",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mrs Khushboo Agarwal",
+      "designation": "Assistant Professor",
+      "pubs": 11,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161639",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Mr Prabhakar Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 13,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161675",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Ms Hemlata Arya",
+      "designation": "Assistant Professor",
+      "pubs": 13,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/200470",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Anjula Mehto",
+      "designation": "Assistant Professor",
+      "pubs": 8,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/228484",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Ranjeet Kumar Singh",
+      "designation": "Assistant Professor",
+      "pubs": 30,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/238418",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Rahul Dubey",
+      "designation": "Assistant Professor",
+      "pubs": 14,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/289765",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Kuldeep Narayan Tripathi",
+      "designation": "Assistant Professor",
+      "pubs": 31,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/300324",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Ms Aashi Singh Bhadouria",
+      "designation": "Assistant Professor",
+      "pubs": 20,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/313201",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Devesh Kumar Lal",
+      "designation": "Assistant Professor",
+      "pubs": 11,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/327008",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Prof Manisha Pathak",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/328220",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Rohit Agrawal",
+      "designation": "Assistant Professor",
+      "pubs": 53,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/336377",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Gagandeep Kaur",
+      "designation": "Assistant Professor",
+      "pubs": 27,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/338356",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Ms Kratika Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/338397",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Shradha Dubey",
+      "designation": "Assistant Professor",
+      "pubs": 7,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/348522",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Ms Sudipti Banerjee",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/350746",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Praphula Jain",
+      "designation": "Assistant Professor",
+      "pubs": 49,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/400363",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Amit Kumar Manjhavar",
+      "designation": "Assistant Professor",
+      "pubs": 40,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/485160",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr GANESH CHANDRA",
+      "designation": "Assistant Professor",
+      "pubs": 15,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/487716",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Nishant Jain",
+      "designation": "Assistant Professor",
+      "pubs": 15,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/546246",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr DEVANSHU TIWARI",
+      "designation": "Assistant Professor",
+      "pubs": 19,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/561320",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Shipra Shukla",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/601822",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr Kirti Raj Bhatele",
+      "designation": "Assistant Professor",
+      "pubs": 33,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/616056",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Dr SUCHITRA AGRAWAL",
+      "designation": "Assistant Professor",
+      "pubs": 8,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/642218",
+      "departmentId": "cse"
+    },
+    {
+      "name": "Prof Vandana Jaiswal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/684381",
+      "departmentId": "cse"
+    }
+  ],
+  "it": [
+    {
+      "name": "Dr Manish Dixit",
+      "designation": "Professor",
+      "pubs": 130,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129890",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Akhilesh Tiwari",
+      "designation": "Professor",
+      "pubs": 9,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/144692",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Rajendra Kumar Gupta",
+      "designation": "Professor",
+      "pubs": 29,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161615",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Sanjiv Sharma",
+      "designation": "Associate Professor",
+      "pubs": 4,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161623",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mr Rajeev Kumar Singh",
+      "designation": "Assistant Professor",
+      "pubs": 27,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/114062",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Vibha Tiwari",
+      "designation": "Assistant Professor",
+      "pubs": 32,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/126314",
+      "departmentId": "it"
+    },
+    {
+      "name": "Ms Pooja Agrawal",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129860",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mr Arun Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129899",
+      "departmentId": "it"
+    },
+    {
+      "name": "Prof Rati Bhan",
+      "designation": "Assistant Professor",
+      "pubs": 4,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161136",
+      "departmentId": "it"
+    },
+    {
+      "name": "Ms Sneha Garg",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161157",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mr Vikas Sejwar",
+      "designation": "Assistant Professor",
+      "pubs": 6,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161620",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mr Mir Shahnawaz Ahmad",
+      "designation": "Assistant Professor",
+      "pubs": 19,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161622",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mrs Neha Bhardwaj",
+      "designation": "Assistant Professor",
+      "pubs": 5,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161630",
+      "departmentId": "it"
+    },
+    {
+      "name": "Ms Parul Saxena",
+      "designation": "Assistant Professor",
+      "pubs": 10,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161632",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Saumil Maheshwari",
+      "designation": "Assistant Professor",
+      "pubs": 32,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/207356",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Priyanka Garg",
+      "designation": "Assistant Professor",
+      "pubs": 17,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/262826",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Nookala Venu",
+      "designation": "Assistant Professor",
+      "pubs": 230,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/291359",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Abhishek Dixit",
+      "designation": "Assistant Professor",
+      "pubs": 9,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/295779",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Aditya Dubey",
+      "designation": "Assistant Professor",
+      "pubs": 55,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/324896",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mr Vikas Sejwar",
+      "designation": "Assistant Professor",
+      "pubs": 9,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/337037",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Tej Singh",
+      "designation": "Assistant Professor",
+      "pubs": 14,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/337217",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Bhagat Singh Raghuwanshi",
+      "designation": "Assistant Professor",
+      "pubs": 21,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/337411",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Ashish Soni",
+      "designation": "Assistant Professor",
+      "pubs": 16,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/337808",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Kritika Bansal",
+      "designation": "Assistant Professor",
+      "pubs": 26,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/337820",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Pawan Dubey",
+      "designation": "Assistant Professor",
+      "pubs": 35,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/337822",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Vikram Rajpoot",
+      "designation": "Assistant Professor",
+      "pubs": 29,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/338107",
+      "departmentId": "it"
+    },
+    {
+      "name": "Prof Bulbul Agrawal",
+      "designation": "Assistant Professor",
+      "pubs": 5,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/338546",
+      "departmentId": "it"
+    },
+    {
+      "name": "Mrs Shubha Mishra",
+      "designation": "Assistant Professor",
+      "pubs": 14,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/339405",
+      "departmentId": "it"
+    },
+    {
+      "name": "Prof Akanchha Tiwari",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/339584",
+      "departmentId": "it"
+    },
+    {
+      "name": "Dr Neelam Arya",
+      "designation": "Assistant Professor",
+      "pubs": 12,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/485498",
+      "departmentId": "it"
+    },
+    {
+      "name": "Prof Surbhi Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/488247",
+      "departmentId": "it"
+    },
+    {
+      "name": "Prof Tanuja  Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/488252",
+      "departmentId": "it"
+    },
+    {
+      "name": "Shubham Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/488267",
+      "departmentId": "it"
+    }
+  ],
+  "ai": [
+    {
+      "name": "Dr Vandana Vikas Thakare",
+      "designation": "Professor",
+      "pubs": 220,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/118191",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Mr Awadhesh Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 3,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/127398",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Dr Jyoti Vimal",
+      "designation": "Assistant Professor",
+      "pubs": 45,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129778",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Mr Mir Shahnawaz Ahmad",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129836",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Mr Chayan Agrawal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139686",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Ms Arpita Singhal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149362",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Ms Shikha Jha",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/153152",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Ms Shweta Patel",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161162",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Mr Madhav Singh",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161651",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Ms Versha Sinha",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161671",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Mr Ankit Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161674",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Dr Abhishek Bhatt",
+      "designation": "Assistant Professor",
+      "pubs": 56,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/402572",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Dr Hardev SIngh Pal",
+      "designation": "Assistant Professor",
+      "pubs": 10,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/473966",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Mr Ramnaresh Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/484976",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Ms. Aditi Samadhiya",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/601476",
+      "departmentId": "ai"
+    },
+    {
+      "name": "Dr SATYAM OMAR",
+      "designation": "Assistant Professor",
+      "pubs": 8,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/615157",
+      "departmentId": "ai"
+    }
+  ],
+  "ee": [
+    {
+      "name": "Prof Manjaree Pandit",
+      "designation": "Dean",
+      "pubs": 167,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/150902",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Shishir Dixit",
+      "designation": "Professor",
+      "pubs": 90,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149428",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Prof Laxmi Srivastava",
+      "designation": "Professor",
+      "pubs": 277,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161629",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Arun Kumar Wadhwani",
+      "designation": "Professor",
+      "pubs": 78,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161636",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Sulochana Wadhwani",
+      "designation": "Professor",
+      "pubs": 117,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161642",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Shishir Dixit",
+      "designation": "Associate Professor",
+      "pubs": 88,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149614",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Vishal Chaudhary",
+      "designation": "Assistant Professor",
+      "pubs": 7,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/125986",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Vikram Saini",
+      "designation": "Assistant Professor",
+      "pubs": 14,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139168",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Mr Manoj Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139231",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Mr Sanjay Kulshreshtha",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139242",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Bhavna Rathore",
+      "designation": "Assistant Professor",
+      "pubs": 6,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139271",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Mr Kuldeep Swarnkar",
+      "designation": "Assistant Professor",
+      "pubs": 31,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149361",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Mr Saurabh Kumar Rajput",
+      "designation": "Assistant Professor",
+      "pubs": 45,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149366",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Himmat Singh",
+      "designation": "Assistant Professor",
+      "pubs": 12,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149439",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Ms Rinisha Bagaria",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/151777",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Mr Nipun Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161287",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Yashwant Sawle",
+      "designation": "Assistant Professor",
+      "pubs": 94,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/264218",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Kaushal Pratap Sengar",
+      "designation": "Assistant Professor",
+      "pubs": 27,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/286058",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Prof Rakesh Narvey",
+      "designation": "Assistant Professor",
+      "pubs": 4,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/290549",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Ankit Tiwari",
+      "designation": "Assistant Professor",
+      "pubs": 6,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/336291",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Ms Richa Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/409735",
+      "departmentId": "ee"
+    },
+    {
+      "name": "ANUJ LODHI",
+      "designation": "Assistant Professor",
+      "pubs": 5,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/488477",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Mrs Poonam singh",
+      "designation": "Assistant Professor",
+      "pubs": 13,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/488523",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Soumyajit Ghosh",
+      "designation": "Assistant Professor",
+      "pubs": 25,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/561833",
+      "departmentId": "ee"
+    },
+    {
+      "name": "Dr Aftab Ahmed Ansari",
+      "designation": "Assistant Professor",
+      "pubs": 30,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/561834",
+      "departmentId": "ee"
+    }
+  ],
+  "me": [
+    {
+      "name": "Dr Pratesh Jayaswal",
+      "designation": "Professor",
+      "pubs": 113,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/113542",
+      "departmentId": "me"
+    },
+    {
+      "name": "Prof Manish Kumar Sagar",
+      "designation": "Professor",
+      "pubs": 33,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/150318",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr M K Gaur",
+      "designation": "Professor",
+      "pubs": 145,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/153110",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Chandra Shekhar Malvi",
+      "designation": "Professor",
+      "pubs": 58,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161169",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Utkarsh Srivastava",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/118244",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Vedansh Chaturvedi",
+      "designation": "Assistant Professor",
+      "pubs": 50,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129796",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Vikash Agarwal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/129878",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Vinod Mahor",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/131597",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Neeraj Mishra",
+      "designation": "Assistant Professor",
+      "pubs": 10,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/131598",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Shubham Shrivastava",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139324",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Amit Aherwar",
+      "designation": "Assistant Professor",
+      "pubs": 95,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/150299",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Ravi Kant Ranjan",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/150307",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Bhupendra Pandey",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/153184",
+      "departmentId": "me"
+    },
+    {
+      "name": "Prof Gyanesh Sharan",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/153268",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Sharad Agrawal",
+      "designation": "Assistant Professor",
+      "pubs": 23,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/153281",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Vaibhav Shivhare",
+      "designation": "Assistant Professor",
+      "pubs": 28,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161163",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Ajay Rajput",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161166",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Vaibhav Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161168",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Narendra Singh Sikarwar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161170",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Krishan Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161360",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Subhas Chand Pal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161372",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Rajendra Prasad Kori",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161652",
+      "departmentId": "me"
+    },
+    {
+      "name": "Mr Kaustubh Khot",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161656",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Nitin Upadhyay",
+      "designation": "Assistant Professor",
+      "pubs": 21,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/207634",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Surendra Kumar Chourasiya",
+      "designation": "Assistant Professor",
+      "pubs": 16,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/208163",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Gavendra Norkey",
+      "designation": "Assistant Professor",
+      "pubs": 15,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/213407",
+      "departmentId": "me"
+    },
+    {
+      "name": "Dr Ashish Agrawal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/230158",
+      "departmentId": "me"
+    }
+  ],
+  "civil": [
+    {
+      "name": "Dr Sanjay Tiwari",
+      "designation": "Professor",
+      "pubs": 22,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/131100",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Mr A K Saxena",
+      "designation": "Associate Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161634",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Prof Aditya Kumar Agarwal",
+      "designation": "Assistant Professor",
+      "pubs": 31,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/130776",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Ayyanaar S",
+      "designation": "Assistant Professor",
+      "pubs": 27,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/131071",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Mr Shivam Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161640",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Prof Gautam Bhadoriya",
+      "designation": "Assistant Professor",
+      "pubs": 25,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161647",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Jayvant Choudhary",
+      "designation": "Assistant Professor",
+      "pubs": 69,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/213918",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Abhilash Shukla",
+      "designation": "Assistant Professor",
+      "pubs": 20,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/213919",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Hemant Shrivastava",
+      "designation": "Assistant Professor",
+      "pubs": 9,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/215209",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Chayan Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 25,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/344589",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Mr Akash Gaur",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/347126",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Reema Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 10,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/682762",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Dr Sarvesh Kumar Jain",
+      "designation": "Former Dean",
+      "pubs": 55,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/442222",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Ms Ambika Priyadarshini  Mishra",
+      "designation": "Adhoc Faculty",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/601059",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Mr Gyanendra Shakya",
+      "designation": "Adhoc Faculty",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/601126",
+      "departmentId": "civil"
+    },
+    {
+      "name": "Mr. Sachin Singh",
+      "designation": "Adhoc Faculty",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/602148",
+      "departmentId": "civil"
+    }
+  ],
+  "ece": [
+    {
+      "name": "Dr Laxmi Shrivastava",
+      "designation": "Professor",
+      "pubs": 112,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/118172",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Karuna Markam",
+      "designation": "Associate Professor",
+      "pubs": 44,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/118271",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Ravindra Pratap Narwaria",
+      "designation": "Associate Professor",
+      "pubs": 65,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/127218",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Vijay Bhuria",
+      "designation": "Associate Professor",
+      "pubs": 74,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139209",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Prof Madhav Singh",
+      "designation": "Assistant Professor",
+      "pubs": 24,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/118176",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Prof Shambhu Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/118178",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Rakesh Naik",
+      "designation": "Assistant Professor",
+      "pubs": 4,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/126186",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Hemant Choubey",
+      "designation": "Assistant Professor",
+      "pubs": 16,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/126307",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Deep Kishore Parsediya",
+      "designation": "Assistant Professor",
+      "pubs": 21,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/126553",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Saurabh Singh Raghuvanshi",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/127396",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Vikas Mahor",
+      "designation": "Assistant Professor",
+      "pubs": 54,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/127400",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Santosh Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 1,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/127402",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Praveen Kumar",
+      "designation": "Assistant Professor",
+      "pubs": 3,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/127823",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Rahul Sagwal",
+      "designation": "Assistant Professor",
+      "pubs": 13,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/139136",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Rahul Dubey",
+      "designation": "Assistant Professor",
+      "pubs": 45,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149356",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Prof Pooja Sahoo",
+      "designation": "Assistant Professor",
+      "pubs": 27,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149659",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Abhilasha Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/181874",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Sandeep Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 103,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/208650",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Arun Singh",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/210872",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Shubhi Kansal",
+      "designation": "Assistant Professor",
+      "pubs": 11,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/239222",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Varun Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 34,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/240956",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Dablu kumar",
+      "designation": "Assistant Professor",
+      "pubs": 17,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/563014",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Dr Kumar Gaurav",
+      "designation": "Assistant Professor",
+      "pubs": 15,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/683181",
+      "departmentId": "ece"
+    },
+    {
+      "name": "Mr Pavitra Pathak",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/683204",
+      "departmentId": "ece"
+    }
+  ],
+  "che": [
+    {
+      "name": "Prof Swati Gupta",
+      "designation": "Assistant Professor",
+      "pubs": 6,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/131792",
+      "departmentId": "che"
+    },
+    {
+      "name": "Dr Kulbhushan Samal",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149421",
+      "departmentId": "che"
+    },
+    {
+      "name": "Dr Rakesh Kumar Dubey",
+      "designation": "Assistant Professor",
+      "pubs": 4,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149422",
+      "departmentId": "che"
+    },
+    {
+      "name": "Dr Sachin Rameshrao Geed",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149429",
+      "departmentId": "che"
+    },
+    {
+      "name": "Prof Anish P Jacob",
+      "designation": "Assistant Professor",
+      "pubs": 8,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149640",
+      "departmentId": "che"
+    },
+    {
+      "name": "Dr Pratap Singh",
+      "designation": "Assistant Professor",
+      "pubs": 2,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/153154",
+      "departmentId": "che"
+    },
+    {
+      "name": "Ms Sulochana Nagar",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/161361",
+      "departmentId": "che"
+    },
+    {
+      "name": "Dr Shourabh Singh Raghuwanshi",
+      "designation": "Assistant Professor",
+      "pubs": 22,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/207480",
+      "departmentId": "che"
+    },
+    {
+      "name": "Ms Shivangi Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 16,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/292778",
+      "departmentId": "che"
+    }
+  ],
+  "emc": [
+    {
+      "name": "Dr Jitendra Kumar",
+      "designation": "Associate Professor",
+      "pubs": 34,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149549",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Prof Angad Singh Ojha",
+      "designation": "Assistant Professor",
+      "pubs": 3,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/149385",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Santosh Kumar Bharadwaj",
+      "designation": "Assistant Professor",
+      "pubs": 22,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/200431",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Minakshi Poonia Dahiya",
+      "designation": "Assistant Professor",
+      "pubs": 20,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/239801",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Divya Chaturvedi",
+      "designation": "Assistant Professor",
+      "pubs": 9,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/239802",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Kuldeep Kumar Tiwari",
+      "designation": "Assistant Professor",
+      "pubs": 13,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/456354",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Vijay Shankar  Sharma",
+      "designation": "Assistant Professor",
+      "pubs": 17,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/503369",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Barkha Tiwari",
+      "designation": "Assistant Professor",
+      "pubs": 0,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/548832",
+      "departmentId": "emc"
+    },
+    {
+      "name": "Dr Nidhi Humnekar",
+      "designation": "Assistant Professor",
+      "pubs": 6,
+      "citations": 0,
+      "patents": 0,
+      "profileLink": "https://mitsgwalior.irins.org/profile/617173",
+      "departmentId": "emc"
+    }
+  ]
+}
