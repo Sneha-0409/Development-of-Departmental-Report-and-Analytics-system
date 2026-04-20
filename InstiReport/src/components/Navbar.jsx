@@ -132,6 +132,7 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
                             </span>
                         </div>
                     </div>
+                    <button className={styles.logoutBtn} onClick={handleLogout} style={{ marginTop: '1rem', width: '100%' }}>Logout</button>
                 </div>
             </nav>
         );

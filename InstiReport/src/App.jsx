@@ -9,6 +9,7 @@ import ReportsPage from "./pages/Reports/ReportsPage";
 import ReportStructurePage from "./pages/Reports/ReportStructurePage";
 import SubmissionPage from "./pages/Reports/SubmissionPage";
 import DraftsPage from "./pages/Reports/DraftsPage";
+import StudentProjectPage from "./pages/Projects/StudentProjectPage";
 import AnalyticsPage from "./pages/Analytics/AnalyticsPage";
 
 
@@ -94,12 +95,20 @@ function App() {
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "My Portfolio": return <PortfolioPage currentUser={currentUser} />;
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
-          case "Project": return <SubmissionPage currentUser={currentUser} />;
+          case "Project": return <StudentProjectPage currentUser={currentUser} />;
           case "Developer": return <DeveloperPage />;
           case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
           default: return <StudentDashboard currentUser={currentUser} navigate={navigate} />;
         }
       case "faculty":
+        switch (currentPage) {
+          case "Project": return <StudentProjectPage currentUser={currentUser} />;
+          case "Analytics": return <AnalyticsPage navigate={navigate} />;
+          case "Achievements": return <AchievementsPage currentUser={currentUser} />;
+          case "Developer": return <DeveloperPage />;
+          case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
+          default: return <FacultyDashboard currentUser={currentUser} navigate={navigate} />;
+        }
       case "project-coordinator":
         switch (currentPage) {
           case "Project": return <SubmissionPage currentUser={currentUser} />;
