@@ -17,8 +17,15 @@ const Icons = {
     ),
     Settings: () => (
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H15a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    ),
+    Achievements: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+    ),
+    Developer: () => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
     )
 };
+
 
 const LogoIcon = () => (
     <img
@@ -38,19 +45,23 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
         window.location.href = "/login";
     };
 
-    // RENDER HOD PORTAL SIDEBAR
-    if (role === "hod") {
-        const renderHODLink = (name, iconName, badge = null) => {
+    // RENDER HIGH-FIDELITY PORTAL SIDEBAR (For HOD & Faculty/Report Maker)
+    if (role === "hod" || role === "report-maker") {
+        const portalTitle = role === "hod" ? "HOD PORTAL" : "FACULTY PORTAL";
+        
+        const renderPortalLink = (name, iconName, badge = null, customLabel = null) => {
             const Icon = Icons[iconName];
-            const isActive = currentPage === name || (name === "Dashboard" && currentPage === "HOD Dashboard");
+            const displayName = customLabel || name;
+            const isActive = currentPage === name || (name === "Dashboard" && currentPage.includes("Dashboard"));
             return (
                 <a
                     href="#"
-                    onClick={(e) => { e.preventDefault(); navigate(name === "Dashboard" ? "HOD Dashboard" : name); }}
+                    key={name}
+                    onClick={(e) => { e.preventDefault(); navigate(name === "Dashboard" && role === "hod" ? "HOD Dashboard" : name); }}
                     className={`${styles.navLinkHOD} ${isActive ? styles.activeHOD : ""}`}
                 >
                     <span className={styles.iconHOD}>{Icon && <Icon />}</span>
-                    <span>{name}</span>
+                    <span>{displayName}</span>
                     {badge && <span className={styles.badgeHOD}>{badge}</span>}
                 </a>
             );
@@ -62,34 +73,63 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
                     <div className={styles.logoIconCircleHOD}><LogoIcon /></div>
                     <div className={styles.brandInfoHOD}>
                         <span className={styles.brandNameHOD}>InstiReport</span>
-                        <span className={styles.portalTitleHOD}>HOD PORTAL</span>
+                        <span className={styles.portalTitleHOD}>{portalTitle}</span>
                     </div>
                 </div>
 
-                <div className={styles.navSectionHOD}>
-                    <div className={styles.sectionLabelHOD}>OVERVIEW</div>
-                    <div className={styles.navLinksHOD}>{renderHODLink("Dashboard", "Dashboard")}</div>
-                </div>
+                {role === "hod" ? (
+                    <>
+                        <div className={styles.navSectionHOD}>
+                            <div className={styles.sectionLabelHOD}>OVERVIEW</div>
+                            <div className={styles.navLinksHOD}>
+                                {renderPortalLink("Dashboard", "Dashboard")}
+                            </div>
+                        </div>
+                        <div className={styles.navSectionHOD}>
+                            <div className={styles.sectionLabelHOD}>REPORTS</div>
+                            <div className={styles.navLinksHOD}>
+                                {renderPortalLink("Approvals", "Approvals", "3")}
+                                {renderPortalLink("Analytics", "Analytics")}
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className={styles.navSectionHOD}>
+                            <div className={styles.sectionLabelHOD}>MAIN</div>
+                            <div className={styles.navLinksHOD}>
+                                {renderPortalLink("Dashboard", "Dashboard")}
+                                {renderPortalLink("Reports", "Reports", null, "My Reports")}
+                                {renderPortalLink("Submissions", "Reports", null, "Submissions")}
+                                {renderPortalLink("Drafts", "Reports", null, "Drafts")}
+                            </div>
+                        </div>
+                        <div className={styles.navSectionHOD}>
+                            <div className={styles.sectionLabelHOD}>RECORDS</div>
+                            <div className={styles.navLinksHOD}>
+                                {renderPortalLink("Achievements", "Achievements")}
+                                {renderPortalLink("Analytics", "Analytics")}
+                            </div>
+                        </div>
+                    </>
+                )}
 
                 <div className={styles.navSectionHOD}>
-                    <div className={styles.sectionLabelHOD}>REPORTS</div>
+                    <div className={styles.sectionLabelHOD}>SYSTEM</div>
                     <div className={styles.navLinksHOD}>
-                        {renderHODLink("Approvals", "Approvals", "3")}
-                        {renderHODLink("Analytics", "Analytics")}
+                        {renderPortalLink("Developer", "Developer")}
+                        {renderPortalLink("Settings", "Settings")}
                     </div>
-                </div>
-
-                <div className={styles.navSectionHOD}>
-                    <div className={styles.sectionLabelHOD}>SETTINGS</div>
-                    <div className={styles.navLinksHOD}>{renderHODLink("Settings", "Settings")}</div>
                 </div>
 
                 <div className={styles.userProfileHOD}>
                     <div className={styles.profileCardHOD}>
-                        <div className={styles.avatarHOD} style={{ background: '#6366f1' }}>{initials}</div>
+                        <div className={styles.avatarHOD} style={{ background: role === "hod" ? '#6366f1' : '#6366f1' }}>{initials}</div>
                         <div className={styles.profileInfoHOD}>
                             <span className={styles.profileNameHOD}>{currentUser?.name || "Dr. Sneha G."}</span>
-                            <span className={styles.profileRoleHOD}>Head of Dept — {currentUser?.department?.substring(0, 2).toUpperCase() || 'CS'}</span>
+                            <span className={styles.profileRoleHOD}>
+                                {role === "hod" ? `Head of Dept — ${currentUser?.department?.substring(0, 2).toUpperCase() || 'CS'}` : (currentUser?.department || "Computer Science")}
+                            </span>
                         </div>
                     </div>
                 </div>

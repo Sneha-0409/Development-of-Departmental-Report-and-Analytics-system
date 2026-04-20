@@ -119,22 +119,7 @@
 .statusApproved { background: #f0fdf4; color: #16a34a; }
 .statusNotSubmitted { background: #f1f5f9; color: #64748b; }
 
-.scrollArrow {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #64748b;
-}
+
 
 /* Content Area */
 .contentArea {

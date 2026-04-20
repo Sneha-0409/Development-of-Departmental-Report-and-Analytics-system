@@ -96,23 +96,27 @@ export default function ProfilePage({ currentUser, setCurrentUser }) {
                                 <div className={styles.value}>{currentUser?.email || "user@instireport.edu"}</div>
                             </div>
 
-                            <div className={styles.detailBox}>
-                                <span className={styles.label}>Roll No.</span>
-                                {isEditing ? (
-                                    <input className={styles.editInput} value={editModeData.rollNo} onChange={e => setEditModeData({...editModeData, rollNo: e.target.value})} />
-                                ) : (
-                                    <div className={styles.value}>{currentUser?.rollNo || "09XXXXX"}</div>
-                                )}
-                            </div>
+                            {currentUser?.role?.toLowerCase() === 'student' && (
+                                <>
+                                    <div className={styles.detailBox}>
+                                        <span className={styles.label}>Roll No.</span>
+                                        {isEditing ? (
+                                            <input className={styles.editInput} value={editModeData.rollNo} onChange={e => setEditModeData({...editModeData, rollNo: e.target.value})} />
+                                        ) : (
+                                            <div className={styles.value}>{currentUser?.rollNo || "09XXXXX"}</div>
+                                        )}
+                                    </div>
 
-                            <div className={styles.detailBox}>
-                                <span className={styles.label}>Semester</span>
-                                {isEditing ? (
-                                    <input className={styles.editInput} value={editModeData.semester} onChange={e => setEditModeData({...editModeData, semester: e.target.value})} />
-                                ) : (
-                                    <div className={styles.value}>{currentUser?.semester || "5th Semester"}</div>
-                                )}
-                            </div>
+                                    <div className={styles.detailBox}>
+                                        <span className={styles.label}>Semester</span>
+                                        {isEditing ? (
+                                            <input className={styles.editInput} value={editModeData.semester} onChange={e => setEditModeData({...editModeData, semester: e.target.value})} />
+                                        ) : (
+                                            <div className={styles.value}>{currentUser?.semester || "5th Semester"}</div>
+                                        )}
+                                    </div>
+                                </>
+                            )}
 
                             <div className={styles.detailBox}>
                                 <span className={styles.label}>Branch</span>

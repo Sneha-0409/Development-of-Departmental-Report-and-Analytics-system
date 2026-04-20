@@ -8,6 +8,7 @@ import DeveloperPage from "./pages/Developer/DeveloperPage";
 import ReportsPage from "./pages/Reports/ReportsPage";
 import ReportStructurePage from "./pages/Reports/ReportStructurePage";
 import SubmissionPage from "./pages/Reports/SubmissionPage";
+import DraftsPage from "./pages/Reports/DraftsPage";
 import AnalyticsPage from "./pages/Analytics/AnalyticsPage";
 
 
@@ -16,6 +17,7 @@ import FacultyDashboard from "./pages/Dashboards/FacultyDashboard";
 import StudentDashboard from "./pages/Dashboards/StudentDashboard";
 import ApprovalsPage from "./pages/Reports/ApprovalsPage";
 import AchievementsPage from "./pages/Dashboards/AchievementsPage";
+import ReportMakerDashboard from "./pages/Dashboards/ReportMakerDashboard";
 
 // Back button
 import BackButton from "./components/BackButton";
@@ -120,11 +122,15 @@ function App() {
         }
       case "report-maker":
         switch (currentPage) {
-          case "Reports": return <ReportsPage navigate={navigate} setSelectedDept={setSelectedDept} />;
+          case "Reports": return <ReportsPage navigate={navigate} onOpenDepartment={setSelectedDept} />;
+          case "Submissions": return <SubmissionPage currentUser={currentUser} navigate={navigate} />;
+          case "Drafts": return <DraftsPage currentUser={currentUser} navigate={navigate} onOpenDepartment={setSelectedDept} />;
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "Achievements": return <AchievementsPage currentUser={currentUser} />;
           case "Profile": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
-          default: return <Dashboard handleLogout={handleLogout} currentUser={currentUser} navigate={navigate} />;
+          case "Settings": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
+          case "ReportStructure": return <ReportStructurePage dept={selectedDept} navigate={navigate} currentUser={currentUser} />;
+          default: return <ReportMakerDashboard currentUser={currentUser} navigate={navigate} />;
         }
       default:
         if (currentPage === "Profile") return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;
@@ -152,19 +158,19 @@ function App() {
           />
 
           <div className="main-content">
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
-              padding: currentPage === "Dashboard" ? '1rem 3rem 0 3rem' : '2.3rem 3rem 1.5rem 3rem',
-              borderBottom: currentPage === "Dashboard" ? 'none' : '1px solid var(--border)',
-              marginBottom: currentPage === "Dashboard" ? '0' : '2rem'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
-                  <BackButton onBack={handleBack} />
-                )}
-                {currentPage !== "Dashboard" && (
+            {currentPage !== "Dashboard" && !["HOD Dashboard", "Reports", "ReportStructure", "Approvals", "Analytics", "Submissions", "Admin Dashboard", "Profile"].includes(currentPage) && (
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'baseline',
+                padding: '2.3rem 3rem 1.5rem 3rem',
+                borderBottom: '1px solid var(--border)',
+                marginBottom: '2rem'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                  {!hideBackOn.includes(currentPage) && historyStack.length > 0 && (
+                    <BackButton onBack={handleBack} />
+                  )}
                   <h1 style={{
                     fontSize: '1.8rem',
                     fontWeight: '800',
@@ -176,15 +182,21 @@ function App() {
                   }}>
                     {currentPage}
                   </h1>
-                )}
-              </div>
+                </div>
 
-              <div>
-                {currentPage !== "Profile" && (
-                  <TopNav currentUser={currentUser} navigate={navigate} />
-                )}
+                <div>
+                  {currentPage !== "Profile" && (
+                    <TopNav currentUser={currentUser} navigate={navigate} />
+                  )}
+                </div>
               </div>
-            </div>
+            )}
+
+            {currentPage === "Dashboard" && (
+                <div style={{ padding: '1rem 3rem 0 3rem' }}>
+                    <TopNav currentUser={currentUser} navigate={navigate} />
+                </div>
+            )}
 
             {renderPage()}
           </div>

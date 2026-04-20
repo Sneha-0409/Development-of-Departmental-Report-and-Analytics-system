@@ -271,1788 +271,202 @@ const activitiesMock = {
    2) Faculty Research & Workload 
 ====================================================== */
 const facultyMock = {
-  "cse": [
-    {
-      "name": "Dr Rakesh Singh Jadon",
-      "pubs": 75,
-      "citations": 0,
-      "patents": 0,
-      "grants": 6,
-      "students": 32,
-      "service": "Professor"
-    },
-    {
-      "name": "Mr Mahesh Parmar",
-      "pubs": 72,
-      "citations": 0,
-      "patents": 0,
-      "grants": 6,
-      "students": 39,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Rajni Ranjan Singh Makwana",
-      "pubs": 64,
-      "citations": 0,
-      "patents": 0,
-      "grants": 5,
-      "students": 36,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Rohit Agrawal",
-      "pubs": 53,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 26,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Praphula Jain",
-      "pubs": 49,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 31,
-      "service": "Professor"
-    },
-    {
-      "name": "Amit Kumar Manjhavar",
-      "pubs": 40,
-      "citations": 0,
-      "patents": 0,
-      "grants": 3,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Amit Kumar Manjhvar",
-      "pubs": 36,
-      "citations": 0,
-      "patents": 0,
-      "grants": 3,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kirti Raj Bhatele",
-      "pubs": 33,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 39,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Abhilash Sonker",
-      "pubs": 31,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kuldeep Narayan Tripathi",
-      "pubs": 31,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Ranjeet Kumar Singh",
-      "pubs": 30,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Anshu Chaturvedi",
-      "pubs": 28,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Gagandeep Kaur",
-      "pubs": 27,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Smita Parte",
-      "pubs": 25,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Aashi Singh Bhadouria",
-      "pubs": 20,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr DEVANSHU TIWARI",
-      "pubs": 19,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr GANESH CHANDRA",
-      "pubs": 15,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Nishant Jain",
-      "pubs": 15,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Rahul Dubey",
-      "pubs": 14,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 35,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Prabhakar Sharma",
-      "pubs": 13,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Hemlata Arya",
-      "pubs": 13,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Jaimala Jha",
-      "pubs": 12,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mrs Khushboo Agarwal",
-      "pubs": 11,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Devesh Kumar Lal",
-      "pubs": 11,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Lav Upadhyay",
-      "pubs": 9,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 26,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Anjula Mehto",
-      "pubs": 8,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr SUCHITRA AGRAWAL",
-      "pubs": 8,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 23,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Shradha Dubey",
-      "pubs": 7,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Manisha Pathak",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Kratika Sharma",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mrs Poonam Sharma",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Manojeet Roy",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mrs Ruchi Jayaswal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Sheo Kumar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Sudipti Banerjee",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Shipra Shukla",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 25,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Vandana Jaiswal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    }
+  cse: [
+    { name: "Dr. Manish Dixit", pubs: 18, grants: 2, students: 42, service: 4 }, // Not verified on IRINS yet
+    { name: "Dr. R. S. Jadon", pubs: 72, grants: 3, students: 38, service: 3 },
+    { name: "Dr. R. K. Gupta", pubs: 14, grants: 2, students: 40, service: 4 },
+    { name: "Dr. Anshu Chaturvedi", pubs: 28, grants: 1, students: 36, service: 3 },
+    { name: "Khushboo Agarwal", pubs: 11, grants: 0, students: 30, service: 2 },
+    { name: "Jaimala Jha", pubs: 12, grants: 1, students: 32, service: 3 },
+    { name: "Mahesh Parmar", pubs: 72, grants: 1, students: 28, service: 2 },
+    { name: "Dr. Parul Saxena", pubs: 16, grants: 2, students: 41, service: 4 },
+    { name: "Amit Kumar Manjhvar", pubs: 40, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Ranjeet Kumar Singh", pubs: 30, grants: 3, students: 43, service: 4 },
+    { name: "Dr. Smita Parte", pubs: 25, grants: 2, students: 37, service: 3 },
+    { name: "Dr. Dheeraj Kumar Dixit", pubs: 13, grants: 2, students: 35, service: 5 },
+    { name: "Dr. Praphula Jain", pubs: 49, grants: 1, students: 39, service: 3 },
+    { name: "Dr. Rahul Dubey", pubs: 13, grants: 2, students: 33, service: 3 },
+    { name: "Dr. Devesh Kumar Lal", pubs: 11, grants: 3, students: 44, service: 4 },
+    { name: "Dr. Gagandeep Kaur", pubs: 27, grants: 1, students: 37, service: 3 },
+    { name: "Dr. Rohit Agrawal", pubs: 52, grants: 2, students: 40, service: 4 },
+    { name: "Dr. Kuldeep Narayan Tripathi", pubs: 31, grants: 1, students: 32, service: 2 },
+    { name: "Dr. Nishant Jain", pubs: 15, grants: 2, students: 35, service: 3 },
+    { name: "Vivek Sharma", pubs: 9, grants: 1, students: 31, service: 3 },
+    { name: "Dr. Kirti Raj Bhatele", pubs: 25, grants: 2, students: 34, service: 3 },
+    { name: "Dr. Ashish Tomar", pubs: 14, grants: 1, students: 38, service: 4 },
+    { name: "Dr. Saurabh Agarwal", pubs: 16, grants: 2, students: 41, service: 3 },
+    { name: "Dr. Manojeet Roy", pubs: 12, grants: 1, students: 36, service: 3 },
+    { name: "Jigyasa Mishra", pubs: 8, grants: 1, students: 30, service: 2 },
+    { name: "Manisha Pathak", pubs: 2, grants: 1, students: 29, service: 3 },
+    { name: "Mona Pandey Sharma", pubs: 7, grants: 0, students: 27, service: 2 },
   ],
-  "it": [
-    {
-      "name": "Dr Nookala Venu",
-      "pubs": 230,
-      "citations": 0,
-      "patents": 0,
-      "grants": 19,
-      "students": 30,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Manish Dixit",
-      "pubs": 130,
-      "citations": 0,
-      "patents": 0,
-      "grants": 10,
-      "students": 38,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Aditya Dubey",
-      "pubs": 55,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 38,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Pawan Dubey",
-      "pubs": 35,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Vibha Tiwari",
-      "pubs": 32,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Saumil Maheshwari",
-      "pubs": 32,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Rajendra Kumar Gupta",
-      "pubs": 29,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 39,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Vikram Rajpoot",
-      "pubs": 29,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Rajeev Kumar Singh",
-      "pubs": 27,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kritika Bansal",
-      "pubs": 26,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Bhagat Singh Raghuwanshi",
-      "pubs": 21,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 23,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Mir Shahnawaz Ahmad",
-      "pubs": 19,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Priyanka Garg",
-      "pubs": 17,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Ashish Soni",
-      "pubs": 16,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Tej Singh",
-      "pubs": 14,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mrs Shubha Mishra",
-      "pubs": 14,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Neelam Arya",
-      "pubs": 12,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Parul Saxena",
-      "pubs": 10,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 26,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Akhilesh Tiwari",
-      "pubs": 9,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Abhishek Dixit",
-      "pubs": 9,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Vikas Sejwar",
-      "pubs": 9,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Vikas Sejwar",
-      "pubs": 6,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mrs Neha Bhardwaj",
-      "pubs": 5,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Bulbul Agrawal",
-      "pubs": 5,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 35,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Sanjiv Sharma",
-      "pubs": 4,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Rati Bhan",
-      "pubs": 4,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Pooja Agrawal",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 25,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Arun Kumar",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Shubham Sharma",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Akanchha Tiwari",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Surbhi Gupta",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Sneha Garg",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Tanuja  Sharma",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 26,
-      "service": "Asst. Professor"
-    }
+  ece: [
+    { name: "Dr. P. K. Singhal", pubs: 14, grants: 2, students: 48, service: 4 },
+    { name: "Dr. Vandana Vikas Thakare", pubs: 12, grants: 2, students: 45, service: 4 },
+    { name: "Dr. Karuna Markam", pubs: 10, grants: 1, students: 43, service: 3 },
+    { name: "Prof. Pooja Sahoo", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Nidhi Saxena", pubs: 11, grants: 1, students: 44, service: 3 },
+    { name: "Prof. D. K. Parsediya", pubs: 8, grants: 0, students: 40, service: 2 },
+    { name: "Dr. Rahul Dubey", pubs: 12, grants: 1, students: 45, service: 3 },
+    { name: "Dr. Khushboo Punia", pubs: 10, grants: 1, students: 42, service: 3 },
+    { name: "Dr. Deepak Batham", pubs: 11, grants: 1, students: 44, service: 3 },
+    { name: "Dr. Varun Sharma", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Shubhi Kansal", pubs: 8, grants: 0, students: 39, service: 2 },
+    { name: "Dr. Himanshu Singh", pubs: 10, grants: 1, students: 43, service: 3 },
+    { name: "Dr. Yogesh Kumar", pubs: 11, grants: 1, students: 44, service: 3 },
   ],
-  "ai": [
-    {
-      "name": "Dr Vandana Vikas Thakare",
-      "pubs": 220,
-      "citations": 0,
-      "patents": 0,
-      "grants": 18,
-      "students": 37,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Abhishek Bhatt",
-      "pubs": 56,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 27,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Jyoti Vimal",
-      "pubs": 45,
-      "citations": 0,
-      "patents": 0,
-      "grants": 3,
-      "students": 27,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Hardev SIngh Pal",
-      "pubs": 10,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr SATYAM OMAR",
-      "pubs": 8,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Awadhesh Gupta",
-      "pubs": 3,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Ramnaresh Sharma",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Mir Shahnawaz Ahmad",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Chayan Agrawal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 25,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Arpita Singhal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Shikha Jha",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 39,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Shweta Patel",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Madhav Singh",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Versha Sinha",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Ankit Kumar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms. Aditi Samadhiya",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 35,
-      "service": "Asst. Professor"
-    }
+  me: [
+    { name: "Dr. Pratesh Jayaswal", pubs: 13, grants: 2, students: 50, service: 5 },
+    { name: "Dr. Chandra Shekhar Malvi", pubs: 11, grants: 1, students: 47, service: 4 },
+    { name: "Dr. Manoj Kumar Gaur", pubs: 12, grants: 2, students: 49, service: 4 },
+    { name: "Dr. Manish Kumar Sagar", pubs: 10, grants: 1, students: 44, service: 3 },
+    { name: "Rajendra Prasad Kori", pubs: 7, grants: 0, students: 40, service: 3 },
+    { name: "Vedansh Chaturvedi", pubs: 9, grants: 1, students: 42, service: 4 },
+    { name: "Dr. Jyoti Vimal", pubs: 12, grants: 2, students: 48, service: 4 },
+    { name: "Sharad Agarwal", pubs: 8, grants: 1, students: 39, service: 3 },
+    { name: "Vaibhav Shivhare", pubs: 7, grants: 0, students: 38, service: 2 },
+    { name: "Dr. Amit Aherwar", pubs: 14, grants: 3, students: 52, service: 5 },
+    { name: "Bhupendra Kumar Pandey", pubs: 9, grants: 1, students: 45, service: 4 },
+    { name: "Dr. Nitin Upadhyay", pubs: 10, grants: 1, students: 47, service: 4 },
+    { name: "Dr. Surendra Kumar Chourasiya", pubs: 11, grants: 2, students: 50, service: 5 },
+    { name: "Dr. Gavendra Norkey", pubs: 8, grants: 1, students: 41, service: 3 },
   ],
-  "ee": [
-    {
-      "name": "Prof Laxmi Srivastava",
-      "pubs": 277,
-      "citations": 0,
-      "patents": 0,
-      "grants": 23,
-      "students": 31,
-      "service": "Professor"
-    },
-    {
-      "name": "Prof Manjaree Pandit",
-      "pubs": 167,
-      "citations": 0,
-      "patents": 0,
-      "grants": 13,
-      "students": 37,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Sulochana Wadhwani",
-      "pubs": 117,
-      "citations": 0,
-      "patents": 0,
-      "grants": 9,
-      "students": 33,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Yashwant Sawle",
-      "pubs": 94,
-      "citations": 0,
-      "patents": 0,
-      "grants": 7,
-      "students": 29,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Shishir Dixit",
-      "pubs": 90,
-      "citations": 0,
-      "patents": 0,
-      "grants": 7,
-      "students": 36,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Shishir Dixit",
-      "pubs": 88,
-      "citations": 0,
-      "patents": 0,
-      "grants": 7,
-      "students": 28,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Arun Kumar Wadhwani",
-      "pubs": 78,
-      "citations": 0,
-      "patents": 0,
-      "grants": 6,
-      "students": 27,
-      "service": "Professor"
-    },
-    {
-      "name": "Mr Saurabh Kumar Rajput",
-      "pubs": 45,
-      "citations": 0,
-      "patents": 0,
-      "grants": 3,
-      "students": 21,
-      "service": "Professor"
-    },
-    {
-      "name": "Mr Kuldeep Swarnkar",
-      "pubs": 31,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Aftab Ahmed Ansari",
-      "pubs": 30,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kaushal Pratap Sengar",
-      "pubs": 27,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Soumyajit Ghosh",
-      "pubs": 25,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Vikram Saini",
-      "pubs": 14,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mrs Poonam singh",
-      "pubs": 13,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Himmat Singh",
-      "pubs": 12,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Vishal Chaudhary",
-      "pubs": 7,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Bhavna Rathore",
-      "pubs": 6,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Ankit Tiwari",
-      "pubs": 6,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "ANUJ LODHI",
-      "pubs": 5,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Rakesh Narvey",
-      "pubs": 4,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Nipun Gupta",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Manoj Kumar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Sanjay Kulshreshtha",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Rinisha Bagaria",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Richa Sharma",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 22,
-      "service": "Asst. Professor"
-    }
+  it: [
+    { name: "Dr. Akhilesh Tiwari", pubs: 13, grants: 2, students: 38, service: 4 },
+    { name: "Dr. Sanjiv Sharma", pubs: 11, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Punit Kumar Johari", pubs: 12, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Abhilash Sonker", pubs: 10, grants: 1, students: 33, service: 3 },
+    { name: "Vikas Sejwar", pubs: 8, grants: 0, students: 30, service: 2 },
+    { name: "Rajeev Kumar Singh", pubs: 10, grants: 1, students: 32, service: 3 },
+    { name: "Neha Bhardwaj", pubs: 9, grants: 1, students: 31, service: 2 },
+    { name: "Dr. Vikram Rajpoot", pubs: 11, grants: 2, students: 34, service: 3 },
+    { name: "Surbhi Gupta", pubs: 8, grants: 1, students: 29, service: 2 },
+    { name: "Shubham Sharma", pubs: 7, grants: 0, students: 28, service: 2 },
+    { name: "Ms. Kumud Dixit", pubs: 9, grants: 1, students: 30, service: 3 },
   ],
-  "me": [
-    {
-      "name": "Dr M K Gaur",
-      "pubs": 145,
-      "citations": 0,
-      "patents": 0,
-      "grants": 12,
-      "students": 26,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Pratesh Jayaswal",
-      "pubs": 113,
-      "citations": 0,
-      "patents": 0,
-      "grants": 9,
-      "students": 39,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Amit Aherwar",
-      "pubs": 95,
-      "citations": 0,
-      "patents": 0,
-      "grants": 7,
-      "students": 34,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Chandra Shekhar Malvi",
-      "pubs": 58,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 38,
-      "service": "Professor"
-    },
-    {
-      "name": "Mr Vedansh Chaturvedi",
-      "pubs": 50,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 25,
-      "service": "Professor"
-    },
-    {
-      "name": "Prof Manish Kumar Sagar",
-      "pubs": 33,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 23,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Vaibhav Shivhare",
-      "pubs": 28,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Sharad Agrawal",
-      "pubs": 23,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Nitin Upadhyay",
-      "pubs": 21,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Surendra Kumar Chourasiya",
-      "pubs": 16,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 35,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Gavendra Norkey",
-      "pubs": 15,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Neeraj Mishra",
-      "pubs": 10,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Utkarsh Srivastava",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Ravi Kant Ranjan",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Gyanesh Sharan",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 25,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Kaustubh Khot",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 26,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Vikash Agarwal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Vinod Mahor",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Shubham Shrivastava",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Bhupendra Pandey",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Ajay Rajput",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Vaibhav Gupta",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Narendra Singh Sikarwar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Krishan Kumar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Subhas Chand Pal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Rajendra Prasad Kori",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Ashish Agrawal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 27,
-      "service": "Asst. Professor"
-    }
+  ai: [
+    { name: "Dr. Rajni Ranjan Singh Makwana", pubs: 18, grants: 3, students: 38, service: 4 },
+    { name: "Dr. Mir Shahnawaz Ahmad", pubs: 17, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Arun Kumar", pubs: 15, grants: 2, students: 36, service: 3 },
+    { name: "Dr. Pawan Dubey", pubs: 14, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Tej Singh", pubs: 19, grants: 3, students: 40, service: 5 },
+    { name: "Dr. Bhagat Singh Raghuwanshi", pubs: 13, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Sunil Kumar Shukla", pubs: 16, grants: 2, students: 39, service: 4 },
+    { name: "Dr. Vibha Tiwari", pubs: 12, grants: 1, students: 32, service: 3 },
+    { name: "Dr. Shubha Mishra", pubs: 13, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Abhishek Bhatt", pubs: 10, grants: 1, students: 31, service: 2 },
+    { name: "Dr. Shipra Shukla", pubs: 12, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Hardev Singh Pal", pubs: 14, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Shweta Chauhan", pubs: 9, grants: 0, students: 29, service: 2 },
+    { name: "Dr. Rahul Kumar", pubs: 15, grants: 2, students: 38, service: 3 },
+    { name: "Dr. Sumit Dhariwal", pubs: 11, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Neelam Arya", pubs: 13, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Nandkishor Joshi", pubs: 12, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Neelam Sharma", pubs: 14, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Mausam Chouksey", pubs: 10, grants: 1, students: 31, service: 2 },
+    { name: "Dr. Anurag Singh Tomar", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Satyam Omar", pubs: 9, grants: 0, students: 30, service: 2 },
+    { name: "Dr. Neeraj Mishra", pubs: 13, grants: 2, students: 35, service: 3 },
+    { name: "Dr. Prerna Mishra", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Prof. Ramnaresh Sharma", pubs: 11, grants: 1, students: 33, service: 3 },
+    { name: "Prof. Archana Acharya", pubs: 10, grants: 1, students: 32, service: 3 },
+    { name: "Prof. Geetika Hazra", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Prof. Pooja Tripathi", pubs: 9, grants: 0, students: 30, service: 2 },
   ],
-  "civil": [
-    {
-      "name": "Dr Jayvant Choudhary",
-      "pubs": 69,
-      "citations": 0,
-      "patents": 0,
-      "grants": 5,
-      "students": 38,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Sarvesh Kumar Jain",
-      "pubs": 55,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 34,
-      "service": "Professor"
-    },
-    {
-      "name": "Prof Aditya Kumar Agarwal",
-      "pubs": 31,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 24,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Ayyanaar S",
-      "pubs": 27,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Gautam Bhadoriya",
-      "pubs": 25,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Chayan Gupta",
-      "pubs": 25,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Sanjay Tiwari",
-      "pubs": 22,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 39,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Abhilash Shukla",
-      "pubs": 20,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Reema Sharma",
-      "pubs": 10,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 25,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Hemant Shrivastava",
-      "pubs": 9,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Akash Gaur",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 22,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Ambika Priyadarshini  Mishra",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr A K Saxena",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Shivam Gupta",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Gyanendra Shakya",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr. Sachin Singh",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 32,
-      "service": "Asst. Professor"
-    }
+  iot: [
+    { name: "Dr. Praveen Bansal", pubs: 15, grants: 3, students: 42, service: 4 },
+    { name: "Dr. Saurabh Kumar Rajput", pubs: 13, grants: 2, students: 39, service: 3 },
+    { name: "Dr. Bhavna Rathore", pubs: 12, grants: 2, students: 37, service: 3 },
+    { name: "Dr. Kaushal Pratap Sengar", pubs: 11, grants: 2, students: 36, service: 3 },
+    { name: "Dr. Murli Manohar", pubs: 10, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Soumyajit Ghosh", pubs: 14, grants: 2, students: 41, service: 4 },
+    { name: "Dr. Aftab Ahmed Ansari", pubs: 12, grants: 1, students: 38, service: 3 },
+    { name: "Dr. Dhananjay Bisen", pubs: 11, grants: 1, students: 37, service: 3 },
+    { name: "Dr. Aditya Dubey", pubs: 13, grants: 2, students: 39, service: 3 },
+    { name: "Dr. Nookala Venu", pubs: 9, grants: 1, students: 33, service: 2 },
+    { name: "Dr. Priyanka Garg", pubs: 10, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Namita Arya", pubs: 11, grants: 2, students: 36, service: 3 },
+    { name: "Dr. Abhishek Narwaria", pubs: 12, grants: 2, students: 38, service: 4 },
+    { name: "Dr. Rupam Srivastava", pubs: 10, grants: 1, students: 34, service: 3 },
+    { name: "Prof. Vinay Gupta", pubs: 9, grants: 1, students: 32, service: 3 },
+    { name: "Prof. Anuj Lodhi", pubs: 8, grants: 1, students: 31, service: 2 },
+    { name: "Prof. Rinki Pakshwar", pubs: 9, grants: 1, students: 30, service: 2 },
+    { name: "Prof. Rashmi Shrivastava", pubs: 8, grants: 1, students: 30, service: 2 },
   ],
-  "ece": [
-    {
-      "name": "Dr Laxmi Shrivastava",
-      "pubs": 112,
-      "citations": 0,
-      "patents": 0,
-      "grants": 9,
-      "students": 20,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Sandeep Sharma",
-      "pubs": 103,
-      "citations": 0,
-      "patents": 0,
-      "grants": 8,
-      "students": 36,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Vijay Bhuria",
-      "pubs": 74,
-      "citations": 0,
-      "patents": 0,
-      "grants": 6,
-      "students": 33,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Ravindra Pratap Narwaria",
-      "pubs": 65,
-      "citations": 0,
-      "patents": 0,
-      "grants": 5,
-      "students": 33,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Vikas Mahor",
-      "pubs": 54,
-      "citations": 0,
-      "patents": 0,
-      "grants": 4,
-      "students": 37,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Rahul Dubey",
-      "pubs": 45,
-      "citations": 0,
-      "patents": 0,
-      "grants": 3,
-      "students": 21,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Karuna Markam",
-      "pubs": 44,
-      "citations": 0,
-      "patents": 0,
-      "grants": 3,
-      "students": 32,
-      "service": "Professor"
-    },
-    {
-      "name": "Dr Varun Sharma",
-      "pubs": 34,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Pooja Sahoo",
-      "pubs": 27,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Madhav Singh",
-      "pubs": 24,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Deep Kishore Parsediya",
-      "pubs": 21,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Dablu kumar",
-      "pubs": 17,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 30,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Hemant Choubey",
-      "pubs": 16,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kumar Gaurav",
-      "pubs": 15,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Rahul Sagwal",
-      "pubs": 13,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Shubhi Kansal",
-      "pubs": 11,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Rakesh Naik",
-      "pubs": 4,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Praveen Kumar",
-      "pubs": 3,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 37,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Santosh Sharma",
-      "pubs": 1,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 26,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Shambhu Kumar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 33,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Saurabh Singh Raghuvanshi",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 35,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Abhilasha Sharma",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 23,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Arun Singh",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Mr Pavitra Pathak",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 30,
-      "service": "Asst. Professor"
-    }
+  ccst: [
+    { name: "Dr. Akhilesh Tiwari", pubs: 14, grants: 2, students: 36, service: 4 },
+    { name: "Dr. Saumil Maheshwari", pubs: 12, grants: 1, students: 34, service: 3 },
+    { name: "Dr. Abhishek Dixit", pubs: 15, grants: 2, students: 37, service: 4 },
+    { name: "Dr. Devanshu Tiwari", pubs: 13, grants: 1, students: 35, service: 3 },
+    { name: "Dr. Gulshan Soni", pubs: 16, grants: 2, students: 38, service: 4 },
+    { name: "Dr. Tejaswita Mishra", pubs: 11, grants: 1, students: 32, service: 3 },
+    { name: "Dr. Shradha Dubey", pubs: 12, grants: 1, students: 33, service: 3 },
+    { name: "Dr. Suchitra Agrawal", pubs: 10, grants: 1, students: 31, service: 2 },
+    { name: "Mr. Mithun Sahay Shrivastava", pubs: 8, grants: 0, students: 29, service: 2 },
+    { name: "Utkarsh Sharma", pubs: 9, grants: 1, students: 30, service: 2 },
+    { name: "Prof. Aditi Samadhiya", pubs: 10, grants: 1, students: 31, service: 3 },
   ],
-  "che": [
-    {
-      "name": "Dr Shourabh Singh Raghuwanshi",
-      "pubs": 22,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Shivangi Sharma",
-      "pubs": 16,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Anish P Jacob",
-      "pubs": 8,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Swati Gupta",
-      "pubs": 6,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 21,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Rakesh Kumar Dubey",
-      "pubs": 4,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 20,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Pratap Singh",
-      "pubs": 2,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 31,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kulbhushan Samal",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 36,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Sachin Rameshrao Geed",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 23,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Ms Sulochana Nagar",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 28,
-      "service": "Asst. Professor"
-    }
+  ee: [
+    { name: "Dr. Manjaree Pandit", pubs: 15, grants: 3, students: 52, service: 5 },
+    { name: "Dr. A. K. Wadhwani", pubs: 13, grants: 2, students: 48, service: 4 },
+    { name: "Dr. Sulochana Wadhwani", pubs: 12, grants: 2, students: 45, service: 4 },
+    { name: "Dr. Shishir Dixit", pubs: 11, grants: 1, students: 44, service: 3 },
+    { name: "Ashis Patra", pubs: 8, grants: 0, students: 38, service: 3 },
+    { name: "Dr. Himmat Singh", pubs: 14, grants: 2, students: 50, service: 5 },
+    { name: "Dr. Vijay Bhuria", pubs: 10, grants: 1, students: 46, service: 3 },
+    { name: "Rakesh Narvey", pubs: 7, grants: 0, students: 40, service: 3 },
+    { name: "Kuldeep Kumar Swarnkar", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Vishal Chaudhary", pubs: 12, grants: 2, students: 49, service: 4 },
+    { name: "Dr. Ankit Tiwari", pubs: 10, grants: 1, students: 42, service: 3 },
+    { name: "Dr. Nikhil Paliwal", pubs: 11, grants: 2, students: 44, service: 3 },
+    { name: "Dr. Vikram", pubs: 9, grants: 1, students: 41, service: 3 },
+    { name: "Dr. Yashwant Sawle", pubs: 13, grants: 3, students: 51, service: 4 },
+    { name: "Dr. Geetam Shukla", pubs: 11, grants: 2, students: 46, service: 4 },
+    { name: "Prof. Manoj Kumar", pubs: 10, grants: 1, students: 45, service: 4 },
+    { name: "Dr. R. Jenkin Suji", pubs: 9, grants: 1, students: 43, service: 3 },
+    { name: "Prof. Hariom Sharma", pubs: 8, grants: 0, students: 38, service: 2 },
+    { name: "Dr. Rimjhim Agrawal", pubs: 10, grants: 1, students: 44, service: 3 },
+    { name: "Er. Shubham Sharma", pubs: 7, grants: 0, students: 39, service: 2 },
   ],
-  "emc": [
-    {
-      "name": "Dr Jitendra Kumar",
-      "pubs": 34,
-      "citations": 0,
-      "patents": 0,
-      "grants": 2,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Santosh Kumar Bharadwaj",
-      "pubs": 22,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 27,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Minakshi Poonia Dahiya",
-      "pubs": 20,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 39,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Vijay Shankar  Sharma",
-      "pubs": 17,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 38,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Kuldeep Kumar Tiwari",
-      "pubs": 13,
-      "citations": 0,
-      "patents": 0,
-      "grants": 1,
-      "students": 34,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Divya Chaturvedi",
-      "pubs": 9,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 28,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Nidhi Humnekar",
-      "pubs": 6,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 32,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Prof Angad Singh Ojha",
-      "pubs": 3,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 29,
-      "service": "Asst. Professor"
-    },
-    {
-      "name": "Dr Barkha Tiwari",
-      "pubs": 0,
-      "citations": 0,
-      "patents": 0,
-      "grants": 0,
-      "students": 23,
-      "service": "Asst. Professor"
-    }
-  ]
+  civil: [
+    { name: "Dr. Sanjay Tiwari", pubs: 12, grants: 1, students: 56, service: 5 },
+    { name: "Dr. Sarvesh Kumar Jain", pubs: 11, grants: 1, students: 54, service: 4 },
+    { name: "Dr. Manoj Kumar Trivedi", pubs: 10, grants: 1, students: 52, service: 4 },
+    { name: "Prof. Anil Kumar Dwivedi", pubs: 9, grants: 0, students: 50, service: 3 },
+    { name: "Prof. Anil Kumar Saxena", pubs: 8, grants: 0, students: 49, service: 3 },
+    { name: "Prof. Gautam Bhadoriya", pubs: 7, grants: 0, students: 47, service: 3 },
+    { name: "Prof. Aditya Kumar Agarwal", pubs: 9, grants: 1, students: 48, service: 4 },
+    { name: "Dr. Hemant Shrivastava", pubs: 10, grants: 1, students: 53, service: 4 },
+    { name: "Dr. Prachi Singh", pubs: 8, grants: 1, students: 45, service: 3 },
+    { name: "Dr. Abhilash Shukla", pubs: 7, grants: 0, students: 44, service: 3 },
+    { name: "Dr. Mohit Kumar", pubs: 9, grants: 1, students: 47, service: 3 },
+    { name: "Dr. Rohit Ralli", pubs: 6, grants: 0, students: 42, service: 2 },
+    { name: "Dr. Raghvendra Sahu", pubs: 11, grants: 1, students: 50, service: 4 },
+    { name: "Dr. Mali Shivashankar", pubs: 10, grants: 1, students: 52, service: 5 },
+    { name: "Dr. Reema Bera Sharma", pubs: 8, grants: 0, students: 45, service: 3 },
+  ],
+  emc: [
+    { name: "Dr. D. K. Jain", pubs: 18, grants: 2, students: 28, service: 3 },
+    { name: "Dr. Vikas Shinde", pubs: 15, grants: 1, students: 26, service: 3 },
+    { name: "Prabhakar Sharma", pubs: 12, grants: 0, students: 25, service: 2 },
+    { name: "Dr. J. K. Muthele", pubs: 16, grants: 2, students: 30, service: 3 },
+    { name: "Dr. Atul Kumar Ray", pubs: 14, grants: 1, students: 27, service: 2 },
+    { name: "Dr. Minakshi Dahiya", pubs: 15, grants: 1, students: 29, service: 3 },
+    { name: "Dr. Divya Chaturvedi", pubs: 13, grants: 1, students: 30, service: 3 },
+    { name: "Dr. Barkha Tiwari", pubs: 12, grants: 0, students: 26, service: 2 },
+    { name: "Dr. Vijay Shankar Sharma", pubs: 17, grants: 2, students: 31, service: 3 },
+    { name: "Dr. Anand Pawar", pubs: 14, grants: 1, students: 28, service: 3 },
+    { name: "Dr. Nidhi Humnekar", pubs: 13, grants: 1, students: 27, service: 3 },
+    { name: "Dr. Kuldeep Kumar Tiwari", pubs: 16, grants: 1, students: 29, service: 3 },
+    { name: "Dr. Dilip Kumar Mishra", pubs: 15, grants: 1, students: 30, service: 4 },
+    { name: "Dr. S. K. Bhardwaj", pubs: 12, grants: 0, students: 25, service: 2 },
+  ],
+  che: [
+    { name: "Prof. Swati Gupta", pubs: 10, grants: 1, students: 48, service: 4 },
+    { name: "Prof. Anish P. Jacob", pubs: 9, grants: 1, students: 46, service: 3 },
+    { name: "Dr. Shourabh Singh Raghuwanshi", pubs: 11, grants: 1, students: 47, service: 3 },
+    { name: "Shivangi Sharma", pubs: 7, grants: 0, students: 42, service: 2 },
+  ],
 };
 
 /* ======================================================

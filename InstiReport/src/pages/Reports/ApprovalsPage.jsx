@@ -157,9 +157,7 @@ export default function ApprovalsPage({ currentUser }) {
                     })}
                 </div>
 
-                <div className={styles.scrollArrow}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"></path></svg>
-                </div>
+
             </aside>
 
             <main className={styles.contentArea}>

@@ -48,10 +48,10 @@ export default function ReportsPage({ navigate, onOpenDepartment }) {
 
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.mainHeader}>
+      <header className={styles.mainHeader}>
         <h1>Departmental Reports</h1>
         <p>Choose a department to view, submit or manage reports</p>
-      </div>
+      </header>
 
       <div className={styles.cardGrid}>
         {DEPARTMENTS.map((dept, index) => {

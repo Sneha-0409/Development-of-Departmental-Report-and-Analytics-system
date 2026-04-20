@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
-import jsPDF from "jspdf";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./ReportStructurePage.module.css";
 import BackButton from "../../components/BackButton";
+import { db } from "../../firebase";
+import { collection, addDoc, serverTimestamp, doc, setDoc, getDoc } from "firebase/firestore";
+import { generateSemanticPDF } from "../../utils/reportPdf";
 
 const DEFAULT_SECTIONS = [
   "1. Vision and Mission",
@@ -35,49 +37,130 @@ const AccordionItem = ({ title, content, onContentChange }) => {
   );
 };
 
-export default function ReportStructurePage({ dept, navigate }) {
+export default function ReportStructurePage({ dept, navigate, currentUser }) {
   const departmentName = dept?.name ?? "CSE Department";
   const [reportData, setReportData] = useState(
     DEFAULT_SECTIONS.reduce((obj, section) => ({ ...obj, [section]: "" }), {})
   );
   const [isReviewing, setIsReviewing] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMsg, setStatusMsg] = useState("");
   const exportRef = useRef();
+
+  // Load existing draft if any
+  useEffect(() => {
+    const loadDraft = async () => {
+      const email = currentUser?.email?.toLowerCase() || "unknown@university.edu";
+      const draftId = `draft_${email}_${departmentName}`.replace(/[^a-zA-Z0-9_]/g, '_');
+      const draftRef = doc(db, "drafts", draftId);
+      
+      try {
+        const draftSnap = await getDoc(draftRef);
+        if (draftSnap.exists()) {
+          const data = draftSnap.data();
+          if (data.reportData) {
+            // Merge existing data with defaults in case of missing fields
+            setReportData(prev => ({ ...prev, ...data.reportData }));
+          }
+        }
+      } catch (err) {
+        console.error("Error loading draft:", err);
+      }
+    };
+    if (currentUser?.email) {
+      loadDraft();
+    }
+  }, [currentUser?.email, departmentName]);
 
   const handleSectionChange = (section, value) => {
     setReportData((prev) => ({ ...prev, [section]: value }));
   };
 
-  const generatePDF = () => {
-    const pdf = new jsPDF("p", "mm", "a4");
+  const handleSaveDraft = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setStatusMsg("Saving draft...");
 
-    pdf.html(exportRef.current, {
-      callback: (doc) => {
-        const totalPages = doc.internal.getNumberOfPages();
-        for (let i = 1; i <= totalPages; i++) {
-          doc.setPage(i);
-          const footerText = `Page ${i} of ${totalPages}`;
-          doc.setFontSize(10);
-          const pageWidth = doc.internal.pageSize.getWidth();
-          const textWidth = doc.getTextWidth(footerText);
-          doc.text(footerText, (pageWidth - textWidth) / 2, 290);
-        }
-        doc.save(`${departmentName} - Annual Report.pdf`);
-      },
-      x: 20,
-      y: 20,
-      width: 170,
-      windowWidth: 1000,
-      html2canvas: { scale: 0.26, useCORS: true }
-    });
+    try {
+      const email = currentUser?.email?.toLowerCase() || "unknown@university.edu";
+      const draftId = `draft_${email}_${departmentName}`.replace(/[^a-zA-Z0-9_]/g, '_');
+      const draftRef = doc(db, "drafts", draftId);
+
+      await setDoc(draftRef, {
+        department: departmentName,
+        userEmail: email,
+        reportData: reportData,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+
+      setStatusMsg("Draft saved successfully!");
+      setTimeout(() => {
+        setStatusMsg("");
+        setIsSubmitting(false);
+      }, 1500);
+    } catch (err) {
+      console.error("Error saving draft:", err);
+      alert("Failed to save draft. Check your connection.");
+      setIsSubmitting(false);
+      setStatusMsg("");
+    }
+  };
+
+  const generatePDF = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setStatusMsg("Generating official semantic report...");
+
+    try {
+      // Use the native generator instead of html2canvas
+      const doc = await generateSemanticPDF(reportData, {
+        departmentName,
+        submittedBy: currentUser?.name || "Faculty Member",
+        userEmail: currentUser?.email || "faculty@university.edu",
+        date: new Date().toLocaleDateString('en-US', { 
+            month: 'long', day: 'numeric', year: 'numeric' 
+        })
+      });
+
+      setStatusMsg("Submitting lightweight report to database...");
+      
+      const pdfDataUrl = doc.output('datauristring');
+      
+      // Save directly to Firestore (This will be ~30KB, safe under 1MB)
+      await addDoc(collection(db, "reports"), {
+        department: currentUser?.department || departmentName,
+        userEmail: currentUser?.email?.toLowerCase() || "unknown@university.edu",
+        submittedBy: currentUser?.name || "Faculty Member",
+        status: "pending",
+        fileDataUrl: pdfDataUrl,
+        fileName: `${departmentName}_AnnualReport.pdf`,
+        submittedOn: serverTimestamp(),
+        createdAt: serverTimestamp()
+      });
+
+      // Removed local download; users will view/download from the Submissions Tracker
+      
+      setStatusMsg("Submission successful!");
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsReviewing(false);
+        navigate("Submissions");
+      }, 1000);
+
+    } catch (err) {
+      console.error("Submission Error:", err);
+      alert(`Submission Failed: ${err.message}. Native PDF engine failed.`);
+      setIsSubmitting(false);
+      setStatusMsg("");
+    }
   };
 
   return (
     <div className={styles.pageContainer}>
-
-
       <header className={styles.header}>
         <div className={styles.breadcrumbs}>
-          Reports / <strong>{departmentName}</strong>
+          <span>Reports / </span>
+          <strong>{departmentName}</strong>
         </div>
         <h1 className={styles.title}>Annual Report Editor</h1>
         <p className={styles.subtitle}>Fill out each section to complete the report.</p>
@@ -95,12 +178,21 @@ export default function ReportStructurePage({ dept, navigate }) {
       </div>
 
       <div className={styles.actionButtons}>
-        <button className={styles.secondaryButton}>Save as Draft</button>
+        <button 
+          className={styles.secondaryButton} 
+          onClick={handleSaveDraft}
+          disabled={isSubmitting}
+        >
+          {isSubmitting && statusMsg.includes("draft") ? "Saving..." : "Save as Draft"}
+        </button>
         <button className={styles.primaryButton} onClick={() => setIsReviewing(true)}>
           Review & Submit Report
         </button>
       </div>
-
+      
+      {statusMsg && !isReviewing && (
+          <div className={styles.submitStatus} style={{ marginTop: '1rem' }}>{statusMsg}</div>
+      )}
 
       {isReviewing && (
         <div className={styles.modalOverlay}>
@@ -133,9 +225,7 @@ export default function ReportStructurePage({ dept, navigate }) {
                     <React.Fragment key={title}>
                       <div className={styles.reviewSection}>
                         <h4>{title}</h4>
-                        {reportData[title] && (
-                          <p className={styles.reportContentText}>{reportData[title]}</p>
-                        )}
+                        <p className={styles.reportContentText}>{reportData[title] || "No content provided."}</p>
                       </div>
 
                       {index < Object.keys(reportData).length - 1 && (
@@ -147,12 +237,15 @@ export default function ReportStructurePage({ dept, navigate }) {
               </div>
 
               <div className={styles.modalActions}>
-                <button className={styles.secondaryButton} onClick={() => setIsReviewing(false)}>
-                  Close
-                </button>
-                <button className={styles.primaryButton} onClick={generatePDF}>
-                  Generate PDF
-                </button>
+                {statusMsg && <div className={styles.submitStatus}>{statusMsg}</div>}
+                <div className={styles.buttonRow}>
+                  <button className={styles.secondaryButton} onClick={() => setIsReviewing(false)} disabled={isSubmitting}>
+                    Close
+                  </button>
+                  <button className={styles.primaryButton} onClick={generatePDF} disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting..." : "Submit Report"}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
