@@ -168,23 +168,168 @@
   color: #fef2f2;
 }
 
+/* --- HOD PORTAL OVERRIDES --- */
+.navbarHOD {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  width: 280px;
+  min-width: 280px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.2rem;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.logoContainerHOD {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-left: 0.5rem;
+}
+
+.logoIconCircleHOD {
+  background: #ffffff;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.brandInfoHOD {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandNameHOD {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.portalTitleHOD {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.navSectionHOD {
+  margin-bottom: 2rem;
+}
+
+.sectionLabelHOD {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-left: 0.8rem;
+}
+
+.navLinksHOD {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.navLinkHOD {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.navLinkHOD:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.activeHOD {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.iconHOD {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.badgeHOD {
+  margin-left: auto;
+  background: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 800;
+}
+
+.userProfileHOD {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profileCardHOD {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.avatarHOD {
+  width: 42px;
+  height: 42px;
+  background: #6366f1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.profileInfoHOD {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileNameHOD {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.profileRoleHOD {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
 @media (max-width: 768px) {
-  .navbar {
+  .navbar, .navbarHOD {
     width: 80px;
     min-width: 80px;
   }
 
-  .brandName,
-  .userName,
-  .navLink span {
+  .brandName, .standardBrandName, .userName, .profileInfoHOD, .navLink span {
     display: none;
-  }
-
-  .active {
-    border-left: none;
-  }
-
-  .bottomActions {
-    flex-direction: column;
   }
 }
