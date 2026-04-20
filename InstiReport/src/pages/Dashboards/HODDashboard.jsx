@@ -126,8 +126,8 @@ export default function HODDashboard({ navigate, currentUser }) {
         <div className={styles.page}>
             <header className={styles.header}>
                 <div className={styles.headerTitle}>
-                    <h1>HOD Dashboard</h1>
-                    <span className={styles.headerSubtitle}>{deptName} · Real-time Portal</span>
+                    <h1>HoD Dashboard</h1>
+                    <span className={styles.headerSubtitle}>Computer Science Department</span>
                 </div>
                 <div className={styles.headerActions}>
                     <button className={styles.notifBtn}>
