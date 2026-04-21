@@ -132,7 +132,10 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
                             </span>
                         </div>
                     </div>
-                    <button className={styles.logoutBtn} onClick={handleLogout} style={{ marginTop: '1rem', width: '100%' }}>Logout</button>
+                    <div className={styles.bottomActions} style={{ marginTop: '1rem' }}>
+                        <button className={styles.themeToggle} onClick={toggleTheme}>{isDarkMode ? "☀️" : "🌙"}</button>
+                        <button className={styles.logoutBtn} onClick={handleLogout}>Logout</button>
+                    </div>
                 </div>
             </nav>
         );
@@ -162,22 +165,48 @@ export default function Navbar({ navigate, currentPage, currentUser, isDarkMode,
                         <span className={styles.brandName}>InstiReport</span>
                     </a>
 
-                    <div className={styles.navLinks}>
-                        {navLinks.filter(l => l !== "Developer").map((link) => (
-                            <a
-                                key={link}
-                                href="#"
-                                onClick={() => navigate(link)}
-                                className={`${styles.navLink} ${currentPage === link ? styles.active : ""}`}
-                            >
-                                {link}
-                            </a>
-                        ))}
+                    <div className={styles.navLinks} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flexGrow: 1 }}>
+                        <div className={styles.navSection}>
+                            <div className={styles.sectionLabelHOD}>OVERVIEW</div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                {navLinks.filter(l => l === "Dashboard" || l === "Admin Dashboard").map((link) => (
+                                    <a key={link} href="#" onClick={(e) => { e.preventDefault(); navigate(link); }} className={`${styles.navLink} ${currentPage === link ? styles.active : ""}`}>
+                                        {link}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {navLinks.filter(l => l !== "Dashboard" && l !== "Admin Dashboard" && l !== "Analytics" && l !== "Developer").length > 0 && (
+                            <div className={styles.navSection}>
+                                <div className={styles.sectionLabelHOD}>RECORDS</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                    {navLinks.filter(l => l !== "Dashboard" && l !== "Admin Dashboard" && l !== "Analytics" && l !== "Developer").map((link) => (
+                                        <a key={link} href="#" onClick={(e) => { e.preventDefault(); navigate(link); }} className={`${styles.navLink} ${currentPage === link ? styles.active : ""}`}>
+                                            {link}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {navLinks.filter(l => l === "Analytics").length > 0 && (
+                            <div className={styles.navSection}>
+                                <div className={styles.sectionLabelHOD}>SYSTEM</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                                    {navLinks.filter(l => l === "Analytics").map((link) => (
+                                        <a key={link} href="#" onClick={(e) => { e.preventDefault(); navigate(link); }} className={`${styles.navLink} ${currentPage === link ? styles.active : ""}`}>
+                                            {link}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <div className={styles.userActions}>
                         {navLinks.includes("Developer") && (
-                            <a href="#" onClick={() => navigate("Developer")} className={`${styles.navLink} ${currentPage === "Developer" ? styles.active : ""}`}>Developer</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); navigate("Developer"); }} className={`${styles.navLink} ${currentPage === "Developer" ? styles.active : ""}`}>Developer</a>
                         )}
                         <a href="#profile" onClick={(e) => { e.preventDefault(); navigate("Profile"); }} className={`${styles.standardNavLink || styles.navLink} ${currentPage === "Profile" ? styles.active : ""}`}>My Profile</a>
 
