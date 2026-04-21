@@ -128,7 +128,7 @@ export default function ReportStructurePage({ dept, navigate, currentUser }) {
       
       // Save directly to Firestore (This will be ~30KB, safe under 1MB)
       await addDoc(collection(db, "reports"), {
-        department: currentUser?.department || departmentName,
+        department: departmentName,
         userEmail: currentUser?.email?.toLowerCase() || "unknown@university.edu",
         submittedBy: currentUser?.name || "Faculty Member",
         status: "pending",

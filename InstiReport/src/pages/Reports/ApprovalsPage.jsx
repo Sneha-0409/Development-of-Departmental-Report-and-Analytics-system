@@ -8,7 +8,13 @@ const DEPARTMENTS_DATA = [
     { id: "IT", name: "Information Technology", short: "IT", color: "#f0fdf4", text: "#22c55e" },
     { id: "EE", name: "Electrical Engineering", short: "EE", color: "#faf5ff", text: "#a855f7" },
     { id: "ME", name: "Mechanical Engineering", short: "ME", color: "#fff7ed", text: "#f97316" },
-    { id: "CIVIL", name: "Civil Engineering", short: "CIVIL", color: "#f1f5f9", text: "#64748b" }
+    { id: "CIVIL", name: "Civil Engineering", short: "CIVIL", color: "#f1f5f9", text: "#64748b" },
+    { id: "ECE", name: "Electronics Engineering", short: "ECE", color: "#fdf4ff", text: "#d946ef" },
+    { id: "AI", name: "Centre for Artificial Intelligence", short: "AI", color: "#eef2ff", text: "#6366f1" },
+    { id: "IOT", name: "Centre for Internet of Things", short: "IOT", color: "#ecfeff", text: "#06b6d4" },
+    { id: "EMC", name: "Engineering Mathematics & Computing", short: "EMC", color: "#fff1f2", text: "#e11d48" },
+    { id: "CCST", name: "Centre for Computer Science and Technology", short: "CCST", color: "#f5f3ff", text: "#8b5cf6" },
+    { id: "CHE", name: "Chemical Engineering", short: "CHE", color: "#fefce8", text: "#ca8a04" }
 ];
 
 export default function ApprovalsPage({ currentUser }) {
@@ -20,21 +26,26 @@ export default function ApprovalsPage({ currentUser }) {
     // Safety check for user department
     const deptName = currentUser?.department || "Computer Science & Engineering";
 
-    // Find the current active department details
-    const activeDeptInfo = DEPARTMENTS_DATA.find(d => 
+    // Initial department setup based on user
+    const defaultDept = DEPARTMENTS_DATA.find(d => 
         deptName?.toLowerCase().includes(d.id.toLowerCase()) || 
         deptName?.toLowerCase().includes(d.name.toLowerCase())
     ) || DEPARTMENTS_DATA[0];
 
-    // Listen for reports belonging to this HOD's department
+    const [viewDept, setViewDept] = useState(defaultDept.name);
+
+    // Compute active UI info based on currently viewed department
+    const activeDeptInfo = DEPARTMENTS_DATA.find(d => d.name === viewDept) || DEPARTMENTS_DATA[0];
+
+    // Listen for reports belonging to the selected department filter
     useEffect(() => {
-        if (!deptName) {
+        if (!viewDept) {
             setLoading(false);
             return;
         }
 
         const reportsRef = collection(db, "reports");
-        const q = query(reportsRef, where("department", "==", deptName));
+        const q = query(reportsRef, where("department", "==", viewDept));
 
         const unsub = onSnapshot(q, (snap) => {
             const fetched = snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
@@ -46,7 +57,7 @@ export default function ApprovalsPage({ currentUser }) {
         });
 
         return () => unsub();
-    }, [deptName]);
+    }, [viewDept]);
 
     // Automatically select the first pending report if none is selected
     useEffect(() => {
@@ -92,7 +103,28 @@ export default function ApprovalsPage({ currentUser }) {
         <div className={styles.page}>
             <aside className={styles.sidebar}>
                 <div className={styles.sidebarHeader}>
-                    <h2>Submissions</h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <h2 style={{ margin: 0 }}>Submissions</h2>
+                    </div>
+                    <select 
+                        value={viewDept} 
+                        onChange={(e) => setViewDept(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '0.6rem',
+                            borderRadius: '8px',
+                            border: '1px solid var(--border)',
+                            backgroundColor: '#f8fafc',
+                            fontSize: '0.9rem',
+                            color: '#475569',
+                            outline: 'none',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        {DEPARTMENTS_DATA.map(d => (
+                            <option key={d.id} value={d.name}>{d.name}</option>
+                        ))}
+                    </select>
                 </div>
                 
                 <div className={styles.deptList}>

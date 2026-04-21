@@ -80,7 +80,7 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
                         name: userDoc.name || trimmedEmail.split('@')[0],
                         email: userDoc.email,
                         role: userDoc.role,
-                        department: userDoc.department || (userDoc.email.includes('cse') ? "Computer Science & Engineering" : "IT")
+                        department: userDoc.department || (userDoc.email.includes("wednesday") ? "Mechanical Engineering" : "")
                     });
                 }, 800);
             } else {

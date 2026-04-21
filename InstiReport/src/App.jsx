@@ -59,7 +59,11 @@ function App() {
   useEffect(() => {
     const savedUser = localStorage.getItem("insti_user");
     if (savedUser) {
-      const u = JSON.parse(savedUser);
+      let u = JSON.parse(savedUser);
+      if (u.email && u.email.includes("wednesday") && u.department !== "Mechanical Engineering") {
+          u.department = "Mechanical Engineering";
+          localStorage.setItem("insti_user", JSON.stringify(u));
+      }
       setCurrentUser(u);
       setIsLoggedIn(true);
     }
