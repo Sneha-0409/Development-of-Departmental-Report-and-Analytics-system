@@ -101,19 +101,30 @@ export default function HODDashboard({ navigate, currentUser }) {
         };
     }, [deptName]);
 
-    const updateStatus = async (item, newStatus) => {
+    const updateStatus = async (item, newStatus, remarks = "") => {
         try {
             const reportRef = doc(db, "reports", item.firestoreId);
             await updateDoc(reportRef, { 
                 status: newStatus, 
+                hodRemarks: remarks,
                 updatedAt: serverTimestamp(),
                 approvedBy: currentUser?.name || "HOD"
             });
-            // onSnapshot will handle the state update automatically
+            // Reset local review state if any
+            setReviewingItem(null);
+            setHodRemarks("");
         } catch (err) {
             console.error("Update failed:", err);
             alert("Action failed. Please try again.");
         }
+    };
+
+    const [reviewingItem, setReviewingItem] = useState(null);
+    const [hodRemarks, setHodRemarks] = useState("");
+
+    const handleViewPDF = (item) => {
+        if (!item.fileDataUrl) return alert("No PDF for this report.");
+        window.open(item.fileDataUrl, "_blank");
     };
 
     const getInitials = (dept) => {
@@ -216,14 +227,35 @@ export default function HODDashboard({ navigate, currentUser }) {
                                         {getInitials(item.department)}
                                     </div>
                                     <div className={styles.approvalInfo}>
-                                        <h4>{item.title || "Report Submission"}</h4>
+                                        <h4>{item.title || "Annual Report Submission"}</h4>
                                         <p className={styles.approvalMeta}>
-                                            By {item.submittedBy || item.userEmail?.split('@')[0]} · {item.category || "General"}
+                                            By {item.submittedBy || "Faculty"} · {item.department}
                                         </p>
+                                        
+                                        {reviewingItem?.firestoreId === item.firestoreId && (
+                                            <div className={styles.reviewExpanded}>
+                                                <textarea 
+                                                    placeholder="Add remarks for revision or rejection..."
+                                                    value={hodRemarks}
+                                                    onChange={(e) => setHodRemarks(e.target.value)}
+                                                    className={styles.remarksInput}
+                                                />
+                                                <div className={styles.expandedActions}>
+                                                    <button className={styles.btnSmall} onClick={() => updateStatus(item, "needs_revision", hodRemarks)}>Request Revision</button>
+                                                    <button className={styles.btnSmallDanger} onClick={() => updateStatus(item, "rejected", hodRemarks)}>Reject</button>
+                                                    <button className={styles.btnCancel} onClick={() => setReviewingItem(null)}>Cancel</button>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                     <div className={styles.approvalActions}>
-                                        <button className={styles.approveBtn} onClick={() => updateStatus(item, "approved")}>Approve</button>
-                                        <button className={styles.rejectBtn} onClick={() => updateStatus(item, "returned")}>Return</button>
+                                        {!reviewingItem || reviewingItem.firestoreId !== item.firestoreId ? (
+                                            <>
+                                                <button className={styles.viewLinkBtn} onClick={() => handleViewPDF(item)}>View</button>
+                                                <button className={styles.approveBtn} onClick={() => updateStatus(item, "approved")}>Approve</button>
+                                                <button className={styles.rejectBtn} onClick={() => setReviewingItem(item)}>Review</button>
+                                            </>
+                                        ) : null}
                                     </div>
                                 </div>
                             ))

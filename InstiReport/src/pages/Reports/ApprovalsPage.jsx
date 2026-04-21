@@ -3,41 +3,30 @@ import { db } from "../../firebase";
 import { collection, query, where, getDocs, doc, updateDoc, serverTimestamp, orderBy, onSnapshot } from "firebase/firestore";
 import styles from "./ApprovalsPage.module.css";
 
-const DEPARTMENTS = [
-    { id: "cse", name: "Computer Science & Engg", short: "CSE", color: "#eff6ff", text: "#3b82f6", faculty: "Dr. Ramesh Kumar" },
-    { id: "it", name: "Information Technology", short: "IT", color: "#f0fdf4", text: "#22c55e", faculty: "Dr. Priya Mehta" },
-    { id: "ds", name: "Data Science", short: "DS", color: "#faf5ff", text: "#a855f7", faculty: "Prof. Aniket Vaidya" },
-    { id: "mech", name: "Mechanical Engineering", short: "MECH", color: "#fff7ed", text: "#f97316", faculty: "Dr. Sunita Kulkarni" },
-    { id: "civil", name: "Civil Engineering", short: "CIVIL", color: "#f1f5f9", text: "#64748b", faculty: "Prof. Neha Joshi" }
-];
-
-const SECTIONS = [
-    "Faculty profile & qualifications",
-    "Research publications",
-    "Student achievements",
-    "Industry collaborations",
-    "Events & workshops conducted",
-    "Lab infrastructure",
-    "Financial summary"
+const DEPARTMENTS_DATA = [
+    { id: "CSE", name: "Computer Science & Engineering", short: "CSE", color: "#eff6ff", text: "#3b82f6" },
+    { id: "IT", name: "Information Technology", short: "IT", color: "#f0fdf4", text: "#22c55e" },
+    { id: "EE", name: "Electrical Engineering", short: "EE", color: "#faf5ff", text: "#a855f7" },
+    { id: "ME", name: "Mechanical Engineering", short: "ME", color: "#fff7ed", text: "#f97316" },
+    { id: "CIVIL", name: "Civil Engineering", short: "CIVIL", color: "#f1f5f9", text: "#64748b" }
 ];
 
 export default function ApprovalsPage({ currentUser }) {
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [search, setSearch] = useState("");
-    const deptName = currentUser?.department || "";
-
-    // Filter departments to only show HOD's own department
-    const filteredDepts = DEPARTMENTS.filter(d => 
-        deptName.toLowerCase().includes(d.id.toLowerCase()) || 
-        deptName.toLowerCase().includes(d.name.toLowerCase()) ||
-        d.id === "cse" // Fallback for the demo "Computer Science" -> "CSE" mapping
-    );
-
-    const [selectedId, setSelectedId] = useState(filteredDepts[0]?.id || "cse");
+    const [selectedReportId, setSelectedReportId] = useState(null);
     const [remarks, setRemarks] = useState("");
-    const [isReviewMode, setIsReviewMode] = useState(false);
+    
+    // Safety check for user department
+    const deptName = currentUser?.department || "Computer Science & Engineering";
 
+    // Find the current active department details
+    const activeDeptInfo = DEPARTMENTS_DATA.find(d => 
+        deptName?.toLowerCase().includes(d.id.toLowerCase()) || 
+        deptName?.toLowerCase().includes(d.name.toLowerCase())
+    ) || DEPARTMENTS_DATA[0];
+
+    // Listen for reports belonging to this HOD's department
     useEffect(() => {
         if (!deptName) {
             setLoading(false);
@@ -51,27 +40,21 @@ export default function ApprovalsPage({ currentUser }) {
             const fetched = snap.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
             setReports(fetched);
             setLoading(false);
+        }, (err) => {
+            console.error("Firestore error:", err);
+            setLoading(false);
         });
 
         return () => unsub();
     }, [deptName]);
 
-    const handleViewPDF = (item) => {
-        if (!item?.fileDataUrl) {
-            // Support for demo reports that don't have a fileDataUrl yet
-            alert("No PDF file attached to this submission yet. Accessing source metadata...");
-            setIsReviewMode(true);
-            return;
+    // Automatically select the first pending report if none is selected
+    useEffect(() => {
+        if (!selectedReportId && reports?.length > 0) {
+            const pending = reports.find(r => r.status === "pending") || reports[0];
+            setSelectedReportId(pending.firestoreId);
         }
-        
-        const win = window.open();
-        if (win) {
-            win.location.href = item.fileDataUrl;
-            setIsReviewMode(true); // Open review tools once PDF is launched
-        } else {
-            alert("Please allow popups to view the report PDF.");
-        }
-    };
+    }, [reports, selectedReportId]);
 
     const updateStatus = async (item, newStatus) => {
         if (!item?.firestoreId) return;
@@ -90,25 +73,12 @@ export default function ApprovalsPage({ currentUser }) {
         }
     };
 
-    const getStatusForDept = (deptId) => {
-        const report = reports.find(r => r.department?.toLowerCase().includes(deptId.toLowerCase()) || r.deptId === deptId);
-        if (!report) return "Not submitted";
-        if (report.status === "pending") return "Pending review";
-        if (report.status === "approved") return "Approved";
-        return report.status;
-    };
-
-    const getReportForDept = (deptId) => {
-        return reports.find(r => r.department?.toLowerCase().includes(deptId.toLowerCase()) || r.deptId === deptId);
-    };
-
-    const activeDept = filteredDepts.find(d => d.id === selectedId);
-    const activeReport = getReportForDept(selectedId);
+    const activeReport = reports?.find(r => r.firestoreId === selectedReportId);
     
     const stats = {
-        total: filteredDepts.length,
-        pending: filteredDepts.filter(d => getStatusForDept(d.id) === "Pending review").length,
-        approved: filteredDepts.filter(d => getStatusForDept(d.id) === "Approved").length
+        total: (reports || []).length,
+        pending: (reports || []).filter(r => r?.status === "pending").length,
+        approved: (reports || []).filter(r => r?.status === "approved").length
     };
 
     if (loading) return (
@@ -122,49 +92,44 @@ export default function ApprovalsPage({ currentUser }) {
         <div className={styles.page}>
             <aside className={styles.sidebar}>
                 <div className={styles.sidebarHeader}>
-                    <h2>Department</h2>
+                    <h2>Submissions</h2>
                 </div>
                 
                 <div className={styles.deptList}>
-                    {filteredDepts.map((dept) => {
-                        const status = getStatusForDept(dept.id);
-                        return (
-                            <div 
-                                key={dept.id} 
-                                className={`${styles.deptItem} ${selectedId === dept.id ? styles.deptItemActive : ""}`}
-                                onClick={() => {
-                                    setSelectedId(dept.id);
-                                    setIsReviewMode(false);
-                                }}
-                            >
-                                <div className={styles.deptAvatar} style={{ background: dept.color, color: dept.text }}>
-                                    {dept.short}
-                                </div>
-                                <div className={styles.deptInfo}>
-                                    <h3>{dept.name}</h3>
-                                    <div className={styles.deptMeta}>
-                                        <span>{dept.faculty}</span>
-                                        <span className={`${styles.statusChip} ${
-                                            status === "Pending review" ? styles.statusPending : 
-                                            (status === "Approved" ? styles.statusApproved : styles.statusNotSubmitted)
-                                        }`}>
-                                            {status}
-                                        </span>
-                                    </div>
+                    {reports?.map((report) => (
+                        <div 
+                            key={report.firestoreId}
+                            className={`${styles.deptItem} ${selectedReportId === report.firestoreId ? styles.deptItemActive : ""}`}
+                            onClick={() => setSelectedReportId(report.firestoreId)}
+                        >
+                            <div className={styles.deptAvatar} style={{ background: activeDeptInfo.color, color: activeDeptInfo.text }}>
+                                {activeDeptInfo.short}
+                            </div>
+                            <div className={styles.deptInfo}>
+                                <h3 style={{ fontSize: '0.9rem', marginBottom: '4px' }}>{report.department || "Internal"} Report</h3>
+                                <div className={styles.deptMeta}>
+                                    <span style={{ fontSize: '0.75rem' }}>By {report.submittedBy || "Staff"}</span>
+                                    <span className={`${styles.statusChip} ${
+                                        report.status === 'pending' ? styles.statusPending : 
+                                        (report.status === 'approved' ? styles.statusApproved : styles.statusNotSubmitted)
+                                    }`}>
+                                        {report.status}
+                                    </span>
                                 </div>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
+                    {(!reports || reports.length === 0) && (
+                        <p style={{ padding: '2rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem' }}>No reports found for your department.</p>
+                    )}
                 </div>
-
-
             </aside>
 
             <main className={styles.contentArea}>
                 <header className={styles.contentHeader}>
                     <div className={styles.headerTitle}>
                         <h1>Annual Report Approvals</h1>
-                        <p>Each department - one report - review and approve or reject below</p>
+                        <p>Review departmental submissions and provide feedback for approval.</p>
                     </div>
                     <div className={styles.topStats}>
                         <div className={styles.statMiniCard}>
@@ -184,115 +149,88 @@ export default function ApprovalsPage({ currentUser }) {
                     </div>
                 </header>
 
-                {activeDept && (
+                {activeReport ? (
                     <div className={styles.reportDetailPanel}>
                         <div className={styles.detailHeader}>
                             <div className={styles.detailDeptTitle}>
-                                <h2>{activeDept.name}</h2>
-                                <p>Submitted by {activeDept.faculty}</p>
+                                <h2>{activeReport.department} Annual Report</h2>
+                                <p>Submitted on {activeReport.submittedOn ? new Date(activeReport.submittedOn.seconds * 1000).toLocaleDateString() : "Just recently"}</p>
                             </div>
                             <div className={styles.detailBadges}>
-                                <div className={styles.metaBadge}>📄 42 pages</div>
-                                <div className={styles.metaBadge}> Apr 18, 2025</div>
                                 <span className={`${styles.statusChip} ${
-                                    getStatusForDept(activeDept.id) === "Pending review" ? styles.statusPending : 
-                                    (status === "Approved" ? styles.statusApproved : styles.statusNotSubmitted)
+                                    activeReport.status === 'pending' ? styles.statusPending : styles.statusApproved
                                 }`}>
-                                    {getStatusForDept(activeDept.id)}
+                                    {activeReport.status?.replace('_', ' ')}
                                 </span>
                             </div>
                         </div>
 
-                        {!isReviewMode ? (
-                            <div className={styles.reviewInvitation}>
-                                <div className={styles.invitationIcon}>📑</div>
-                                <h3>Ready to review the report?</h3>
-                                <p>Open the submitted PDF to start the verification process.</p>
-                                <button 
-                                    className={`${styles.btn} ${styles.btnPrimary} ${styles.btnReview}`}
-                                    onClick={() => handleViewPDF(activeReport)}
-                                >
-                                    🔍 Review PDF & Start Audit
-                                </button>
+                        {activeReport.fileDataUrl ? (
+                            <div style={{ width: '100%', height: '550px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', marginBottom: '1.5rem', background: '#f8fafc' }}>
+                                <iframe 
+                                    src={activeReport.fileDataUrl} 
+                                    width="100%" 
+                                    height="100%" 
+                                    style={{ border: 'none' }}
+                                    title="Report Preview"
+                                />
                             </div>
                         ) : (
-                            <>
-                                <div className={styles.sectionList}>
-                                    <div className={styles.sectionListHeader}>REPORT SECTIONS</div>
-                                    {SECTIONS.map((sec, i) => (
-                                        <div key={i} className={styles.sectionItem}>
-                                            <div className={styles.sectionDot}></div>
-                                            {sec}
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className={styles.remarksArea}>
-                                    <label>HoD Remarks <span>(if any)</span></label>
-                                    <textarea 
-                                        className={styles.textarea}
-                                        placeholder="Add your remarks or feedback for the Department..."
-                                        value={remarks}
-                                        onChange={(e) => setRemarks(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className={styles.actionGrid}>
-                                    <button 
-                                        className={`${styles.btn} ${styles.btnPrimary}`}
-                                        onClick={() => updateStatus(activeReport, "approved")}
-                                        disabled={!activeReport}
-                                    >
-                                        ✓ Approve Report
-                                    </button>
-                                    <button 
-                                        className={`${styles.btn} ${styles.btnPrimary}`}
-                                        onClick={() => updateStatus(activeReport, "rejected")}
-                                        disabled={!activeReport || !remarks.trim()}
-                                    >
-                                        ✕ Reject
-                                    </button>
-                                </div>
-                                <button 
-                                    className={`${styles.btn} ${styles.btnLarge}`}
-                                    onClick={() => updateStatus(activeReport, "needs_revision")}
-                                    disabled={!activeReport || !remarks.trim()}
-                                >
-                                    Request revision from department
-                                </button>
-                            </>
+                            <div style={{ padding: '3rem', textAlign: 'center', background: '#f1f5f9', borderRadius: '12px', marginBottom: '1.5rem' }}>
+                                <p style={{ color: '#64748b' }}>No PDF preview available for this submission.</p>
+                            </div>
                         )}
 
-                        <div className={styles.historySection}>
-                            <h4>APPROVAL HISTORY</h4>
-                            <div className={styles.timeline}>
-                                <div className={styles.timelineItem}>
-                                    <div className={styles.timelineDotWrapper}>
-                                        <div className={styles.timelineDot}></div>
-                                        <div className={styles.timelineLine}></div>
-                                    </div>
-                                    <div className={styles.timelineContent}>
-                                        <h5>Annual report submitted by {activeDept.faculty}</h5>
-                                        <p>Apr 18, 2025 · 11:30 AM</p>
-                                    </div>
-                                </div>
-                                <div className={styles.timelineItem}>
-                                    <div className={styles.timelineDotWrapper}>
-                                        <div className={`${styles.timelineDot} ${styles.timelineDotOngoing}`}></div>
-                                    </div>
-                                    <div className={styles.timelineContent}>
-                                        <h5>Awaiting HOD review</h5>
-                                        <p>Now</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className={styles.remarksArea}>
+                            <label>HOD Feedback & Remarks</label>
+                            <textarea 
+                                className={styles.textarea}
+                                placeholder="Add your feedback or correction notes..."
+                                value={remarks}
+                                onChange={(e) => setRemarks(e.target.value)}
+                            />
                         </div>
+
+                        {activeReport.status === 'pending' && (
+                            <div className={styles.actionGrid}>
+                                <button 
+                                    className={`${styles.btn} ${styles.btnPrimary}`}
+                                    style={{ background: '#10b981', color: 'white', border: 'none' }}
+                                    onClick={() => updateStatus(activeReport, "approved")}
+                                >
+                                    ✓ Approve Report
+                                </button>
+                                <button 
+                                    className={`${styles.btn} ${styles.btnPrimary}`}
+                                    style={{ background: '#ef4444', color: 'white', border: 'none' }}
+                                    onClick={() => updateStatus(activeReport, "rejected")}
+                                    disabled={!remarks.trim()}
+                                >
+                                    ✕ Reject
+                                </button>
+                                <button 
+                                    className={`${styles.btn} ${styles.btnLarge}`}
+                                    style={{ background: '#f59e0b', color: 'white', border: 'none', gridColumn: 'span 2' }}
+                                    onClick={() => updateStatus(activeReport, "needs_revision")}
+                                    disabled={!remarks.trim()}
+                                >
+                                    ⚠ Request Revision from Department
+                                </button>
+                            </div>
+                        )}
+                        
+                        {activeReport.hodRemarks && (
+                            <div style={{ marginTop: '2rem', padding: '1.25rem', background: '#eff6ff', borderRadius: '12px', borderLeft: '4px solid #3b82f6' }}>
+                                <strong style={{ display: 'block', marginBottom: '0.4rem', color: '#1e3a8a' }}>Last Official Remarks:</strong>
+                                <p style={{ color: '#1e40af', fontSize: '0.9rem' }}>{activeReport.hodRemarks}</p>
+                            </div>
+                        )}
                     </div>
-                )}
-                
-                {!activeDept && (
+                ) : (
                     <div className={styles.emptyArea}>
-                        Select a department to review its annual report
+                        {reports?.length > 0 
+                            ? "Select a report from the list on the left to start your review." 
+                            : "No submissions found for your department."}
                     </div>
                 )}
             </main>

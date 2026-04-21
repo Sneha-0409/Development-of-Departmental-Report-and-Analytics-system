@@ -121,7 +121,7 @@ function App() {
       case "hod":
         switch (currentPage) {
           case "HOD Dashboard": return <HODDashboard navigate={navigate} currentUser={currentUser} />;
-          case "Approvals": return <ApprovalsPage role="hod" />;
+          case "Approvals": return <ApprovalsPage role="hod" currentUser={currentUser} />;
           case "Analytics": return <AnalyticsPage navigate={navigate} />;
           case "Faculty": return <AchievementsPage currentUser={currentUser} />;
           case "Settings": return <ProfilePage currentUser={currentUser} setCurrentUser={setCurrentUser} />;

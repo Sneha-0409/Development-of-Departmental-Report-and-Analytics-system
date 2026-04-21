@@ -237,3 +237,25 @@
   .colAction { align-self: stretch; flex-direction: column; gap: 0.5rem; }
   .viewBtn, .deleteBtn { width: 100%; }
 }
+
+.hodRemarks {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.hodRemarks strong {
+    color: #1e293b;
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}

@@ -1,6 +1,8 @@
-import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import styles from './ReportMakerDashboard.module.css';
+import { db } from "../../firebase";
+import { collection, query, where, onSnapshot, orderBy, limit } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const StatCard = ({ icon, label, value, subtext, colorClass, iconClass, hoverClass }) => (
     <div className={`${styles.statCard} ${styles[hoverClass]}`}>
@@ -27,35 +29,90 @@ const ProgressBar = ({ label, percent }) => (
 );
 
 const ReportMakerDashboard = ({ currentUser, navigate }) => {
-    const userName = currentUser?.name?.split(' ')[0] || 'Sneha';
-    
-    // Mock Data for high-fidelity parity
-    const progressData = [
-        { name: 'Done', value: 70 },
-        { name: 'Remaining', value: 30 }
-    ];
+    const userName = currentUser?.name?.split(' ')[0] || 'User';
+    const email = currentUser?.email?.toLowerCase() || "";
     const COLORS = ['#2563eb', '#f1f5f9'];
+    
+    // State for dynamic stats
+    const [stats, setStats] = useState({
+        sectionsFilled: 0,
+        submitted: 0,
+        pending: 0,
+        activities: []
+    });
+    const [loading, setLoading] = useState(true);
 
-    const sections = [
-        { label: 'Faculty & qualifications', percent: 100 },
-        { label: 'Research publications', percent: 100 },
-        { label: 'Student achievements', percent: 80 },
-        { label: 'Industry collaborations', percent: 50 },
-        { label: 'Financial summary', percent: 0 },
+    useEffect(() => {
+        if (!email) return;
+
+        // 1. Fetch Submitted & Pending counts
+        const reportsRef = collection(db, "reports");
+        const qReports = query(reportsRef, where("userEmail", "==", email));
+        
+        const unsubReports = onSnapshot(qReports, (snap) => {
+            const allReports = snap.docs.map(d => d.data());
+            const pendingCount = allReports.filter(r => r.status === "pending").length;
+            
+            // Format activities from real reports
+            const realActivities = allReports.slice(0, 5).map(r => ({
+                dot: r.status === 'approved' ? '#10b981' : r.status === 'pending' ? '#3b82f6' : '#ef4444',
+                title: r.status === 'approved' ? `HOD approved ${r.department} report` : 
+                       r.status === 'needs_revision' ? `Revision requested for ${r.department}` :
+                       `You submitted ${r.department} report`,
+                time: r.submittedOn ? new Date(r.submittedOn.seconds * 1000).toLocaleDateString() : "Just now"
+            }));
+
+            setStats(prev => ({
+                ...prev,
+                submitted: snap.size,
+                pending: pendingCount,
+                activities: realActivities.length > 0 ? realActivities : prev.activities
+            }));
+            setLoading(false);
+        });
+
+        // 2. Fetch Drafts for sections filled (approximate)
+        const draftsRef = collection(db, "drafts");
+        const qDrafts = query(draftsRef, where("userEmail", "==", email));
+        const unsubDrafts = onSnapshot(qDrafts, (snap) => {
+            if (!snap.empty) {
+                const draft = snap.docs[0].data();
+                const filled = Object.values(draft.reportData || {}).filter(v => v && v.length > 10).length;
+                setStats(prev => ({ ...prev, sectionsFilled: filled }));
+            }
+        });
+
+        return () => {
+            unsubReports();
+            unsubDrafts();
+        };
+    }, [email]);
+
+    // Mock/Default activities if none found
+    const activities = stats.activities.length > 0 ? stats.activities : [
+        { dot: '#10b981', title: "Welcome to InstiReport", time: "Just now" },
+        { dot: '#3b82f6', title: "Start your first departmental report", time: "Today" }
     ];
 
-    const activities = [
-        { dot: '#10b981', title: "You submitted the Annual Sports Report", time: "1 hour ago" },
-        { dot: '#2563eb', title: "HOD approved your Q2 Financials section", time: "Yesterday • 2:30 PM" },
-        { dot: '#8b5cf6', title: "A comment was added to Library Expansion Plan", time: "Yesterday • 10:00 AM" },
-        { dot: '#f97316', title: "Deadline reminder sent by department admin", time: "Apr 17, 2025" },
-        { dot: '#ef4444', title: "Research section returned for revision by HOD", time: "Apr 15, 2025" },
+    const progressData = [
+        { name: 'Done', value: (stats.sectionsFilled / 7) * 100 || 10 },
+        { name: 'Remaining', value: 100 - ((stats.sectionsFilled / 7) * 100 || 10) }
+    ];
+
+    // Define sections and deadlines to fix ReferenceError
+    const sections = [
+        { label: "Vision & Mission", percent: stats.sectionsFilled >= 1 ? 100 : 0 },
+        { label: "Faculty Details", percent: stats.sectionsFilled >= 2 ? 100 : 0 },
+        { label: "Student Achievements", percent: stats.sectionsFilled >= 3 ? 100 : 0 },
+        { label: "Research & Pubs", percent: stats.sectionsFilled >= 4 ? 100 : 0 },
+        { label: "Labs & Infra", percent: stats.sectionsFilled >= 5 ? 100 : 0 },
+        { label: "Events & Activities", percent: stats.sectionsFilled >= 6 ? 100 : 0 },
+        { label: "Budget & Util", percent: stats.sectionsFilled >= 7 ? 100 : 0 },
     ];
 
     const deadlines = [
-        { day: '20', month: 'OCT', title: 'Annual Financial Report', sub: 'Submit to HOD' },
-        { day: '01', month: 'NOV', title: 'Q3 Activities Summary', sub: 'Final submission' },
-        { day: '15', month: 'NOV', title: 'Industry Collaborations', sub: 'MoU documentation' },
+        { day: "28", month: "Apr", title: "Monthly Progress", sub: "Status update due" },
+        { day: "15", month: "May", title: "Final Draft", sub: "Annual report review" }
     ];
 
     return (
@@ -85,8 +142,8 @@ const ReportMakerDashboard = ({ currentUser, navigate }) => {
                 <StatCard 
                     icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>}
                     label="Sections Filled" 
-                    value="7" 
-                    subtext="of 10 total" 
+                    value={stats.sectionsFilled} 
+                    subtext="of 7 total" 
                     colorClass="greenText"
                     iconClass="blueIcon"
                     hoverClass="hoverBlue"
@@ -94,8 +151,8 @@ const ReportMakerDashboard = ({ currentUser, navigate }) => {
                 <StatCard 
                     icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>}
                     label="Reports Submitted" 
-                    value="12" 
-                    subtext="this month" 
+                    value={stats.submitted} 
+                    subtext="lifetime" 
                     colorClass="greenText"
                     iconClass="greenIcon"
                     hoverClass="hoverGreen"
@@ -103,7 +160,7 @@ const ReportMakerDashboard = ({ currentUser, navigate }) => {
                 <StatCard 
                     icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>}
                     label="Pending Approval" 
-                    value="3" 
+                    value={stats.pending} 
                     subtext="from HOD" 
                     colorClass="orangeText"
                     iconClass="orangeIcon"
@@ -148,7 +205,7 @@ const ReportMakerDashboard = ({ currentUser, navigate }) => {
                                     </PieChart>
                                 </ResponsiveContainer>
                                 <div className={styles.radialCenter}>
-                                    <span className={styles.radialPercent}>70%</span>
+                                    <span className={styles.radialPercent}>{Math.round((stats.sectionsFilled / 7) * 100)}%</span>
                                     <span className={styles.radialLabel}>Done</span>
                                 </div>
                             </div>

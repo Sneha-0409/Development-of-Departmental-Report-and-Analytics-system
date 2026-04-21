@@ -16,6 +16,7 @@ const StatusMarker = ({ status }) => {
         pending: { color: "#eab308", label: "Waiting for Approval" },
         approved: { color: "#22c55e", label: "Approved" },
         rejected: { color: "#ef4444", label: "Rejected" },
+        needs_revision: { color: "#f97316", label: "Needs Revision" },
         draft: { color: "#94a3b8", label: "Draft" },
     };
 
@@ -161,6 +162,11 @@ export default function SubmissionPage({ currentUser }) {
 
                                 <div className={styles.colStatus}>
                                     <StatusMarker status={report.status} />
+                                    {report.hodRemarks && (
+                                        <div className={styles.hodRemarks}>
+                                            <strong>HOD Feedback:</strong> {report.hodRemarks}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className={styles.colAction}>

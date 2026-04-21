@@ -9,9 +9,23 @@ const RegisterPage = ({ showLoginPage }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('report-maker');
+    const [department, setDepartment] = useState('Computer Science & Engineering');
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+
+    const DEPARTMENTS = [
+        "Computer Science & Engineering",
+        "Information Technology",
+        "Electrical Engineering",
+        "Electronics Engineering",
+        "Mechanical Engineering",
+        "Civil Engineering",
+        "Chemical Engineering",
+        "Mathematics & Computing",
+        "Artificial Intelligence",
+        "Internet of Things"
+    ];
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -52,6 +66,7 @@ const RegisterPage = ({ showLoginPage }) => {
                 email: trimmedEmail,
                 password: trimmedPassword,
                 role,
+                department,
                 createdAt: serverTimestamp()
             });
 
@@ -160,6 +175,15 @@ const RegisterPage = ({ showLoginPage }) => {
                                         <option value="project-coordinator">Project Coordinator</option>
                                         <option value="hod">HOD</option>
                                         <option value="report-maker">Report Maker</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="input-group">
+                                <label htmlFor="department">Department</label>
+                                <div className="select-wrapper">
+                                    <select id="department" value={department} onChange={(e) => setDepartment(e.target.value)} required>
+                                        {DEPARTMENTS.map(d => <option key={d} value={d}>{d}</option>)}
                                     </select>
                                 </div>
                             </div>

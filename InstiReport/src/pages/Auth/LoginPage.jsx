@@ -15,6 +15,20 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
     const [showPassword, setShowPassword] = useState(false);
     const [choosingRole, setChoosingRole] = useState(false);
     const [googleUser, setGoogleUser] = useState(null);
+    const [googleDept, setGoogleDept] = useState("Computer Science & Engineering");
+
+    const DEPARTMENTS = [
+        "Computer Science & Engineering",
+        "Information Technology",
+        "Electrical Engineering",
+        "Electronics Engineering",
+        "Mechanical Engineering",
+        "Civil Engineering",
+        "Chemical Engineering",
+        "Mathematics & Computing",
+        "Artificial Intelligence",
+        "Internet of Things"
+    ];
 
     const handleForgotPassword = (e) => {
         e.preventDefault();
@@ -65,7 +79,8 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
                     onLoginSuccess({
                         name: userDoc.name || trimmedEmail.split('@')[0],
                         email: userDoc.email,
-                        role: userDoc.role
+                        role: userDoc.role,
+                        department: userDoc.department || (userDoc.email.includes('cse') ? "Computer Science & Engineering" : "IT")
                     });
                 }, 800);
             } else {
@@ -93,22 +108,25 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const userEmail = result.user?.email;
+            const lowercaseEmail = userEmail?.toLowerCase();
+            const isDeveloper = lowercaseEmail === "samarthkhare39@gmail.com";
 
-            if (userEmail?.endsWith("@mitsgwl.ac.in")) {
+            if (lowercaseEmail?.endsWith("@mitsgwl.ac.in") && !isDeveloper) {
                 setMessage("Login successful!");
                 setTimeout(() => {
                     onLoginSuccess({
                         name: result.user.displayName || userEmail.split('@')[0],
                         email: userEmail,
-                        role: "student"
+                        role: "student",
+                        department: "Student"
                     });
                 }, 800);
-            } else if (userEmail?.endsWith("@mitsgwalior.in")) {
+            } else if (lowercaseEmail?.endsWith("@mitsgwalior.in") || isDeveloper) {
                 setGoogleUser(result.user);
                 setChoosingRole(true);
             } else {
                 await signOut(auth);
-                setMessage("Access Denied: Please use your @mitsgwl.ac.in or @mitsgwalior.in email.");
+                setMessage("Access Denied: Please use your university email.");
             }
         } catch (error) {
             console.error("Auth Error:", error);
@@ -123,7 +141,8 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
         onLoginSuccess({
             name: googleUser.displayName || googleUser.email.split('@')[0],
             email: googleUser.email,
-            role: selectedRole
+            role: selectedRole,
+            department: googleDept
         });
     };
 
@@ -146,20 +165,45 @@ export default function LoginPage({ onLoginSuccess, showRegisterPage }) {
                             <h2>Choose Your Role</h2>
                             <p>Signed in as: <strong>{googleUser?.email}</strong></p>
                         </div>
-                        <div className="role-selection-grid" style={{ display: 'grid', gap: '15px', marginTop: '20px' }}>
+                        <div className="input-group" style={{ marginTop: '20px' }}>
+                            <label htmlFor="google-dept">Select Department</label>
+                            <div className="select-wrapper">
+                                <select 
+                                    id="google-dept" 
+                                    value={googleDept} 
+                                    onChange={(e) => setGoogleDept(e.target.value)}
+                                    style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--border)' }}
+                                >
+                                    {DEPARTMENTS.map(d => <option key={d} value={d}>{d}</option>)}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="role-selection-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '15px' }}>
                             <button onClick={() => handleSelectGoogleRole("faculty")} className="btn-role-select">Faculty</button>
-                            <button onClick={() => handleSelectGoogleRole("project-coordinator")} className="btn-role-select">Project Coordinator</button>
+                            <button onClick={() => handleSelectGoogleRole("project-coordinator")} className="btn-role-select">Coordinator</button>
                             <button onClick={() => handleSelectGoogleRole("hod")} className="btn-role-select">HOD</button>
                             <button onClick={() => handleSelectGoogleRole("report-maker")} className="btn-role-select">Report Maker</button>
-                            
-                            <button 
-                                onClick={() => { setChoosingRole(false); setGoogleUser(null); signOut(auth); }} 
-                                className="btn-cancel"
-                                style={{ marginTop: '10px', background: 'transparent', border: '1px dashed var(--border)', color: 'var(--text-muted)', padding: '10px', borderRadius: '8px', cursor: 'pointer' }}
-                            >
-                                Cancel & Sign Out
-                            </button>
                         </div>
+                        
+                        <button 
+                            onClick={() => { setChoosingRole(false); setGoogleUser(null); signOut(auth); }} 
+                            className="btn-cancel"
+                            style={{ 
+                                marginTop: '20px', 
+                                width: '100%',
+                                background: 'transparent', 
+                                border: '1px dashed var(--border)', 
+                                color: 'var(--text-muted)', 
+                                padding: '12px', 
+                                borderRadius: '8px', 
+                                cursor: 'pointer',
+                                fontSize: '0.9rem',
+                                fontWeight: '600'
+                            }}
+                        >
+                            Cancel & Sign Out
+                        </button>
                     </div>
                 </div>
             </div>

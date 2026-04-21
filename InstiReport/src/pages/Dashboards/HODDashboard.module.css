@@ -320,3 +320,67 @@
     grid-template-columns: 1fr;
   }
 }
+
+.viewLinkBtn {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+}
+
+.reviewExpanded {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+}
+
+.remarksInput {
+    width: 100%;
+    min-height: 100px;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1.5px solid #cbd5e1;
+    margin-bottom: 1rem;
+    resize: vertical;
+}
+
+.expandedActions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btnSmall {
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: #3b82f6;
+    color: white;
+    border: none;
+}
+
+.btnSmallDanger {
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: #ef4444;
+    color: white;
+    border: none;
+}
+
+.btnCancel {
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: transparent;
+    color: #64748b;
+    border: 1.5px solid #e2e8f0;
+}
