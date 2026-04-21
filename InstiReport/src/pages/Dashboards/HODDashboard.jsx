@@ -36,6 +36,7 @@ const StatCard = ({ icon, label, value, trend, trendUp, color }) => (
 export default function HODDashboard({ navigate, currentUser }) {
     const [stats, setStats] = useState({ pending: 0, approved: 0, faculty: 0 });
     const [approvals, setApprovals] = useState([]);
+    const [activity, setActivity] = useState([]);
     const [chartData, setChartData] = useState([]);
     const [loading, setLoading] = useState(true);
     const deptName = currentUser?.department || "Computer Science";
@@ -65,7 +66,7 @@ export default function HODDashboard({ navigate, currentUser }) {
         // 4. Fetch Faculty Count Once
         const fetchFaculty = async () => {
             const qFaculty = query(usersRef, where("role", "==", "faculty"));
-            const fSnap = await getDocs(facultyQ);
+            const fSnap = await getDocs(qFaculty);
             setStats(prev => ({ ...prev, faculty: fSnap.size }));
         };
 
